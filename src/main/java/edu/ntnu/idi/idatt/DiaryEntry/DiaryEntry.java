@@ -12,7 +12,8 @@ public class DiaryEntry {
   private String entryTitle;
   private String entryText;
 
-  public DiaryEntry(java.time.LocalDateTime entryDate, String entryAuthor, String entryTitle, String entryText) {
+  public DiaryEntry(java.time.LocalDateTime entryDate, String entryAuthor, String entryTitle,
+      String entryText) {
 
     this.entryDate = entryDate;
     this.entryAuthor = entryAuthor;
@@ -44,4 +45,15 @@ public class DiaryEntry {
   public void setEntryText(String entryText) {
     this.entryText = entryText;
   }
+
+  @Override
+  public String toString() {
+    return "Date: " + entryDate + "\n" +
+        "Author: " + entryAuthor + "\n" +
+        "Title " + entryTitle + "\n" +
+        "Entry: " + entryText;
+  }
+
 }
+
+

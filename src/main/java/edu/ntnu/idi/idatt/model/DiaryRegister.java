@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.DiaryRegister;
+package edu.ntnu.idi.idatt.model;
 
 public class DiaryRegister {
 

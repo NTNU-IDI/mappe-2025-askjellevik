@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.UserInterface;
+package edu.ntnu.idi.idatt.view;
 
 public class UserInterface {
 

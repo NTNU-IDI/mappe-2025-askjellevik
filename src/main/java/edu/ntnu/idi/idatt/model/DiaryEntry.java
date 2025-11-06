@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt.DiaryEntry;
+package edu.ntnu.idi.idatt.model;
 
 import java.time.LocalDateTime;
 

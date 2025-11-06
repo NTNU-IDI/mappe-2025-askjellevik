@@ -1,7 +1,6 @@
 package edu.ntnu.idi.idatt;
 
-import edu.ntnu.idi.idatt.DiaryRegister.DiaryRegister;
-import edu.ntnu.idi.idatt.UserInterface.UserInterface;
+import edu.ntnu.idi.idatt.view.UserInterface;
 
 public class Main {
 

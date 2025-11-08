@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
@@ -61,7 +62,7 @@ public class DiaryRegisterTest {
     List<DiaryEntry> results = diaryRegister.searchDiaryEntryByDate(searchDate);
 
     assertEquals(1, results.size());
-    assertEquals(diaryEntry, results.getFirst());
+    assertEquals(diaryEntry, results.get(0));
   }
 
 
@@ -82,11 +83,8 @@ public class DiaryRegisterTest {
 
   @Test
   void testDeleteDiaryEntryThrowsException() {
-    try {
-      diaryRegister.deleteDiaryEntry(null);
-    } catch (DiaryEntryNotFound e) {
-      assertEquals("Did not find the diary entry to delete.", e.getMessage());
-    }
+    assertThrows(DiaryEntryNotFound.class , () -> diaryRegister.deleteDiaryEntry(null),
+        "Did not find the diary entry to delete.");
   }
 
   @Test
@@ -178,8 +176,8 @@ public class DiaryRegisterTest {
     DiaryEntry diaryEntry2 = new DiaryEntry(
         java.time.LocalDateTime.of(2024, 6, 16, 10, 30),
         author,
-        "Workday",
-        "Today was a busy ... at work."
+        "Work",
+        "Busy at work."
     );
 
     diaryRegister.addDiaryEntry(diaryEntry1);

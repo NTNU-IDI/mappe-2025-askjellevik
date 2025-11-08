@@ -131,5 +131,14 @@ public class DiaryRegister {
     return authorEntryCounts;
   }
 
+  /**
+   * Gets the entire diary register.
+   *
+   * @return the diary register map
+   */
+  public Map<UUID, DiaryEntry> getDiaryRegister() {
+    return diaryRegister;
+  }
+
 
 }

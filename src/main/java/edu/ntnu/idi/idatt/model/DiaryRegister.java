@@ -125,5 +125,16 @@ public class DiaryRegister {
     return entriesByAuthor;
   }
 
+  public Map<Author, Integer> getAuthorEntryCounts() {
+    Map<Author, Integer> authorEntryCounts = new HashMap<>();
+
+    for (DiaryEntry entry : diaryRegister.values()) {
+      Author author = entry.getEntryAuthor();
+      authorEntryCounts.put(author, authorEntryCounts.getOrDefault(author, 0) + 1);
+    }
+
+    return authorEntryCounts;
+  }
+
 
 }

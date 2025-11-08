@@ -21,7 +21,7 @@ public class DiaryEntryTest {
   }
 
   @Test
-  public void testGetters() {
+  void testGetters() {
     assertEquals(entryDate, diaryEntry.getEntryDate());
     assertEquals(author, diaryEntry.getEntryAuthor());
     assertEquals("Test title", diaryEntry.getEntryTitle());
@@ -29,7 +29,7 @@ public class DiaryEntryTest {
   }
 
   @Test
-  public void testSetters() {
+  void testSetters() {
     diaryEntry.setEntryTitle("Updated title");
     diaryEntry.setEntryText("Updated text.");
 
@@ -38,7 +38,7 @@ public class DiaryEntryTest {
   }
 
   @Test
-  public void testToString() {
+  void testToString() {
     String expected = "Date: " + entryDate + "\n"
         + "Author: " + author.getName() + "\n"
         + "Title " + diaryEntry.getEntryTitle() + "\n"

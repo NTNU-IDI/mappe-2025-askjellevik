@@ -26,15 +26,10 @@ public class DiaryRegister {
   /**
    * Adds a new diary entry to the register.
    *
-   * @param entryDate   the date of the diary entry
-   * @param entryAuthor the author of the diary entry
-   * @param entryTitle  the title of the diary entry
-   * @param entryText   the text content of the diary entry
+   * @param diaryEntry the diary entry to add
    */
-  public void addDiaryEntry(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
-      String entryText) {
-    DiaryEntry newEntry = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
-    diaryRegister.put(newEntry.getEntryID(), newEntry);
+  public void addDiaryEntry(DiaryEntry diaryEntry) {
+    diaryRegister.put(diaryEntry.getEntryID(), diaryEntry);
   }
 
   /**

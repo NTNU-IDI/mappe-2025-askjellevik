@@ -23,12 +23,10 @@ public class AuthorRegister {
   /**
    * Adds a new author to the register.
    *
-   * @param name  the name of the author
-   * @param email the email of the author
+   * @param author the author to add
    */
-  public void addAuthor(String name, String email) {
-    Author newAuthor = new Author(name, email);
-    authorRegister.put(newAuthor.getId(), newAuthor);
+  public void addAuthor(Author author) {
+    authorRegister.put(author.getId(), author);
   }
 
   /**

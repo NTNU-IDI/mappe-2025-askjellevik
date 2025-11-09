@@ -274,7 +274,7 @@ public class DiaryRegisterTest {
     diaryRegister.addDiaryEntry(diaryEntry1);
     diaryRegister.addDiaryEntry(diaryEntry2);
 
-    Map<Author, Integer> authorEntryCounts = diaryRegister.getAuthorEntryCounts();
+    Map<Author, Integer> authorEntryCounts = diaryRegister.getMapOfAuthorEntryCounts();
 
     assertEquals(1, authorEntryCounts.size());
     assertEquals(2, authorEntryCounts.get(author));

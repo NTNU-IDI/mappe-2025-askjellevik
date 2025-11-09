@@ -120,7 +120,7 @@ public class DiaryRegister {
     return entriesByAuthor;
   }
 
-  public Map<Author, Integer> getAuthorEntryCounts() {
+  public Map<Author, Integer> getMapOfAuthorEntryCounts() {
     Map<Author, Integer> authorEntryCounts = new HashMap<>();
 
     for (DiaryEntry entry : diaryRegister.values()) {
@@ -129,6 +129,16 @@ public class DiaryRegister {
     }
 
     return authorEntryCounts;
+  }
+
+  public Integer getAmountOfDiaryEntriesBySpecificAuthor(Author author) {
+    int amountOfEntries = 0;
+    for (DiaryEntry diaryEntry : diaryRegister.values()) {
+      if (diaryEntry.getEntryAuthor().getId().equals(author.getId())) {
+        amountOfEntries += 1;
+      }
+    }
+    return amountOfEntries;
   }
 
   /**

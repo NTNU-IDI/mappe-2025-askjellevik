@@ -17,10 +17,8 @@ public class DiaryController {
     this.diaryRegister = diaryRegister;
   }
 
-  public void addDiaryToRegister(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
-      String entryText) {
-    DiaryEntry diaryEntryToAdd = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
-    diaryRegister.addDiaryEntry(diaryEntryToAdd);
+  public void addDiaryToRegister(DiaryEntry diaryEntry) {
+    diaryRegister.addDiaryEntry(diaryEntry);
   }
 
   public List<DiaryEntry> getListOfDiaryEntriesByDate(LocalDateTime date) {

@@ -9,7 +9,7 @@ import java.util.UUID;
 public class DiaryEntry {
 
   private final UUID entryID;
-  private final java.time.LocalDateTime entryDate;
+  private final LocalDateTime entryDate;
   private final Author entryAuthor;
   private String entryTitle;
   private String entryText;
@@ -23,7 +23,7 @@ public class DiaryEntry {
    * @param entryTitle  the title of the diary entry
    * @param entryText   the text content of the diary entry
    */
-  public DiaryEntry(java.time.LocalDateTime entryDate, Author entryAuthor, String entryTitle,
+  public DiaryEntry(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
       String entryText) {
     this.entryID = UUID.randomUUID();
     this.entryDate = entryDate;

@@ -6,14 +6,13 @@ import java.time.LocalDateTime;
 public class DateValidator {
 
   public static boolean validateDate(LocalDateTime date) {
+    LocalDateTime dateAndTimeNow = LocalDateTime.now();
 
-    try {
-      /*TODO: Add date validator logic*/
-      return true;
-    } catch (InvalidDateException e) {
-      return false;
+    if (date.isAfter(dateAndTimeNow)) {
+      throw new InvalidDateException("The date cannot be in the future");
     }
 
+    return true;
   }
 
 }

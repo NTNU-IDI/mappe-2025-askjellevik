@@ -41,7 +41,7 @@ public class UserInterface {
   }
 
 
-  public static void init() {
+  public void init() {
 
     AuthorRegister authorRegister = new AuthorRegister();
     DiaryRegister diaryRegister = new DiaryRegister();
@@ -51,7 +51,7 @@ public class UserInterface {
 
   }
 
-  public static void start() {
+  public void start() {
     showMainMenu = true;
 
     while (running) {

@@ -8,9 +8,9 @@ public class Main {
 
     UserInterface userInterface = new UserInterface();
 
-    UserInterface.init();
+    userInterface.init();
 
-    UserInterface.start();
+    userInterface.start();
 
 
   }

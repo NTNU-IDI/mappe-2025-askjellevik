@@ -111,6 +111,69 @@ public class UserInterface {
 
   private static void findSpecificDiaryEntry() {
     consoleUtils.showMessage("Under construction");
+
+    consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
+    consoleUtils.showMessage("Option 1: Search for diary entry by word");
+    consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
+    consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
+    consoleUtils.showMessage("Option 4: Exit diary entry lookup");
+
+
+    String userInput = consoleUtils.readUserInput();
+
+    while (true) {
+      switch (userInput) {
+        case "1" -> searchForDiaryEntryByWord();
+        case "2" -> searchForDiaryEntryWithSpecificDate();
+        case "3" -> searchForDiaryEntryWithinTwoDates();
+        case "4" -> {
+          showMainMenu = true;
+          return;
+        }
+        default -> {
+          consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
+          userInput = consoleUtils.readUserInput();
+        }
+
+      }
+    }
+
+
+  }
+
+  private static void searchForDiaryEntryWithinTwoDates() {
+  }
+
+  private static void searchForDiaryEntryWithSpecificDate() {
+  }
+
+  private static void searchForDiaryEntryByWord() {
+    consoleUtils.showColoredMessage("=== Searching for diary by word===", Color.WHITE);
+    consoleUtils.showMessage("Type Back to go back");
+
+    while (true) {
+        String searchWord = consoleUtils.readUserInputWithPrompt("Enter the search word: ");
+
+        if ("back".equalsIgnoreCase(searchWord)) {
+          return;
+        }
+
+        List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesWithSpecificWord(searchWord);
+
+        if (diaries.isEmpty()) {
+          consoleUtils.showColoredMessage("No entries with that word found", Color.RED);
+        } else {
+          consoleUtils.showColoredMessage("Found" + diaries.size() + " diaries with that word:", Color.CYAN);
+          displayListOfDiaries(diaries);
+          break;
+
+
+      }
+    }
+
+  }
+
+  private static void displayListOfDiaries(List<DiaryEntry> diaries) {
   }
 
   private static void browseAndManageRegisteredDiaries() {
@@ -156,7 +219,6 @@ public class UserInterface {
     }
 
 
-
   }
 
   private static void exitProgram() {
@@ -184,10 +246,6 @@ public class UserInterface {
     showMainMenu = false;
 
     consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
-
-
-
-
 
 
   }
@@ -248,7 +306,6 @@ public class UserInterface {
         return null;
       }
 
-
       try {
         int indexOfAuthorByInput = Integer.parseInt(chosenAuthorInput);
         if (indexOfAuthorByInput >= amountOfAuthorsToDisplay || indexOfAuthorByInput < 0) {
@@ -276,7 +333,7 @@ public class UserInterface {
 
       authorName = consoleUtils.readUserInputWithPrompt("Enter the name of the author:");
 
-    if (!AuthorValidator.validateName(authorName)) {
+      if (!AuthorValidator.validateName(authorName)) {
         consoleUtils.showColoredMessage("Invalid name, try again", Color.RED);
         continue;
       }

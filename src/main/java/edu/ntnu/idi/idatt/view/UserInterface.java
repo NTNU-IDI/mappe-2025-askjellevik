@@ -17,6 +17,15 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import org.fusesource.jansi.Ansi.Color;
 
+
+/**
+ * Class that handles user interference by initializing controllers, displaying menus
+ * and running the main interface loop.
+ *
+ * @author andskj
+ * @version 1.0
+ * @since v0.2.1
+ */
 public class UserInterface {
 
   private static final ConsoleUtils consoleUtils = new ConsoleUtils();

@@ -28,16 +28,15 @@ import org.fusesource.jansi.Ansi.Color;
  */
 public class UserInterface {
 
-  private static final ConsoleUtils consoleUtils = new ConsoleUtils();
-  private static AuthorController authorController;
-  private static DiaryController diaryController;
-  private static boolean running;
-  private static boolean showMainMenu;
+  private final ConsoleUtils consoleUtils;
+  private AuthorController authorController;
+  private DiaryController diaryController;
+  private boolean running;
 
 
   public UserInterface() {
+    consoleUtils = new ConsoleUtils();
     running = true;
-    showMainMenu = false;
   }
 
 
@@ -52,64 +51,55 @@ public class UserInterface {
   }
 
   public void start() {
-    showMainMenu = true;
 
     while (running) {
-
-      if (showMainMenu) {
-        consoleUtils.showColoredMessage("==== Main Menu ====", Color.GREEN);
-        consoleUtils.showMessage("1. Browse the registered diary entries");
-        consoleUtils.showMessage("2. Create a new diary entry");
-        consoleUtils.showMessage("3. Find a specific diary entry");
-        consoleUtils.showMessage("4. Browse and manage the registered authors");
-        consoleUtils.showMessage("5. Exit");
-
-        String userInput = consoleUtils.readUserInput();
-
-        boolean validInputFromUser = false;
-
-        while (!validInputFromUser) {
-          switch (userInput) {
-            case "1" -> {
-              browseAndManageRegisteredDiaries();
-              validInputFromUser = true;
-            }
-            case "2" -> {
-              createNewDiaryEntry();
-              validInputFromUser = true;
-            }
-            case "3" -> {
-              findSpecificDiaryEntry();
-              validInputFromUser = true;
-            }
-            case "4" -> {
-              browseAndManageRegisteredAuthors();
-              validInputFromUser = true;
-            }
-            case "5" -> {
-              exitProgram();
-              validInputFromUser = true;
-            }
-            default -> {
-              consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
-              userInput = consoleUtils.readUserInput();
-
-            }
-
-
-          }
-
-        }
-
-
-      }
+      showMainMenu();
 
 
     }
 
   }
 
-  private static void findSpecificDiaryEntry() {
+  private void showMainMenu() {
+    consoleUtils.showColoredMessage("==== Main Menu ====", Color.GREEN);
+    consoleUtils.showMessage("1. Browse the registered diary entries");
+    consoleUtils.showMessage("2. Create a new diary entry");
+    consoleUtils.showMessage("3. Find a specific diary entry");
+    consoleUtils.showMessage("4. Browse and manage the registered authors");
+    consoleUtils.showMessage("5. Exit");
+
+    String userInput = consoleUtils.readUserInput();
+
+    while (true)
+
+      switch (userInput) {
+        case "1" -> {
+          browseAndManageRegisteredDiaries();
+        }
+        case "2" -> {
+          createNewDiaryEntry();
+        }
+        case "3" -> {
+          findSpecificDiaryEntry();
+        }
+        case "4" -> {
+          browseAndManageRegisteredAuthors();
+        }
+        case "5" -> {
+          exitProgram();
+        }
+        default -> {
+          consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
+          userInput = consoleUtils.readUserInput();
+
+        }
+
+
+      }
+
+  }
+
+  private void findSpecificDiaryEntry() {
     consoleUtils.showMessage("Under construction");
 
     consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
@@ -126,10 +116,7 @@ public class UserInterface {
         case "1" -> searchForDiaryEntryByWord();
         case "2" -> searchForDiaryEntryWithSpecificDate();
         case "3" -> searchForDiaryEntryWithinTwoDates();
-        case "4" -> {
-          showMainMenu = true;
-          return;
-        }
+        case "4" -> showMainMenu();
         default -> {
           consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
           userInput = consoleUtils.readUserInput();
@@ -147,7 +134,7 @@ public class UserInterface {
   private static void searchForDiaryEntryWithSpecificDate() {
   }
 
-  private static void searchForDiaryEntryByWord() {
+  private void searchForDiaryEntryByWord() {
     consoleUtils.showColoredMessage("=== Searching for diary by word===", Color.WHITE);
     consoleUtils.showMessage("Type Back to go back");
 
@@ -176,11 +163,76 @@ public class UserInterface {
   private static void displayListOfDiaries(List<DiaryEntry> diaries) {
   }
 
-  private static void browseAndManageRegisteredDiaries() {
-    consoleUtils.showMessage("Under construction");
+  private void browseAndManageRegisteredDiaries() {
+    DiaryEntry chosenDiaryEntry = browseRegisteredDiaries();
+    if (chosenDiaryEntry != null) {
+      String[] messages = {"You have chosen the diary: ", chosenDiaryEntry.toString()};
+      Color[] colors = {Color.CYAN, Color.YELLOW};
+
+      consoleUtils.showMessageWithMultipleColors(messages, colors);
+      consoleUtils.showMessage("Option 1: Read this diary entry");
+      consoleUtils.showMessage("Option 2: Edit this diary entry");
+      consoleUtils.showMessage("Option 3: Return to main menu");
+
+
+      String userInput = consoleUtils.readUserInput();
+
+      while (true) {
+        switch (userInput) {
+          case "1" -> {
+            consoleUtils.showMessage(chosenDiaryEntry.toString());
+          }
+          case "2" -> {
+            editChosenDiaryEntry(chosenDiaryEntry);
+          }
+          case "3" -> {
+            consoleUtils.showColoredMessage("Returning to main menu", Color.CYAN);
+            return;
+          }
+          default -> {
+            consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
+            userInput = consoleUtils.readUserInput();
+          }
+
+        }
+      }
+
+    } else {
+      consoleUtils.showColoredMessage("Write a new diary entry or go back", Color.CYAN);
+      consoleUtils.showMessage("Option 1: Register a new diary entry");
+      consoleUtils.showMessage("Option 2: Go back");
+
+      String userInput = consoleUtils.readUserInput();
+
+      while (true) {
+        switch (userInput) {
+          case "1" -> {
+            createNewDiaryEntry();
+            browseAndManageRegisteredDiaries();
+          }
+          case "2" -> {
+            consoleUtils.showColoredMessage("Returning to main menu", Color.CYAN);
+            return;
+          }
+          default -> {
+            consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
+            userInput = consoleUtils.readUserInput();
+          }
+
+        }
+      }
+
+
+    }
+
   }
 
-  private static void browseAndManageRegisteredAuthors() {
+  private void editChosenDiaryEntry(DiaryEntry chosenDiaryEntry) {
+    consoleUtils.showMessage("Under construction");
+    showMainMenu();
+  }
+
+  private void browseAndManageRegisteredAuthors() {
     Author chosenAuthor = browseRegisteredAuthors();
     if (chosenAuthor != null) {
       String[] messages = {"You have chosen the author: ", chosenAuthor.toString()};
@@ -221,14 +273,13 @@ public class UserInterface {
 
   }
 
-  private static void exitProgram() {
+  private void exitProgram() {
     consoleUtils.showColoredMessage("Exiting program...", Color.WHITE);
     consoleUtils.shutDownConsoleUtils();
     running = false;
   }
 
-  private static void createNewDiaryEntry() {
-    showMainMenu = false;
+  private void createNewDiaryEntry() {
     consoleUtils.showColoredMessage("=== Crating new Diary Entry ===", Color.WHITE);
     LocalDateTime entryDate = getDateOfNewDiaryEntry();
     Author author = getAuthorOfNewDiaryEntry();
@@ -237,20 +288,59 @@ public class UserInterface {
     String entryText = consoleUtils.readUserInputWithPrompt("Enter the text of the diary entry");
 
     DiaryEntry diaryEntry = new DiaryEntry(entryDate, author, entryTitle, entryText);
-    consoleUtils.showMessage(diaryEntry.toString());
-    showMainMenu = true;
+    diaryController.addDiaryToRegister(diaryEntry);
+
+    showMainMenu();
 
   }
 
-  private static void browseRegisteredDiaries() {
-    showMainMenu = false;
+  private DiaryEntry browseRegisteredDiaries() {
+    List<DiaryEntry> diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
+    consoleUtils.showColoredMessage("=== Registered Diary Entries ===", Color.WHITE);
 
-    consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
+
+    if (diaryEntries.isEmpty()) {
+      consoleUtils.showColoredMessage("No diaries registered", Color.WHITE);
+      showMainMenu();
+    }
+
+    int indexOfFirstDiaryToDisplay = 0;
+    int amountOfDiariesToDisplay = Math.min(diaryEntries.size(), 5);
+
+    for (int i = indexOfFirstDiaryToDisplay; i < amountOfDiariesToDisplay; i++) {
+      consoleUtils.showMessage(i + ": " + diaryEntries.get(i).toString());
+    }
+
+    String chosenDiaryInput;
+
+    while (true) {
+
+      chosenDiaryInput = consoleUtils.readUserInputWithPrompt("Enter author key or go 'back':");
+
+      if ("back".equalsIgnoreCase(chosenDiaryInput)) {
+        showMainMenu();
+      }
+
+      try {
+        int indexOfDiaryByInput = Integer.parseInt(chosenDiaryInput);
+        if (indexOfDiaryByInput >= amountOfDiariesToDisplay || indexOfDiaryByInput < 0) {
+          consoleUtils.showColoredMessage("Not a possible choice of diary", Color.RED);
+          continue;
+        }
+
+        return diaryEntries.get(indexOfDiaryByInput);
+
+      } catch (NumberFormatException e) {
+        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
+      }
+
+
+    }
 
 
   }
 
-  private static Author getAuthorOfNewDiaryEntry() {
+  private Author getAuthorOfNewDiaryEntry() {
     consoleUtils.showMessage("Choose the author of the diary entry:");
     consoleUtils.showMessage("Option 1: Register as a new author");
     consoleUtils.showMessage("Option 2: Choose an author that is already registered");
@@ -281,7 +371,7 @@ public class UserInterface {
 
   }
 
-  private static Author browseRegisteredAuthors() {
+  private Author browseRegisteredAuthors() {
     List<Author> authors = authorController.getListOfAuthorsInRegister();
 
     if (authors.isEmpty()) {
@@ -303,7 +393,7 @@ public class UserInterface {
       chosenAuthorInput = consoleUtils.readUserInputWithPrompt("Enter author key or go 'back':");
 
       if ("back".equalsIgnoreCase(chosenAuthorInput)) {
-        return null;
+        showMainMenu();
       }
 
       try {
@@ -324,7 +414,7 @@ public class UserInterface {
 
   }
 
-  private static Author createNewAuthor() {
+  private Author createNewAuthor() {
     consoleUtils.showColoredMessage("=== New Author ===", Color.BLUE);
     String authorName;
     String authorEmail;
@@ -357,7 +447,7 @@ public class UserInterface {
   }
 
 
-  private static LocalDateTime getDateOfNewDiaryEntry() {
+  private LocalDateTime getDateOfNewDiaryEntry() {
     consoleUtils.showMessage("Choose date for the diary entry:");
     consoleUtils.showMessage("Option 1: Automatically choose the current time");
 

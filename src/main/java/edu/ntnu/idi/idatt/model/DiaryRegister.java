@@ -150,5 +150,9 @@ public class DiaryRegister {
     return diaryRegister;
   }
 
+  public List<DiaryEntry> getAllDiaryEntries() {
+    return new ArrayList<>(diaryRegister.values());
+  }
+
 
 }

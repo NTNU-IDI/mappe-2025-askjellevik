@@ -50,6 +50,10 @@ public class DiaryController {
     return diaryRegister.getAmountOfDiaryEntriesBySpecificAuthor(author);
   }
 
+  public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
+    return diaryRegister.getAllDiaryEntries();
+  }
+
 
 
 

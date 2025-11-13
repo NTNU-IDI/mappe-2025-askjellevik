@@ -11,6 +11,7 @@ import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
+import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -29,8 +30,8 @@ import org.fusesource.jansi.Ansi.Color;
 public class UserInterface {
 
   private final ConsoleUtils consoleUtils;
-  private AuthorController authorController;
   private DiaryController diaryController;
+  private AuthorController authorController;
   private boolean running;
 
 
@@ -42,11 +43,10 @@ public class UserInterface {
 
   public void init() {
 
-    AuthorRegister authorRegister = new AuthorRegister();
     DiaryRegister diaryRegister = new DiaryRegister();
+    AuthorRegister authorRegister = new AuthorRegister();
 
-    authorController = new AuthorController(authorRegister);
-    diaryController = new DiaryController(diaryRegister);
+    DiaryMenu diaryMenu = new DiaryMenu(diaryRegister, consoleUtils);
 
   }
 

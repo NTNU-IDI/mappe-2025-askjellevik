@@ -10,8 +10,8 @@ import org.fusesource.jansi.Ansi.Color;
 
 public class AuthorMenu {
 
-  private ConsoleUtils consoleUtils;
-  private AuthorController authorController;
+  private final ConsoleUtils consoleUtils;
+  private final AuthorController authorController;
 
   public AuthorMenu(AuthorRegister authorRegister, ConsoleUtils consoleUtils) {
     this.authorController = new AuthorController(authorRegister);

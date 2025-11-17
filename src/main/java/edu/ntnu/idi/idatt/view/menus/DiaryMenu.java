@@ -15,9 +15,9 @@ import org.fusesource.jansi.Ansi.Color;
 
 public class DiaryMenu {
 
-  private ConsoleUtils consoleUtils;
-  private DiaryController diaryController;
-  private AuthorMenu authorMenu;
+  private final ConsoleUtils consoleUtils;
+  private final DiaryController diaryController;
+  private final AuthorMenu authorMenu;
 
   public DiaryMenu(DiaryRegister diaryRegister, ConsoleUtils consoleUtils, AuthorMenu authorMenu) {
     this.diaryController = new DiaryController(diaryRegister);

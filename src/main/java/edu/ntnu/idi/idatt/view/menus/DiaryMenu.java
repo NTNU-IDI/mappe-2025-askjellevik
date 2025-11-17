@@ -39,13 +39,11 @@ public class DiaryMenu {
     consoleUtils.showColoredMessage("=== Searching for diary by date===", Color.WHITE);
     consoleUtils.showMessage("Type Back to go back");
 
-
     while (true) {
       String userInput = consoleUtils.readUserInputWithPrompt("Enter the search date: dd-MM-YYYY");
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
       LocalDate entryDate;
       LocalDateTime entryDateTime = null;
-
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;
@@ -68,7 +66,7 @@ public class DiaryMenu {
         consoleUtils.showColoredMessage("No entries from that date found", Color.RED);
       } else {
         consoleUtils.showColoredMessage("Found " + diaries.size() + " diaries from that date:",
-                Color.CYAN);
+            Color.CYAN);
         displayListOfDiaries(diaries);
         break;
 
@@ -118,14 +116,17 @@ public class DiaryMenu {
     int page = 1;
     int amountOfDiariesToDisplay = Math.min(diaryEntries.size(), 5);
 
-    for (int i = indexOfFirstDiaryToDisplay; i < indexOfFirstDiaryToDisplay + amountOfDiariesToDisplay; i++) {
-      consoleUtils.showMessage(i + ": " + diaryEntries.get(i).toString());
+    for (int i = indexOfFirstDiaryToDisplay;
+        i < indexOfFirstDiaryToDisplay + amountOfDiariesToDisplay; i++) {
+      consoleUtils.showMessage(
+          i + ": " + diaryEntries.get(i).getEntryTitle() + ", " + diaryEntries.get(i)
+              .getEntryDate());
     }
-
 
     while (true) {
 
-      String chosenDiaryInput = consoleUtils.readUserInputWithPrompt("Enter '(Diary key)', 'Next' or 'Previous'");
+      String chosenDiaryInput = consoleUtils.readUserInputWithPrompt(
+          "Enter '(Diary key)', 'Next' or 'Previous'");
 
       if ("back".equalsIgnoreCase(chosenDiaryInput)) {
         return null;
@@ -133,13 +134,15 @@ public class DiaryMenu {
       if (diaryEntries.size() > amountOfDiariesToDisplay) {
         if ("next".equalsIgnoreCase(chosenDiaryInput)) {
           indexOfFirstDiaryToDisplay += 5;
+          page += 1;
         }
+      }
+      if (page > 0) {
         if ("previous".equalsIgnoreCase(chosenDiaryInput)) {
           indexOfFirstDiaryToDisplay -= 5;
+          page -= 1;
         }
-
       }
-
 
       try {
         int indexOfDiaryByInput = Integer.parseInt(chosenDiaryInput);
@@ -183,19 +186,18 @@ public class DiaryMenu {
 
     String userInput = consoleUtils.readUserInput();
 
-      switch (userInput) {
-        case "1" -> searchForDiaryEntryByWord();
-        case "2" -> searchForDiaryEntryWithSpecificDate();
-        case "3" -> searchForDiaryEntryWithinTwoDates();
-        case "4" -> {
-          return;
-        }
-        default -> {
-          consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
-        }
-
+    switch (userInput) {
+      case "1" -> searchForDiaryEntryByWord();
+      case "2" -> searchForDiaryEntryWithSpecificDate();
+      case "3" -> searchForDiaryEntryWithinTwoDates();
+      case "4" -> {
+        return;
+      }
+      default -> {
+        consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
       }
 
+    }
 
 
   }

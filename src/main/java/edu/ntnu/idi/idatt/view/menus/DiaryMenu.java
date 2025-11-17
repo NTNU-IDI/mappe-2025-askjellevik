@@ -115,20 +115,31 @@ public class DiaryMenu {
     }
 
     int indexOfFirstDiaryToDisplay = 0;
+    int page = 1;
     int amountOfDiariesToDisplay = Math.min(diaryEntries.size(), 5);
 
-    for (int i = indexOfFirstDiaryToDisplay; i < amountOfDiariesToDisplay; i++) {
+    for (int i = indexOfFirstDiaryToDisplay; i < indexOfFirstDiaryToDisplay + amountOfDiariesToDisplay; i++) {
       consoleUtils.showMessage(i + ": " + diaryEntries.get(i).toString());
     }
 
 
     while (true) {
 
-      String chosenDiaryInput = consoleUtils.readUserInputWithPrompt("Enter author key or go 'back':");
+      String chosenDiaryInput = consoleUtils.readUserInputWithPrompt("Enter '(Diary key)', 'Next' or 'Previous'");
 
       if ("back".equalsIgnoreCase(chosenDiaryInput)) {
         return null;
       }
+      if (diaryEntries.size() > amountOfDiariesToDisplay) {
+        if ("next".equalsIgnoreCase(chosenDiaryInput)) {
+          indexOfFirstDiaryToDisplay += 5;
+        }
+        if ("previous".equalsIgnoreCase(chosenDiaryInput)) {
+          indexOfFirstDiaryToDisplay -= 5;
+        }
+
+      }
+
 
       try {
         int indexOfDiaryByInput = Integer.parseInt(chosenDiaryInput);

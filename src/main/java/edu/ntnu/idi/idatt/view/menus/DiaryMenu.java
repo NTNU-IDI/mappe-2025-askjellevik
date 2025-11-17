@@ -7,6 +7,8 @@ import edu.ntnu.idi.idatt.controller.validators.DateValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -33,7 +35,46 @@ public class DiaryMenu {
   private static void searchForDiaryEntryWithinTwoDates() {
   }
 
-  private static void searchForDiaryEntryWithSpecificDate() {
+  private void searchForDiaryEntryWithSpecificDate() {
+    consoleUtils.showColoredMessage("=== Searching for diary by date===", Color.WHITE);
+    consoleUtils.showMessage("Type Back to go back");
+
+
+    while (true) {
+      String userInput = consoleUtils.readUserInputWithPrompt("Enter the search date: dd-MM-YYYY");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+      LocalDate entryDate;
+      LocalDateTime entryDateTime = null;
+
+
+      if ("back".equalsIgnoreCase(userInput)) {
+        return;
+      }
+
+      try {
+        entryDate = LocalDate.parse(userInput, formatter);
+        entryDateTime = entryDate.atStartOfDay();
+        if (!DateValidator.validateDate(entryDateTime)) {
+          throw new InvalidDateException("The date is not valid");
+        }
+
+      } catch (InvalidDateException | DateTimeParseException e) {
+        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
+      }
+
+      List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesByDate(entryDateTime);
+
+      if (diaries.isEmpty()) {
+        consoleUtils.showColoredMessage("No entries from that date found", Color.RED);
+      } else {
+        consoleUtils.showColoredMessage("Found " + diaries.size() + " diaries from that date:",
+                Color.CYAN);
+        displayListOfDiaries(diaries);
+        break;
+
+
+      }
+    }
   }
 
   private void searchForDiaryEntryByWord() {
@@ -52,7 +93,7 @@ public class DiaryMenu {
       if (diaries.isEmpty()) {
         consoleUtils.showColoredMessage("No entries with that word found", Color.RED);
       } else {
-        consoleUtils.showColoredMessage("Found" + diaries.size() + " diaries with that word:",
+        consoleUtils.showColoredMessage("Found " + diaries.size() + " diaries with that word:",
             Color.CYAN);
         displayListOfDiaries(diaries);
         break;

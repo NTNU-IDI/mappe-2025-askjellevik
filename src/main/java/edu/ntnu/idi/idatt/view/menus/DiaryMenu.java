@@ -7,7 +7,6 @@ import edu.ntnu.idi.idatt.controller.validators.DateValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -253,13 +252,13 @@ public class DiaryMenu {
   public String subMenuForFindingDiaryAction() {
 
     while (true) {
-    consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
-    consoleUtils.showMessage("Option 1: Search for diary entry by word");
-    consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
-    consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
-    consoleUtils.showMessage("Option Back: Exit diary entry lookup");
+      consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
+      consoleUtils.showMessage("Option 1: Search for diary entry by word");
+      consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
+      consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
+      consoleUtils.showMessage("Option Back: Exit diary entry lookup");
 
-    String userInput = consoleUtils.readUserInput();
+      String userInput = consoleUtils.readUserInput();
 
       if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
           userInput)) {

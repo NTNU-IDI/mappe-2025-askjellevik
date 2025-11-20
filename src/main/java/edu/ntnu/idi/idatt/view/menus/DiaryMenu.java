@@ -119,8 +119,9 @@ public class DiaryMenu {
 
       for (int i = start; i < end; i++) {
         consoleUtils.showMessage(
-            i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |" + diaryEntries.get(i)
-                .getEntryDate());
+            i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |"
+                + consoleUtils.formatDateToView(diaryEntries.get(i)
+                .getEntryDate()));
       }
 
       String userInput = consoleUtils.readUserInputWithPrompt(
@@ -185,8 +186,12 @@ public class DiaryMenu {
   }
 
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
-    String[] messages = {"You have chosen the diary: ", diaryEntry.toString()};
-    Color[] colors = {Color.CYAN, Color.YELLOW};
+    String[] messages = {"You have chosen the diary: \n",
+        diaryEntry.getEntryTitle() , " written by "
+            , diaryEntry.getEntryAuthor().getName() , " registered ",
+        consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
+    Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE,
+        Color.CYAN};
 
     consoleUtils.showMessageWithMultipleColors(messages, colors);
 

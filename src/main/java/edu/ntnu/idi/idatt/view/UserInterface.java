@@ -6,9 +6,17 @@ import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
+import edu.ntnu.idi.idatt.view.actions.Action;
+import edu.ntnu.idi.idatt.view.actions.BrowseAuthorsAction;
+import edu.ntnu.idi.idatt.view.actions.BrowseDiariesAction;
+import edu.ntnu.idi.idatt.view.actions.CreateDiaryEntryAction;
+import edu.ntnu.idi.idatt.view.actions.ExitProgramAction;
+import edu.ntnu.idi.idatt.view.actions.FindSpecificDiaryAction;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
 
 
@@ -26,6 +34,7 @@ public class UserInterface {
   private DiaryMenu diaryMenu;
   private AuthorMenu authorMenu;
   private boolean running;
+  private Map<String, Action> mainMenuMap;
 
 
   public UserInterface() {
@@ -73,6 +82,15 @@ public class UserInterface {
     this.diaryMenu = new DiaryMenu(diaryRegister, consoleUtils, authorMenu);
 
 
+    this.mainMenuMap = new HashMap<>();
+
+    mainMenuMap.put("1", new BrowseDiariesAction(diaryMenu));
+    mainMenuMap.put("2", new CreateDiaryEntryAction(diaryMenu));
+    mainMenuMap.put("3", new FindSpecificDiaryAction(diaryMenu));
+    mainMenuMap.put("4", new BrowseAuthorsAction(authorMenu));
+    mainMenuMap.put("5", new ExitProgramAction(this, consoleUtils));
+
+
   }
 
   public void start() {
@@ -91,27 +109,22 @@ public class UserInterface {
     consoleUtils.showMessage("2. Create a new diary entry");
     consoleUtils.showMessage("3. Find a specific diary entry");
     consoleUtils.showMessage("4. Browse and manage the registered authors");
-    consoleUtils.showMessage("5. Exit");
+    consoleUtils.showMessage("5. Exit program");
 
     String userInput = consoleUtils.readUserInput();
 
-    switch (userInput) {
-      case "1" -> diaryMenu.browseAndManageRegisteredDiaries();
-      case "2" -> diaryMenu.createNewDiaryEntry();
-      case "3" -> diaryMenu.findSpecificDiaryEntry();
-      case "4" -> authorMenu.browseAndManageRegisteredAuthors();
-      case "5" -> exitProgram();
-      default -> consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
+    Action action = mainMenuMap.get(userInput);
 
-
+    if (action != null) {
+      action.execute();
+    } else {
+      consoleUtils.showColoredMessage("Invalid menu option, try again", Color.RED);
     }
 
   }
 
 
-  private void exitProgram() {
-    consoleUtils.showColoredMessage("Exiting program...", Color.WHITE);
-    consoleUtils.shutDownConsoleUtils();
+  public void exitProgram() {
     running = false;
   }
 

@@ -4,9 +4,8 @@ package edu.ntnu.idi.idatt.view;
 import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
-import edu.ntnu.idi.idatt.model.Author;
+import edu.ntnu.idi.idatt.controller.utils.TestDataLoader;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
-import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
 import edu.ntnu.idi.idatt.view.actions.Action;
 import edu.ntnu.idi.idatt.view.actions.BrowseAuthorsAction;
@@ -16,7 +15,6 @@ import edu.ntnu.idi.idatt.view.actions.ExitProgramAction;
 import edu.ntnu.idi.idatt.view.actions.FindSpecificDiaryAction;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
@@ -56,6 +54,20 @@ public class UserInterface {
     this.authorMenu = new AuthorMenu(authorController, consoleUtils);
     this.diaryMenu = new DiaryMenu(diaryController, consoleUtils, authorMenu);
 
+    boolean validInput = false;
+    while (!validInput) {
+      String loadData = consoleUtils.readUserInputWithPrompt("\nLoad test data now? (yes/no)");
+      if ("yes".equalsIgnoreCase(loadData)) {
+        TestDataLoader loader = new TestDataLoader();
+        loader.loadTestData(diaryController, authorController);
+        consoleUtils.showMessage("Loaded data");
+        validInput = true;
+      }
+      if ("no".equalsIgnoreCase(loadData)) {
+        validInput = true;
+      }
+      consoleUtils.showMessage("Not valid input, enter (yes/no)");
+    }
 
     this.mainMenuMap = new HashMap<>();
 

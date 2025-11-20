@@ -14,7 +14,6 @@ public class ConsoleUtils {
       DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
 
-
   public ConsoleUtils() {
     System.setProperty("jansi.passthrough", "true");
     AnsiConsole.systemInstall();
@@ -25,17 +24,17 @@ public class ConsoleUtils {
   public void showColoredMessage(String message, Ansi.Color color) {
     /* Chat-GPT prompt:
 
-    *   How do I make this method print out the message in the console with a given color?
-    *
-    * */
+     *   How do I make this method print out the message in the console with a given color?
+     *
+     * */
     System.out.println(Ansi.ansi().fg(color).a(message).reset());
 
   }
 
   public void showMessageWithMultipleColors(String[] strings, Color[] colors) {
     /* Chat-GPT prompt:
-    *
-    *   How do I make the method print out a one-line message with multiple colors?*/
+     *
+     *   How do I make the method print out a one-line message with multiple colors?*/
     if (strings.length != colors.length) {
       throw new IllegalArgumentException("The lists must be the same size");
     }
@@ -75,4 +74,8 @@ public class ConsoleUtils {
     return date.format(DEFAULT_FORMATTER);
   }
 
+  public void printLine(Color color) {
+    System.out.println(Ansi.ansi().fg(color).a("------------------").reset());
+
+  }
 }

@@ -29,6 +29,26 @@ public class DiaryMenu {
     this.authorMenu = authorMenu;
   }
 
+  public String subMenuForFindingDiaryAction() {
+
+    while (true) {
+      consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
+      consoleUtils.showMessage("Option 1: Search for diary entry by word");
+      consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
+      consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
+      consoleUtils.showMessage("Option Back: Exit diary entry lookup");
+
+      String userInput = consoleUtils.readUserInput();
+
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
+          userInput)) {
+        return userInput;
+      }
+
+    }
+
+
+  }
 
   public void searchForDiaryEntryWithinTwoDates() {
   }
@@ -100,71 +120,20 @@ public class DiaryMenu {
 
   }
 
+  public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end, int page) {
+    consoleUtils.showColoredMessage("=== Registered Diary Entries (Page"+(page+1)+") ===", Color.WHITE);
 
-  public DiaryEntry chooseRegisteredDiaries() {
-    List<DiaryEntry> diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
-    consoleUtils.showColoredMessage("=== Registered Diary Entries ===", Color.WHITE);
-
-    if (diaryEntries.isEmpty()) {
-      consoleUtils.showColoredMessage("No diaries registered", Color.WHITE);
-      return null;
+    for (int i = start; i < end; i++) {
+      consoleUtils.showMessage(
+          i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |"
+              + consoleUtils.formatDateToView(diaryEntries.get(i)
+              .getEntryDate()));
     }
 
-    int page = 0;
-    int pageSize = 5;
-
-    while (true) {
-
-      int start = page * pageSize;
-      int end = Math.min(diaryEntries.size(), start + pageSize);
-
-      consoleUtils.showMessage("KEY|    TITLE   |   DATE");
-
-      for (int i = start; i < end; i++) {
-        consoleUtils.showMessage(
-            i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |"
-                + consoleUtils.formatDateToView(diaryEntries.get(i)
-                .getEntryDate()));
-      }
-
-      String userInput = consoleUtils.readUserInputWithPrompt(
-          "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
-
-      if ("back".equalsIgnoreCase(userInput)) {
-        return null;
-      }
-
-      if (end < diaryEntries.size()) {
-        if ("next".equalsIgnoreCase(userInput)) {
-          page += 1;
-          continue;
-        }
-      }
-      if (page > 0) {
-        if ("previous".equalsIgnoreCase(userInput)) {
-          page -= 1;
-          continue;
-        }
-      }
-
-      try {
-        int indexOfDiaryByInput = Integer.parseInt(userInput);
-        if (indexOfDiaryByInput >= end || indexOfDiaryByInput < 0) {
-          consoleUtils.showColoredMessage("Not a possible choice of diary", Color.RED);
-          continue;
-        }
-
-        return diaryEntries.get(indexOfDiaryByInput);
-
-      } catch (NumberFormatException e) {
-        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
-      }
-
-
-    }
-
-
+    return consoleUtils.readUserInputWithPrompt(
+        "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
   }
+
 
 
   public void createNewDiaryEntry() {
@@ -260,7 +229,15 @@ public class DiaryMenu {
 
   }
 
-  private static void displayListOfDiaries(List<DiaryEntry> diaries) {
+  private void displayListOfDiaries(List<DiaryEntry> diaries) {
+
+    if (diaries.isEmpty()) {
+      consoleUtils.showColoredMessage("Found no diaries", Color.RED);
+      return;
+    }
+
+
+
   }
 
 
@@ -272,8 +249,8 @@ public class DiaryMenu {
     consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
     consoleUtils.showMessage("Are you sure you want to delete this diary from the register?");
     String[] messages = {
-        diaryEntry.getEntryTitle() + " by " + diaryEntry.getEntryAuthor().getName() + " from "
-            + consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
+        diaryEntry.getEntryTitle(), " by " , diaryEntry.getEntryAuthor().getName(), " from "
+            , consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
     Color[] colors = {Color.WHITE, Color.DEFAULT, Color.WHITE, Color.DEFAULT, Color.WHITE};
 
     consoleUtils.showMessageWithMultipleColors(messages, colors);
@@ -281,6 +258,7 @@ public class DiaryMenu {
     while (true) {
       if ("yes".equalsIgnoreCase(userInput)) {
         diaryController.deleteDiaryEntryInRegister(diaryEntry);
+        consoleUtils.showColoredMessage("Diary entry deleted.", Color.BLACK);
         return;
       }
       if ("no".equalsIgnoreCase(userInput)) {
@@ -289,27 +267,6 @@ public class DiaryMenu {
       consoleUtils.showColoredMessage("Not a valid input, Yes/No", Color.RED);
       userInput = consoleUtils.readUserInput();
     }
-  }
-
-  public String subMenuForFindingDiaryAction() {
-
-    while (true) {
-      consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
-      consoleUtils.showMessage("Option 1: Search for diary entry by word");
-      consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
-      consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
-      consoleUtils.showMessage("Option Back: Exit diary entry lookup");
-
-      String userInput = consoleUtils.readUserInput();
-
-      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
-          userInput)) {
-        return userInput;
-      }
-
-    }
-
-
   }
 
   public String subMenuForEditingDiaryAction() {
@@ -410,5 +367,13 @@ public class DiaryMenu {
       }
     }
 
+  }
+
+  public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
+    return diaryController.getListOfAllRegisteredDiaryEntries();
+  }
+
+  public void displayInvalidInputKey() {
+    consoleUtils.showColoredMessage("The input key was not a valid key", Color.RED);
   }
 }

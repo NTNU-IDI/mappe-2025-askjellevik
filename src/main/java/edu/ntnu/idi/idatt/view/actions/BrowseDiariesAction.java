@@ -14,37 +14,77 @@ public class BrowseDiariesAction implements Action {
 
   @Override
   public void execute() {
+    List<DiaryEntry> diaryEntries = diaryMenu.getListOfAllRegisteredDiaryEntries();
+
+    int page = 0;
+    int pageSize = 5;
+
     while (true) {
 
-      DiaryEntry diaryEntry = diaryMenu.chooseRegisteredDiaries();
+      int start = page * pageSize;
+      int end = Math.min(diaryEntries.size(), start + pageSize);
 
-      if (diaryEntry == null) {
+      String userInput = diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page);
+
+      if ("back".equalsIgnoreCase(userInput)) {
         return;
       }
 
-      boolean choosing = true;
-
-      while (choosing) {
-        String submenuUserChoice = diaryMenu.subMenuForDiaryManagementAction(diaryEntry);
-
-
-      switch (submenuUserChoice) {
-        case "1" -> diaryMenu.readDiaryEntry(diaryEntry);
-        case "2" -> {
-          Action editDiaryAction = new EditDiaryAction(diaryMenu, diaryEntry);
-          editDiaryAction.execute();
-        }
-        case "3" -> {
-          diaryMenu.deleteDiaryEntry(diaryEntry);
-          choosing = false;
-        }
-        case "back" -> {
-          choosing = false;
-        }
+      if ("next".equalsIgnoreCase(userInput) && end < diaryEntries.size()) {
+        page += 1;
+        continue;
       }
+      if ("previous".equalsIgnoreCase(userInput) && page > 0 ) {
+        page -= 1;
+        continue;
+
+      }
+      try {
+
+        int indexOfChosenDiary = Integer.parseInt(userInput);
+
+        if (indexOfChosenDiary < start || indexOfChosenDiary >= end) {
+          diaryMenu.displayInvalidInputKey();
+          continue;
+        }
+
+        DiaryEntry diaryEntry = diaryEntries.get(indexOfChosenDiary);
+
+        boolean choosingSubMenu = true;
+        while (choosingSubMenu) {
+          String submenuUserChoice = diaryMenu.subMenuForDiaryManagementAction(diaryEntry);
+
+          switch (submenuUserChoice) {
+            case "1" -> diaryMenu.readDiaryEntry(diaryEntry);
+            case "2" -> {
+              Action editDiaryAction = new EditDiaryAction(diaryMenu, diaryEntry);
+              editDiaryAction.execute();
+            }
+            case "3" -> {
+              diaryMenu.deleteDiaryEntry(diaryEntry);
+              choosingSubMenu = false;
+            }
+            case "back" -> {
+              choosingSubMenu = false;
+            }
+          }
+
+        }
+      } catch (NumberFormatException e) {
+        userInput = diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page);
+      }
+
 
     }
   }
 }
 
-}
+
+
+
+
+
+
+
+
+

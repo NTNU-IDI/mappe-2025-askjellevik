@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.view.actions;
 
-import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 
 public class FindSpecificDiaryAction implements Action {
@@ -19,7 +18,7 @@ public class FindSpecificDiaryAction implements Action {
       case "1" -> diaryMenu.searchForDiaryEntryByWord();
       case "2" -> diaryMenu.searchForDiaryEntryWithSpecificDate();
       case "3" -> diaryMenu.searchForDiaryEntryWithinTwoDates();
-      case "4" -> {
+      case "back" -> {
       }
     }
 

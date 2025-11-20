@@ -1,9 +1,12 @@
 package edu.ntnu.idi.idatt.view.menus;
 
 import edu.ntnu.idi.idatt.controller.DiaryController;
+import edu.ntnu.idi.idatt.controller.exceptions.EmptyStringException;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
+import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
 import edu.ntnu.idi.idatt.controller.validators.DateValidator;
+import edu.ntnu.idi.idatt.controller.validators.StringValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
@@ -187,8 +190,8 @@ public class DiaryMenu {
 
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
     String[] messages = {"You have chosen the diary: \n",
-        diaryEntry.getEntryTitle() , " written by "
-            , diaryEntry.getEntryAuthor().getName() , " registered ",
+        diaryEntry.getEntryTitle(), " written by "
+        , diaryEntry.getEntryAuthor().getName(), " registered ",
         consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
     Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE,
         Color.CYAN};
@@ -264,8 +267,6 @@ public class DiaryMenu {
   public void readDiaryEntry(DiaryEntry diaryEntry) {
   }
 
-  public void editDiaryEntry(DiaryEntry diaryEntry) {
-  }
 
   public void deleteDiaryEntry(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
@@ -308,6 +309,106 @@ public class DiaryMenu {
 
     }
 
+
+  }
+
+  public String subMenuForEditingDiaryAction() {
+    while (true) {
+      consoleUtils.showColoredMessage("=== Diary entry editing ===", Color.WHITE);
+      consoleUtils.showMessage("Option 1: Edit the diary entry title");
+      consoleUtils.showMessage("Option 2: Overwrite the diary entry text");
+      consoleUtils.showMessage("Option 3: Add text to the existing diary entry text");
+      consoleUtils.showMessage("Option Back: Exit diary entry editing");
+
+      String userInput = consoleUtils.readUserInput();
+
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
+          userInput)) {
+        return userInput;
+      }
+
+    }
+  }
+
+
+  public void editDiaryTitle(DiaryEntry diaryEntry) {
+    consoleUtils.showColoredMessage("### Editing Diary Title ###", Color.MAGENTA);
+    consoleUtils.showMessage("Original title: " + diaryEntry.getEntryTitle());
+    consoleUtils.showMessage("------------------------------");
+
+    String newTitle = consoleUtils.readUserInputWithPrompt(
+        "Enter the new title: (Back for back)");
+    while (true) {
+      if ("back".equalsIgnoreCase(newTitle)) {
+        return;
+      }
+
+      try {
+
+        StringValidator.validateDiaryTitle(newTitle);
+
+        diaryController.setDiaryTitle(diaryEntry, newTitle);
+        return;
+
+      } catch (InvalidInputException | EmptyStringException e) {
+        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
+        newTitle = consoleUtils.readUserInputWithPrompt(
+            "Enter the new title: (Back for back)");
+      }
+
+    }
+
+  }
+
+
+  public void overwriteDiaryText(DiaryEntry diaryEntry) {
+    consoleUtils.showColoredMessage("### Overwriting text ###", Color.MAGENTA);
+    String newText = consoleUtils.readUserInputWithPrompt(
+        "Enter the new text that will overwrite the existing text: (Back for back)");
+    while (true) {
+      if ("back".equalsIgnoreCase(newText)) {
+        return;
+      }
+
+      try {
+
+        StringValidator.validateDiaryEntryText(newText);
+
+        diaryController.setDiaryText(diaryEntry, newText);
+        return;
+
+      } catch (EmptyStringException e) {
+        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
+        newText = consoleUtils.readUserInputWithPrompt(
+            "Enter the new text that will overwrite the existing text: (Back for back)");
+      }
+    }
+
+  }
+  public void addDiaryText(DiaryEntry diaryEntry) {
+    consoleUtils.showColoredMessage("### Adding text ###", Color.MAGENTA);
+    String textToAdd = consoleUtils.readUserInputWithPrompt(
+        "Enter the new text that will add to the existing text: (Back for back)");
+    while (true) {
+      if ("back".equalsIgnoreCase(textToAdd)) {
+        return;
+      }
+
+      try {
+
+        StringValidator.validateDiaryEntryText(textToAdd);
+
+        String finalText = diaryEntry.getEntryText() + " " + textToAdd;
+
+        diaryController.setDiaryText(diaryEntry, finalText);
+        return;
+
+      } catch (EmptyStringException e) {
+        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
+        textToAdd = consoleUtils.readUserInputWithPrompt(
+            "Enter the new text that will overwrite the existing text: (Back for back)");
+      }
+    }
 
   }
 }

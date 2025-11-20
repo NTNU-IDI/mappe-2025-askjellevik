@@ -134,8 +134,6 @@ public class DiaryMenu {
         "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
   }
 
-
-
   public void createNewDiaryEntry() {
     consoleUtils.showColoredMessage("=== Creating new Diary Entry ===", Color.WHITE);
 
@@ -185,7 +183,6 @@ public class DiaryMenu {
 
 
   }
-
 
   private LocalDateTime getDateOfNewDiaryEntry() {
     consoleUtils.showMessage("Choose date for the diary entry:");
@@ -242,6 +239,15 @@ public class DiaryMenu {
 
 
   public void readDiaryEntry(DiaryEntry diaryEntry) {
+    consoleUtils.showColoredMessage("===== Reading diary entry =====", Color.MAGENTA);
+    consoleUtils.showMessage(diaryEntry.getEntryTitle());
+    consoleUtils.printLine(Color.GREEN);
+    consoleUtils.showMessage("By " + diaryEntry.getEntryAuthor().getName());
+    consoleUtils.showMessage("Date " + consoleUtils.formatDateToView(diaryEntry.getEntryDate()));
+    consoleUtils.printLine(Color.GREEN);
+    consoleUtils.showMessage(diaryEntry.getEntryText());
+    consoleUtils.printLine(Color.GREEN);
+    consoleUtils.readUserInputWithPrompt("Press ENTER to continue");
   }
 
 
@@ -342,6 +348,7 @@ public class DiaryMenu {
     }
 
   }
+
   public void addDiaryText(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("### Adding text ###", Color.MAGENTA);
     String textToAdd = consoleUtils.readUserInputWithPrompt(

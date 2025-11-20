@@ -199,66 +199,6 @@ public class DiaryMenu {
   }
 
 
-  public void browseAndManageRegisteredDiaries() {
-    DiaryEntry chosenDiaryEntry = chooseRegisteredDiaries();
-    if (chosenDiaryEntry != null) {
-      String[] messages = {"You have chosen the diary: ", chosenDiaryEntry.toString()};
-      Color[] colors = {Color.CYAN, Color.YELLOW};
-
-      consoleUtils.showMessageWithMultipleColors(messages, colors);
-      consoleUtils.showMessage("Option 1: Read this diary entry");
-      consoleUtils.showMessage("Option 2: Edit this diary entry");
-      consoleUtils.showMessage("Option Back: Return to main menu");
-
-      String userInput = consoleUtils.readUserInput();
-
-      while (true) {
-        switch (userInput) {
-          case "1" -> consoleUtils.showMessage(chosenDiaryEntry.toString());
-          //case "2" -> editChosenDiaryEntry(chosenDiaryEntry);
-          case "back" -> {
-            consoleUtils.showColoredMessage("Returning to main menu", Color.CYAN);
-            return;
-          }
-          default -> {
-            consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
-            userInput = consoleUtils.readUserInput();
-          }
-
-        }
-      }
-
-    } else {
-      consoleUtils.showColoredMessage("Write a new diary entry or go back", Color.CYAN);
-      consoleUtils.showMessage("Option 1: Register a new diary entry");
-      consoleUtils.showMessage("Option 2: Go back");
-
-      String userInput = consoleUtils.readUserInput();
-
-      while (true) {
-        switch (userInput) {
-          case "1" -> {
-            createNewDiaryEntry();
-            return;
-          }
-          case "2" -> {
-            consoleUtils.showColoredMessage("Returning to main menu", Color.CYAN);
-            return;
-          }
-          default -> {
-            consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
-            userInput = consoleUtils.readUserInput();
-          }
-
-        }
-      }
-
-
-    }
-
-  }
-
-
   private LocalDateTime getDateOfNewDiaryEntry() {
     consoleUtils.showMessage("Choose date for the diary entry:");
     consoleUtils.showMessage("Option 1: Automatically choose the current time");

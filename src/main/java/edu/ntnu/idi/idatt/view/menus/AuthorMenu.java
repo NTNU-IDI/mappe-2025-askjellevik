@@ -179,6 +179,23 @@ public class AuthorMenu {
   public Author chooseRegisteredAuthors() {
     return null;
   }
+  public String subMenuForEditingAuthorAction() {
+    while (true) {
+      consoleUtils.showColoredMessage("=== Author editing ===", Color.WHITE);
+      consoleUtils.showMessage("Option 1: Edit the authors name");
+      consoleUtils.showMessage("Option 2: Edit the authors email");
+      consoleUtils.showMessage("Option Back: Exit author editing");
+
+      String userInput = consoleUtils.readUserInput();
+
+      if ("1".equals(userInput) || "2".equals(userInput) || "back".equals(
+          userInput)) {
+        return userInput;
+      }
+
+    }
+  }
+
 }
 
 

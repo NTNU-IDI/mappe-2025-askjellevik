@@ -173,31 +173,6 @@ public class DiaryMenu {
 
   }
 
-  public void findSpecificDiaryEntry() {
-    consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
-    consoleUtils.showMessage("Option 1: Search for diary entry by word");
-    consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
-    consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
-    consoleUtils.showMessage("Option Back: Exit diary entry lookup");
-
-    String userInput = consoleUtils.readUserInput();
-
-    switch (userInput) {
-      case "1" -> searchForDiaryEntryByWord();
-      case "2" -> searchForDiaryEntryWithSpecificDate();
-      case "3" -> searchForDiaryEntryWithinTwoDates();
-      case "back" -> {
-        return;
-      }
-      default -> {
-        consoleUtils.showColoredMessage("Invalid choice, please try again.", Color.RED);
-      }
-
-    }
-
-
-  }
-
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
     String[] messages = {"You have chosen the diary: ", diaryEntry.toString()};
     Color[] colors = {Color.CYAN, Color.YELLOW};

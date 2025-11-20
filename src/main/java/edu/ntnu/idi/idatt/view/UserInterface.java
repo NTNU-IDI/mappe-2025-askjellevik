@@ -61,10 +61,10 @@ public class UserInterface {
     Author author2 = new Author("Martn Basj", "mart@mail.com");
 
     DiaryEntry diary1 = new DiaryEntry(dateTime1, author1, "test", "tesasdas");
-    DiaryEntry diary2 = new DiaryEntry(dateTime2, author2, "test", "tesasdas");
-    DiaryEntry diary3 = new DiaryEntry(dateTime3, author1, "test", "tesasdas");
+    DiaryEntry diary2 = new DiaryEntry(dateTime2, author2, "tes3wt", "tesasdas");
+    DiaryEntry diary3 = new DiaryEntry(dateTime3, author1, "testwr3w", "tesasdas");
     DiaryEntry diary4 = new DiaryEntry(dateTime4, author2, "test", "tesasdas");
-    DiaryEntry diary5 = new DiaryEntry(dateTime5, author1, "test", "tesasdas");
+    DiaryEntry diary5 = new DiaryEntry(dateTime5, author1, "tes455t", "tesasdas");
     DiaryEntry diary6 = new DiaryEntry(dateTime6, author2, "test", "tesasdas");
 
     authorRegister.addAuthor(author1);

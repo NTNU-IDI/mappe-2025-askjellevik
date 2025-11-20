@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.controller.utils;
 
-import java.security.spec.RSAOtherPrimeInfo;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Color;
@@ -9,6 +10,9 @@ import org.fusesource.jansi.AnsiConsole;
 public class ConsoleUtils {
 
   private final Scanner scanner;
+  private static final DateTimeFormatter DEFAULT_FORMATTER =
+      DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
 
 
   public ConsoleUtils() {
@@ -61,6 +65,14 @@ public class ConsoleUtils {
   public void shutDownConsoleUtils() {
     AnsiConsole.systemUninstall();
     scanner.close();
+  }
+
+
+  public String formatDateToView(LocalDateTime date) {
+    if (date == null) {
+      return "";
+    }
+    return date.format(DEFAULT_FORMATTER);
   }
 
 }

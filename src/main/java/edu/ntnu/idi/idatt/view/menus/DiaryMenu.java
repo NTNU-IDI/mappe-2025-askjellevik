@@ -107,41 +107,45 @@ public class DiaryMenu {
       return null;
     }
 
-    int indexOfFirstDiaryToDisplay = 0;
-    int page = 1;
-    int amountOfDiariesToDisplay = Math.min(diaryEntries.size(), 5);
-
-    for (int i = indexOfFirstDiaryToDisplay;
-        i < indexOfFirstDiaryToDisplay + amountOfDiariesToDisplay; i++) {
-      consoleUtils.showMessage(
-          i + ": " + diaryEntries.get(i).getEntryTitle() + ", " + diaryEntries.get(i)
-              .getEntryDate());
-    }
+    int page = 0;
+    int pageSize = 5;
 
     while (true) {
 
-      String chosenDiaryInput = consoleUtils.readUserInputWithPrompt(
+      int start = page * pageSize;
+      int end = Math.min(diaryEntries.size(), start + pageSize);
+
+      consoleUtils.showMessage("KEY|    TITLE   |   DATE");
+
+      for (int i = start; i < end; i++) {
+        consoleUtils.showMessage(
+            i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |" + diaryEntries.get(i)
+                .getEntryDate());
+      }
+
+      String userInput = consoleUtils.readUserInputWithPrompt(
           "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
 
-      if ("back".equalsIgnoreCase(chosenDiaryInput)) {
+      if ("back".equalsIgnoreCase(userInput)) {
         return null;
       }
-      if (diaryEntries.size() > amountOfDiariesToDisplay) {
-        if ("next".equalsIgnoreCase(chosenDiaryInput)) {
-          indexOfFirstDiaryToDisplay += 5;
+
+      if (end < diaryEntries.size()) {
+        if ("next".equalsIgnoreCase(userInput)) {
           page += 1;
+          continue;
         }
       }
       if (page > 0) {
-        if ("previous".equalsIgnoreCase(chosenDiaryInput)) {
-          indexOfFirstDiaryToDisplay -= 5;
+        if ("previous".equalsIgnoreCase(userInput)) {
           page -= 1;
+          continue;
         }
       }
 
       try {
-        int indexOfDiaryByInput = Integer.parseInt(chosenDiaryInput);
-        if (indexOfDiaryByInput >= amountOfDiariesToDisplay || indexOfDiaryByInput < 0) {
+        int indexOfDiaryByInput = Integer.parseInt(userInput);
+        if (indexOfDiaryByInput >= end || indexOfDiaryByInput < 0) {
           consoleUtils.showColoredMessage("Not a possible choice of diary", Color.RED);
           continue;
         }
@@ -161,8 +165,16 @@ public class DiaryMenu {
 
   public void createNewDiaryEntry() {
     consoleUtils.showColoredMessage("=== Creating new Diary Entry ===", Color.WHITE);
+
     LocalDateTime entryDate = getDateOfNewDiaryEntry();
+    if (entryDate == null) {
+      return;
+    }
+
     Author author = authorMenu.getAuthorOfNewDiaryEntry();
+    if (author == null) {
+      return;
+    }
     consoleUtils.showMessage(author + " is now chosen");
     String entryTitle = consoleUtils.readUserInputWithPrompt("Enter the diary entry title: ");
     String entryText = consoleUtils.readUserInputWithPrompt("Enter the text of the diary entry");
@@ -217,6 +229,10 @@ public class DiaryMenu {
         consoleUtils.showMessage("Using the current date and time: " + entryDate.format(formatter));
         return entryDate;
 
+
+      }
+      if ("back".equalsIgnoreCase(userInput)) {
+        return null;
       } else {
         try {
           entryDate = LocalDateTime.parse(userInput, formatter);
@@ -247,6 +263,26 @@ public class DiaryMenu {
   }
 
   public void deleteDiaryEntry(DiaryEntry diaryEntry) {
+    consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
+    consoleUtils.showMessage("Are you sure you want to delete this diary from the register?");
+    String[] messages = {
+        diaryEntry.getEntryTitle() + " by " + diaryEntry.getEntryAuthor().getName() + " from "
+            + consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
+    Color[] colors = {Color.WHITE, Color.DEFAULT, Color.WHITE, Color.DEFAULT, Color.WHITE};
+
+    consoleUtils.showMessageWithMultipleColors(messages, colors);
+    String userInput = consoleUtils.readUserInputWithPrompt("Yes/No");
+    while (true) {
+      if ("yes".equalsIgnoreCase(userInput)) {
+        diaryController.deleteDiaryEntryInRegister(diaryEntry);
+        return;
+      }
+      if ("no".equalsIgnoreCase(userInput)) {
+        return;
+      }
+      consoleUtils.showColoredMessage("Not a valid input, Yes/No", Color.RED);
+      userInput = consoleUtils.readUserInput();
+    }
   }
 
   public String subMenuForFindingDiaryAction() {

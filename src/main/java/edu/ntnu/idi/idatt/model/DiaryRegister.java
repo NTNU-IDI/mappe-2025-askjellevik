@@ -141,14 +141,6 @@ public class DiaryRegister {
     return amountOfEntries;
   }
 
-  /**
-   * Gets the entire diary register.
-   *
-   * @return the diary register map
-   */
-  public Map<UUID, DiaryEntry> getDiaryRegister() {
-    return diaryRegister;
-  }
 
   public List<DiaryEntry> getAllDiaryEntries() {
     return new ArrayList<>(diaryRegister.values());

@@ -28,14 +28,10 @@ public class DiaryMenu {
   }
 
 
-  private void editChosenDiaryEntry(DiaryEntry chosenDiaryEntry) {
-    consoleUtils.showMessage("Under construction");
+  public void searchForDiaryEntryWithinTwoDates() {
   }
 
-  private static void searchForDiaryEntryWithinTwoDates() {
-  }
-
-  private void searchForDiaryEntryWithSpecificDate() {
+  public void searchForDiaryEntryWithSpecificDate() {
     consoleUtils.showColoredMessage("=== Searching for diary by date===", Color.WHITE);
     consoleUtils.showMessage("Type Back to go back");
 
@@ -75,7 +71,7 @@ public class DiaryMenu {
     }
   }
 
-  private void searchForDiaryEntryByWord() {
+  public void searchForDiaryEntryByWord() {
     consoleUtils.showColoredMessage("=== Searching for diary by word===", Color.WHITE);
     consoleUtils.showMessage("Type Back to go back");
 
@@ -103,7 +99,7 @@ public class DiaryMenu {
   }
 
 
-  private DiaryEntry browseRegisteredDiaries() {
+  public DiaryEntry chooseRegisteredDiaries() {
     List<DiaryEntry> diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
     consoleUtils.showColoredMessage("=== Registered Diary Entries ===", Color.WHITE);
 
@@ -126,7 +122,7 @@ public class DiaryMenu {
     while (true) {
 
       String chosenDiaryInput = consoleUtils.readUserInputWithPrompt(
-          "Enter '(Diary key)', 'Next' or 'Previous'");
+          "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
 
       if ("back".equalsIgnoreCase(chosenDiaryInput)) {
         return null;
@@ -182,7 +178,7 @@ public class DiaryMenu {
     consoleUtils.showMessage("Option 1: Search for diary entry by word");
     consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
     consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
-    consoleUtils.showMessage("Option 4: Exit diary entry lookup");
+    consoleUtils.showMessage("Option Back: Exit diary entry lookup");
 
     String userInput = consoleUtils.readUserInput();
 
@@ -190,7 +186,7 @@ public class DiaryMenu {
       case "1" -> searchForDiaryEntryByWord();
       case "2" -> searchForDiaryEntryWithSpecificDate();
       case "3" -> searchForDiaryEntryWithinTwoDates();
-      case "4" -> {
+      case "back" -> {
         return;
       }
       default -> {
@@ -202,9 +198,34 @@ public class DiaryMenu {
 
   }
 
+  public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
+    String[] messages = {"You have chosen the diary: ", diaryEntry.toString()};
+    Color[] colors = {Color.CYAN, Color.YELLOW};
+
+    consoleUtils.showMessageWithMultipleColors(messages, colors);
+
+    while (true) {
+      consoleUtils.showMessage("Option 1: Read this diary entry");
+      consoleUtils.showMessage("Option 2: Edit this diary entry");
+      consoleUtils.showMessage("Option 3: Delete this diary entry");
+      consoleUtils.showMessage("Option Back: Return to main menu");
+
+      String userInput = consoleUtils.readUserInput();
+
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
+          userInput)) {
+        return userInput;
+      }
+
+
+    }
+
+
+  }
+
 
   public void browseAndManageRegisteredDiaries() {
-    DiaryEntry chosenDiaryEntry = browseRegisteredDiaries();
+    DiaryEntry chosenDiaryEntry = chooseRegisteredDiaries();
     if (chosenDiaryEntry != null) {
       String[] messages = {"You have chosen the diary: ", chosenDiaryEntry.toString()};
       Color[] colors = {Color.CYAN, Color.YELLOW};
@@ -212,15 +233,15 @@ public class DiaryMenu {
       consoleUtils.showMessageWithMultipleColors(messages, colors);
       consoleUtils.showMessage("Option 1: Read this diary entry");
       consoleUtils.showMessage("Option 2: Edit this diary entry");
-      consoleUtils.showMessage("Option 3: Return to main menu");
+      consoleUtils.showMessage("Option Back: Return to main menu");
 
       String userInput = consoleUtils.readUserInput();
 
       while (true) {
         switch (userInput) {
           case "1" -> consoleUtils.showMessage(chosenDiaryEntry.toString());
-          case "2" -> editChosenDiaryEntry(chosenDiaryEntry);
-          case "3" -> {
+          //case "2" -> editChosenDiaryEntry(chosenDiaryEntry);
+          case "back" -> {
             consoleUtils.showColoredMessage("Returning to main menu", Color.CYAN);
             return;
           }
@@ -305,4 +326,33 @@ public class DiaryMenu {
   }
 
 
+  public void readDiaryEntry(DiaryEntry diaryEntry) {
+  }
+
+  public void editDiaryEntry(DiaryEntry diaryEntry) {
+  }
+
+  public void deleteDiaryEntry(DiaryEntry diaryEntry) {
+  }
+
+  public String subMenuForFindingDiaryAction() {
+
+    while (true) {
+    consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
+    consoleUtils.showMessage("Option 1: Search for diary entry by word");
+    consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
+    consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
+    consoleUtils.showMessage("Option Back: Exit diary entry lookup");
+
+    String userInput = consoleUtils.readUserInput();
+
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
+          userInput)) {
+        return userInput;
+      }
+
+    }
+
+
+  }
 }

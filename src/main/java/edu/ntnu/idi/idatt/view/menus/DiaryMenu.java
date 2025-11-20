@@ -373,7 +373,7 @@ public class DiaryMenu {
     return diaryController.getListOfAllRegisteredDiaryEntries();
   }
 
-  public void displayInvalidInputKey() {
-    consoleUtils.showColoredMessage("The input key was not a valid key", Color.RED);
+  public void displayPromptedMessage(String string) {
+    consoleUtils.showColoredMessage(string, Color.RED);
   }
 }

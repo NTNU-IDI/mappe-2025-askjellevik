@@ -23,8 +23,8 @@ public class DiaryMenu {
   private final DiaryController diaryController;
   private final AuthorMenu authorMenu;
 
-  public DiaryMenu(DiaryRegister diaryRegister, ConsoleUtils consoleUtils, AuthorMenu authorMenu) {
-    this.diaryController = new DiaryController(diaryRegister);
+  public DiaryMenu(DiaryController diaryController, ConsoleUtils consoleUtils, AuthorMenu authorMenu) {
+    this.diaryController = diaryController;
     this.consoleUtils = consoleUtils;
     this.authorMenu = authorMenu;
   }

@@ -4,7 +4,6 @@ import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
 import edu.ntnu.idi.idatt.controller.validators.AuthorValidator;
 import edu.ntnu.idi.idatt.model.Author;
-import edu.ntnu.idi.idatt.model.AuthorRegister;
 import java.util.List;
 import org.fusesource.jansi.Ansi.Color;
 
@@ -13,8 +12,8 @@ public class AuthorMenu {
   private final ConsoleUtils consoleUtils;
   private final AuthorController authorController;
 
-  public AuthorMenu(AuthorRegister authorRegister, ConsoleUtils consoleUtils) {
-    this.authorController = new AuthorController(authorRegister);
+  public AuthorMenu(AuthorController authorController, ConsoleUtils consoleUtils) {
+    this.authorController = authorController;
     this.consoleUtils = consoleUtils;
   }
 

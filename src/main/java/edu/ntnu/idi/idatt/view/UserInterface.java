@@ -1,6 +1,8 @@
 package edu.ntnu.idi.idatt.view;
 
 
+import edu.ntnu.idi.idatt.controller.AuthorController;
+import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
@@ -48,38 +50,11 @@ public class UserInterface {
     DiaryRegister diaryRegister = new DiaryRegister();
     AuthorRegister authorRegister = new AuthorRegister();
 
-    LocalDateTime dateTime1 = LocalDateTime.of(2025, 4,9,17,0 );
-    LocalDateTime dateTime2 = LocalDateTime.of(2025, 4,10,18,0 );
-    LocalDateTime dateTime3 = LocalDateTime.of(2025, 4,6,18,0 );
-    LocalDateTime dateTime4 = LocalDateTime.of(2025, 1,13,18,0 );
-    LocalDateTime dateTime5 = LocalDateTime.of(2025, 3,25,18,0 );
-    LocalDateTime dateTime6 = LocalDateTime.of(2025, 6,13,18,0 );
+    DiaryController diaryController = new DiaryController(diaryRegister);
+    AuthorController authorController = new AuthorController(authorRegister);
 
-
-
-    Author author1 = new Author("Andy Skjell", "and@mail.com");
-    Author author2 = new Author("Martn Basj", "mart@mail.com");
-
-    DiaryEntry diary1 = new DiaryEntry(dateTime1, author1, "test", "tesasdas");
-    DiaryEntry diary2 = new DiaryEntry(dateTime2, author2, "tes3wt", "tesasdas");
-    DiaryEntry diary3 = new DiaryEntry(dateTime3, author1, "testwr3w", "tesasdas");
-    DiaryEntry diary4 = new DiaryEntry(dateTime4, author2, "test", "tesasdas");
-    DiaryEntry diary5 = new DiaryEntry(dateTime5, author1, "tes455t", "tesasdas");
-    DiaryEntry diary6 = new DiaryEntry(dateTime6, author2, "test", "tesasdas");
-
-    authorRegister.addAuthor(author1);
-    authorRegister.addAuthor(author2);
-
-    diaryRegister.addDiaryEntry(diary1);
-    diaryRegister.addDiaryEntry(diary2);
-    diaryRegister.addDiaryEntry(diary3);
-    diaryRegister.addDiaryEntry(diary4);
-    diaryRegister.addDiaryEntry(diary5);
-    diaryRegister.addDiaryEntry(diary6);
-
-
-    this.authorMenu = new AuthorMenu(authorRegister, consoleUtils);
-    this.diaryMenu = new DiaryMenu(diaryRegister, consoleUtils, authorMenu);
+    this.authorMenu = new AuthorMenu(authorController, consoleUtils);
+    this.diaryMenu = new DiaryMenu(diaryController, consoleUtils, authorMenu);
 
 
     this.mainMenuMap = new HashMap<>();

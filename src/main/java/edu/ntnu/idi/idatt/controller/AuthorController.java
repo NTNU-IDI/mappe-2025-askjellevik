@@ -15,7 +15,6 @@ public class AuthorController {
 
   public void addAuthorToRegister(Author authorToAdd) {
     authorRegister.addAuthor(authorToAdd);
-
     }
 
     public List<Author> getListOfAuthorsInRegister() {

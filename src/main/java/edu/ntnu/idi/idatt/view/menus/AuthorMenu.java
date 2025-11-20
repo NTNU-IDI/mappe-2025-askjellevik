@@ -166,6 +166,19 @@ public class AuthorMenu {
   }
 
 
+  public String subMenuForAuthorManagementAction(Author author) {
+    return null;
+  }
+
+  public void findAuthorsEntries(Author author) {
+  }
+
+  public void editAuthor(Author author) {
+  }
+
+  public Author chooseRegisteredAuthors() {
+    return null;
+  }
 }
 
 

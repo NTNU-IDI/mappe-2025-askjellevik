@@ -36,7 +36,7 @@ public class BrowseDiariesAction implements Action {
         }
         case "3" -> {
           diaryMenu.deleteDiaryEntry(diaryEntry);
-          break;
+          choosing = false;
         }
         case "back" -> {
           choosing = false;

@@ -2,26 +2,33 @@ package edu.ntnu.idi.idatt.controller;
 
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AuthorController {
 
-  private final AuthorRegister authorRegister;
+    private final AuthorRegister authorRegister;
+    private final DiaryController diaryController;
 
-  public AuthorController(AuthorRegister authorRegister) {
-    this.authorRegister = authorRegister;
-  }
+    public AuthorController(AuthorRegister authorRegister, DiaryController diaryController) {
+        this.authorRegister = authorRegister;
+        this.diaryController = diaryController;
+    }
 
-  public void addAuthorToRegister(Author authorToAdd) {
-    authorRegister.addAuthor(authorToAdd);
+    public void addAuthorToRegister(Author authorToAdd) {
+        authorRegister.addAuthor(authorToAdd);
     }
 
     public List<Author> getListOfAuthorsInRegister() {
-    return authorRegister.getAllAuthors();
+        return authorRegister.getAllAuthors();
     }
 
+    public Integer getAmountOfEntriesBySpecificAuthor(Author author) {
+        return diaryController.getAmountOfEntriesBySpecificAuthor(author);
+    }
 
-  }
+}
 
 

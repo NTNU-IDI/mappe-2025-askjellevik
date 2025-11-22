@@ -7,14 +7,22 @@ import java.util.List;
 public class BrowseDiariesAction implements Action {
 
   private final DiaryMenu diaryMenu;
+  private List<DiaryEntry> diaryEntries;
 
   public BrowseDiariesAction(DiaryMenu diaryMenu) {
     this.diaryMenu = diaryMenu;
+    this.diaryEntries = diaryMenu.getListOfAllRegisteredDiaryEntries();
+
+  }
+
+  public BrowseDiariesAction(DiaryMenu diaryMenu, List<DiaryEntry> diaryEntries) {
+    this.diaryMenu = diaryMenu;
+    this.diaryEntries = diaryEntries;
   }
 
   @Override
   public void execute() {
-    List<DiaryEntry> diaryEntries = diaryMenu.getListOfAllRegisteredDiaryEntries();
+
 
     int page = 0;
     int pageSize = 5;

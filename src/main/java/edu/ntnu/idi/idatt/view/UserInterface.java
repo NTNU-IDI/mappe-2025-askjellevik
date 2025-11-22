@@ -49,7 +49,7 @@ public class UserInterface {
     AuthorRegister authorRegister = new AuthorRegister();
 
     DiaryController diaryController = new DiaryController(diaryRegister);
-    AuthorController authorController = new AuthorController(authorRegister);
+    AuthorController authorController = new AuthorController(authorRegister, diaryController);
 
     this.authorMenu = new AuthorMenu(authorController, consoleUtils);
     this.diaryMenu = new DiaryMenu(diaryController, consoleUtils, authorMenu);
@@ -74,7 +74,7 @@ public class UserInterface {
     mainMenuMap.put("1", new BrowseDiariesAction(diaryMenu));
     mainMenuMap.put("2", new CreateDiaryEntryAction(diaryMenu));
     mainMenuMap.put("3", new FindSpecificDiaryAction(diaryMenu));
-    mainMenuMap.put("4", new BrowseAuthorsAction(authorMenu));
+    mainMenuMap.put("4", new BrowseAuthorsAction(authorMenu, diaryMenu, diaryController));
     mainMenuMap.put("5", new ExitProgramAction(this, consoleUtils));
 
 

@@ -166,7 +166,28 @@ public class AuthorMenu {
 
 
   public String subMenuForAuthorManagementAction(Author author) {
-    return null;
+    String[] messages = {"You have chosen the author: \n",
+            author.getName(), " |  email: ",
+            author.getEmail(), " diary entries registered: ", String.valueOf(authorController.getAmountOfEntriesBySpecificAuthor(author))};
+    Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN};
+
+    consoleUtils.showMessageWithMultipleColors(messages, colors);
+
+    while (true) {
+      consoleUtils.showMessage("Option 1: Browse this authors diary entries");
+      consoleUtils.showMessage("Option 2: Edit this author");
+      consoleUtils.showMessage("Option Back: Return to main menu");
+
+      String userInput = consoleUtils.readUserInput();
+
+      if ("1".equals(userInput) || "2".equals(userInput) || "back".equals(userInput)) {
+        return userInput;
+      }
+
+
+    }
+
+
   }
 
   public void findAuthorsEntries(Author author) {
@@ -178,6 +199,7 @@ public class AuthorMenu {
   public Author chooseRegisteredAuthors() {
     return null;
   }
+
   public String subMenuForEditingAuthorAction() {
     while (true) {
       consoleUtils.showColoredMessage("=== Author editing ===", Color.WHITE);
@@ -195,6 +217,44 @@ public class AuthorMenu {
     }
   }
 
+  public List<Author> getListOfAllRegisteredAuthors() {
+    return authorController.getListOfAuthorsInRegister();
+  }
+
+  public String displayEntriesForSelection(List<Author> authors, int start,int end, int page) {
+    consoleUtils.showColoredMessage("=== Registered Authors (Page" + (page + 1) + ") ===", Color.WHITE);
+
+//    for (int i = start; i < end; i++) {
+//      consoleUtils.showMessage(
+//          i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |"
+//              + consoleUtils.formatDateToView(diaryEntries.get(i)
+//              .getEntryDate()));
+//    }
+//
+//    return consoleUtils.readUserInputWithPrompt(
+//        "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
+    String leftAlignFormat = "| %-4d | %-20s |%n";
+
+    System.out.format("+---+-----Page "+page+"--+%n");
+    System.out.format("|ID | Name               |%n");
+    System.out.format("+---+--------------------+%n");
+    for (int i = start; i < end; i++) {
+      System.out.format(leftAlignFormat, i, authors.get(i).getName());
+    }
+    System.out.format("+-----------------+------+%n");
+    return consoleUtils.readUserInputWithPrompt(
+            "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
+  }
+
+  public void displayPromptedMessage(String s) {
+    consoleUtils.showColoredMessage(s, Color.RED);
+  }
+
+  public void displayAuthorsDiaryEntries(Author Author) {
+  }
+
+  public void displayAmountOFDiaryEntries(Author Author) {
+  }
 }
 
 

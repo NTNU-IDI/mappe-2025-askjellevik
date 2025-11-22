@@ -3,9 +3,7 @@ package edu.ntnu.idi.idatt.controller;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AuthorController {
 
@@ -27,6 +25,10 @@ public class AuthorController {
 
     public Integer getAmountOfEntriesBySpecificAuthor(Author author) {
         return diaryController.getAmountOfEntriesBySpecificAuthor(author);
+    }
+
+    public void setNewEmail(Author author, String newEmail) {
+        author.setEmail(newEmail);
     }
 
 }

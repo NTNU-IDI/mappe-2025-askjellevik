@@ -1,18 +1,21 @@
 package edu.ntnu.idi.idatt.controller.validators;
 
-import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DateValidator {
 
-  public static boolean validateDate(LocalDateTime date) {
+  public static List<String> validateDate(LocalDateTime date) {
+    List<String> errors = new ArrayList<>();
+
     LocalDateTime dateAndTimeNow = LocalDateTime.now();
 
     if (date.isAfter(dateAndTimeNow)) {
-      throw new InvalidDateException("The date cannot be in the future");
+      errors.add("The date can not be in the future");
     }
 
-    return true;
+    return errors;
   }
 
 }

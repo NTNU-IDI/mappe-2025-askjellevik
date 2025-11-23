@@ -8,7 +8,7 @@ import java.util.UUID;
 public class Author {
 
   private final UUID id;
-  private final String name;
+  private String name;
   private String email;
 
 
@@ -54,6 +54,14 @@ public class Author {
    */
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  /**   Sets the name of the author.
+   *
+   * @param name the new name of the author
+   */
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override

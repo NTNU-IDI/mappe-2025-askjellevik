@@ -31,6 +31,9 @@ public class AuthorController {
         author.setEmail(newEmail);
     }
 
+    public void setNewName(Author author, String newName) {
+        author.setName(newName);
+    }
 }
 
 

@@ -56,14 +56,14 @@ public class UserInterface {
 
     boolean validInput = false;
     while (!validInput) {
-      String loadData = consoleUtils.readUserInputWithPrompt("\nLoad test data now? (yes/no)");
-      if ("yes".equalsIgnoreCase(loadData)) {
+      String loadData = consoleUtils.readUserInputWithPrompt("\nLoad test data now? (y/n)");
+      if ("y".equalsIgnoreCase(loadData)) {
         TestDataLoader loader = new TestDataLoader();
         loader.loadTestData(diaryController, authorController);
         consoleUtils.showMessage("Loaded data");
         validInput = true;
       }
-      if ("no".equalsIgnoreCase(loadData)) {
+      if ("n".equalsIgnoreCase(loadData)) {
         validInput = true;
       }
       consoleUtils.showMessage("Not valid input, enter (yes/no)");
@@ -74,7 +74,7 @@ public class UserInterface {
     mainMenuMap.put("1", new BrowseDiariesAction(diaryMenu));
     mainMenuMap.put("2", new CreateDiaryEntryAction(diaryMenu));
     mainMenuMap.put("3", new FindSpecificDiaryAction(diaryMenu));
-    mainMenuMap.put("4", new BrowseAuthorsAction(authorMenu, diaryMenu, diaryController));
+    mainMenuMap.put("4", new BrowseAuthorsAction(authorMenu, diaryMenu, diaryController, authorController));
     mainMenuMap.put("5", new ExitProgramAction(this, consoleUtils));
 
 

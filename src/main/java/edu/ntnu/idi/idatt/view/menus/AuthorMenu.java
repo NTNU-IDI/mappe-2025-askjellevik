@@ -193,14 +193,17 @@ public class AuthorMenu {
   public void findAuthorsEntries(Author author) {
   }
 
-  public void editAuthor(Author author) {
+  public String editAuthorEmailPrompt(Author author) {
+    consoleUtils.showColoredMessage("=== Change author email ===", Color.WHITE);
+    consoleUtils.showMessage("Original email: "+ author.getEmail());
+      return consoleUtils.readUserInputWithPrompt("Enter new email: ");
   }
 
   public Author chooseRegisteredAuthors() {
     return null;
   }
 
-  public String subMenuForEditingAuthorAction() {
+  public String subMenuForEditingAuthorAction(Author author) {
     while (true) {
       consoleUtils.showColoredMessage("=== Author editing ===", Color.WHITE);
       consoleUtils.showMessage("Option 1: Edit the authors name");
@@ -254,6 +257,12 @@ public class AuthorMenu {
   }
 
   public void displayAmountOFDiaryEntries(Author Author) {
+  }
+
+  public String editAuthorNamePrompt(Author author) {
+    consoleUtils.showColoredMessage("=== Change author name ===", Color.WHITE);
+    consoleUtils.showMessage("Original name: "+ author.getName());
+    return consoleUtils.readUserInputWithPrompt("Enter new name: ");
   }
 }
 

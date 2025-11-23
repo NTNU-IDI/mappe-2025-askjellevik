@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.view.actions;
 
+import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
@@ -13,11 +14,13 @@ public class BrowseAuthorsAction implements Action {
     private final AuthorMenu authorMenu;
     private final DiaryMenu diaryMenu;
     private final DiaryController diaryController;
+    private final AuthorController authorController;
 
-    public BrowseAuthorsAction(AuthorMenu authorMenu, DiaryMenu diaryMenu, DiaryController diaryController) {
+    public BrowseAuthorsAction(AuthorMenu authorMenu, DiaryMenu diaryMenu, DiaryController diaryController, AuthorController authorController) {
         this.authorMenu = authorMenu;
         this.diaryMenu = diaryMenu;
         this.diaryController = diaryController;
+        this.authorController = authorController;
     }
 
     @Override
@@ -67,7 +70,10 @@ public class BrowseAuthorsAction implements Action {
                             Action action = new BrowseDiariesAction(diaryMenu,diaries);
                             action.execute();
                         }
-                        case "2" -> authorMenu.editAuthor(chosenAuthor);
+                        case "2" -> {
+                            Action action = new EditAuthorAction(authorMenu, authorController, chosenAuthor);
+                            action.execute();
+                        }
                         case "back" -> {
                             choosingSubMenu = false;
                         }

@@ -72,7 +72,7 @@ public class DiaryMenu {
             try {
                 entryDate = LocalDate.parse(userInput, formatter);
                 entryDateTime = entryDate.atStartOfDay();
-                if (!DateValidator.validateDate(entryDateTime)) {
+                if (!DateValidator.validateDate(entryDateTime).isEmpty()) {
                     throw new InvalidDateException("The date is not valid");
                 }
 
@@ -152,21 +152,6 @@ public class DiaryMenu {
     public void createNewDiaryEntry() {
         consoleUtils.showColoredMessage("=== Creating new Diary Entry ===", Color.WHITE);
 
-        LocalDateTime entryDate = getDateOfNewDiaryEntry();
-        if (entryDate == null) {
-            return;
-        }
-
-        Author author = authorMenu.getAuthorOfNewDiaryEntry();
-        if (author == null) {
-            return;
-        }
-        consoleUtils.showMessage(author + " is now chosen");
-        String entryTitle = consoleUtils.readUserInputWithPrompt("Enter the diary entry title: ");
-        String entryText = consoleUtils.readUserInputWithPrompt("Enter the text of the diary entry");
-
-        DiaryEntry diaryEntry = new DiaryEntry(entryDate, author, entryTitle, entryText);
-        diaryController.addDiaryToRegister(diaryEntry);
 
     }
 
@@ -199,7 +184,7 @@ public class DiaryMenu {
 
     }
 
-    private LocalDateTime getDateOfNewDiaryEntry() {
+    public LocalDateTime getDateOfNewDiaryEntry() {
         consoleUtils.showMessage("Choose date for the diary entry:");
         consoleUtils.showMessage("Option 1: Automatically choose the current time");
 
@@ -213,6 +198,7 @@ public class DiaryMenu {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
         while (true) {
+            userInput = consoleUtils.readUserInputWithPrompt("Enter the date manually or enter '2'");
             if ("1".equals(userInput)) {
                 entryDate = LocalDateTime.now();
                 consoleUtils.showMessage("Using the current date and time: " + entryDate.format(formatter));
@@ -222,18 +208,13 @@ public class DiaryMenu {
             }
             if ("back".equalsIgnoreCase(userInput)) {
                 return null;
-            } else {
+            } if ("2".equalsIgnoreCase(userInput)) {
                 try {
                     entryDate = LocalDateTime.parse(userInput, formatter);
-                    if (!DateValidator.validateDate(entryDate)) {
-                        throw new InvalidDateException("The date is not valid");
-                    }
-                    consoleUtils.showMessage("The date has been registered: " + entryDate);
                     return entryDate;
 
                 } catch (InvalidDateException | DateTimeParseException e) {
                     consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
-                    userInput = consoleUtils.readUserInputWithPrompt("Enter the date manually or enter '2'");
                 }
 
             }

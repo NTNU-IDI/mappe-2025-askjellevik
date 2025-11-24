@@ -9,6 +9,11 @@ public class DateValidator {
   public static List<String> validateDate(LocalDateTime date) {
     List<String> errors = new ArrayList<>();
 
+    if (date == null) {
+      errors.add("Date cannot be empty");
+      return errors;
+    }
+
     LocalDateTime dateAndTimeNow = LocalDateTime.now();
 
     if (date.isAfter(dateAndTimeNow)) {

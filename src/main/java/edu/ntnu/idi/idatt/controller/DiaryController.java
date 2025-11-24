@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.controller;
 
+import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.validators.DateValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
@@ -61,6 +62,15 @@ public class DiaryController {
   public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
     return diaryRegister.getAllDiaryEntries();
   }
+
+  public static void validateDate(LocalDateTime date) throws InvalidDateException {
+    List<String> errors = DateValidator.validateDate(date);
+    if (!errors.isEmpty()) {
+      throw new InvalidDateException(String.join(". ",errors));
+    }
+  }
+
+  public static void valdiateEmail()
 
 
 

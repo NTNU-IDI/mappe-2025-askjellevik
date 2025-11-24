@@ -264,6 +264,14 @@ public class AuthorMenu {
     consoleUtils.showMessage("Original name: "+ author.getName());
     return consoleUtils.readUserInputWithPrompt("Enter new name: ");
   }
+
+  public String getAuthorNamePrompt() {
+      return consoleUtils.readUserInputWithPrompt("Enter the name of the author");
+  }
+
+  public void displayErrorMessage(String message) {
+
+  }
 }
 
 

@@ -9,7 +9,6 @@ import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,11 +24,11 @@ public class DiaryRegisterTest {
     author = new Author("Test Author", "test.author@mail.com");
   }
 
-  @Test
-  void testGetDiaryRegister() {
-    Map<UUID, DiaryEntry> register = diaryRegister.getDiaryRegister();
+@Test
+  void testGetAllDiaryEntries() {
+    List<DiaryEntry> diaries = diaryRegister.getAllDiaryEntries();
 
-    assertTrue(register.isEmpty());
+    assertTrue(diaries.isEmpty());
   }
 
   @Test
@@ -43,8 +42,8 @@ public class DiaryRegisterTest {
 
     diaryRegister.addDiaryEntry(diaryEntry);
 
-    assertTrue(diaryRegister.getDiaryRegister().containsKey(diaryEntry.getEntryID()));
-    assertEquals(diaryRegister.getDiaryRegister().get(diaryEntry.getEntryID()), diaryEntry);
+    assertTrue(diaryRegister.getAllDiaryEntries().contains(diaryEntry));
+    assertEquals(diaryRegister.getAllDiaryEntries().get(0), diaryEntry);
 
   }
 
@@ -78,7 +77,7 @@ public class DiaryRegisterTest {
     diaryRegister.addDiaryEntry(diaryEntry);
     diaryRegister.deleteDiaryEntry(diaryEntry);
 
-    assertTrue(diaryRegister.getDiaryRegister().isEmpty());
+    assertTrue(diaryRegister.getAllDiaryEntries().isEmpty());
   }
 
   @Test

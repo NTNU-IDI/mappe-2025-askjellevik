@@ -70,7 +70,9 @@ public class DiaryController {
     }
   }
 
-  public static void valdiateEmail()
+  public static void valdiateEmail() {
+
+  }
 
 
 

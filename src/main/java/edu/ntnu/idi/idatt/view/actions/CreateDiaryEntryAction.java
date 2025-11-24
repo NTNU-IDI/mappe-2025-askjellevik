@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.view.actions;
 
+import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
@@ -13,35 +14,30 @@ public class CreateDiaryEntryAction implements Action {
   private final DiaryMenu diaryMenu;
   private final DiaryController diaryController;
   private final AuthorMenu authorMenu;
+  private final AuthorController authorController;
 
-  public CreateDiaryEntryAction(DiaryMenu diaryMenu, DiaryController diaryController, AuthorMenu authorMenu) {
+  public CreateDiaryEntryAction(DiaryMenu diaryMenu, DiaryController diaryController, AuthorMenu authorMenu,
+      AuthorController authorController) {
     this.diaryMenu = diaryMenu;
       this.diaryController = diaryController;
       this.authorMenu = authorMenu;
+    this.authorController = authorController;
   }
 
   @Override
   public void execute() {
-    LocalDateTime entryDate = diaryMenu.getDateOfNewDiaryEntry();
-    if (entryDate == null) {
-      return;
+
+    String validName = null;
+    while (validName == null) {
+      String userInput = authorMenu.getAuthorNamePrompt();
+      if ("back".equalsIgnoreCase(userInput)) {
+        return;
+      }
+      try {
+        authorController.
+      }
     }
-    try {
 
-    } catch () {
-
-    }
-
-    Author author = authorMenu.getAuthorOfNewDiaryEntry();
-    if (author == null) {
-      return;
-    }
-    consoleUtils.showMessage(author + " is now chosen");
-    String entryTitle = consoleUtils.readUserInputWithPrompt("Enter the diary entry title: ");
-    String entryText = consoleUtils.readUserInputWithPrompt("Enter the text of the diary entry");
-
-    DiaryEntry diaryEntry = new DiaryEntry(entryDate, author, entryTitle, entryText);
-    diaryController.addDiaryToRegister(diaryEntry);
 
   }
 

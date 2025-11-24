@@ -26,7 +26,7 @@ public class AuthorTest {
   void testSetters() {
     author.setEmail("navn.navnesen@mail.com");
 
-    assertEquals("navn.navnesen@gmail.com", author.getEmail());
+    assertEquals("navn.navnesen@mail.com", author.getEmail());
   }
 
   @Test

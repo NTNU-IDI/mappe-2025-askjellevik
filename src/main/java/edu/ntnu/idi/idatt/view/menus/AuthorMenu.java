@@ -272,6 +272,10 @@ public class AuthorMenu {
   public void displayErrorMessage(String message) {
 
   }
+
+  public String getAuthorEmailPrompt() {
+    return consoleUtils.readUserInputWithPrompt("Enter the email of the author");
+  }
 }
 
 

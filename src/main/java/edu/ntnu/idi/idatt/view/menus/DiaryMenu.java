@@ -226,7 +226,7 @@ public class DiaryMenu {
   }
 
 
-  public void editDiaryTitle(DiaryEntry diaryEntry) {
+  /*public void editDiaryTitle(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("### Editing Diary Title ###", Color.MAGENTA);
     consoleUtils.showMessage("Original title: " + diaryEntry.getEntryTitle());
     consoleUtils.showMessage("------------------------------");
@@ -253,60 +253,14 @@ public class DiaryMenu {
 
     }
 
-  }
+  }*/
 
 
-  public void overwriteDiaryText(DiaryEntry diaryEntry) {
-    consoleUtils.showColoredMessage("### Overwriting text ###", Color.MAGENTA);
-    String newText = consoleUtils.readUserInputWithPrompt(
-        "Enter the new text that will overwrite the existing text: (Back for back)");
-    while (true) {
-      if ("back".equalsIgnoreCase(newText)) {
-        return;
-      }
+/*  public String overwriteDiaryTextPrompt() {
+    return consoleUtils.readUserInputWithPrompt()
 
-      try {
+  }*/
 
-        StringValidator.validateDiaryEntryText(newText);
-
-        diaryController.setDiaryText(diaryEntry, newText);
-        return;
-
-      } catch (EmptyStringException e) {
-        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
-        newText = consoleUtils.readUserInputWithPrompt(
-            "Enter the new text that will overwrite the existing text: (Back for back)");
-      }
-    }
-
-  }
-
-  public void addDiaryText(DiaryEntry diaryEntry) {
-    consoleUtils.showColoredMessage("### Adding text ###", Color.MAGENTA);
-    String textToAdd = consoleUtils.readUserInputWithPrompt(
-        "Enter the new text that will add to the existing text: (Back for back)");
-    while (true) {
-      if ("back".equalsIgnoreCase(textToAdd)) {
-        return;
-      }
-
-      try {
-
-        StringValidator.validateDiaryEntryText(textToAdd);
-
-        String finalText = diaryEntry.getEntryText() + " " + textToAdd;
-
-        diaryController.setDiaryText(diaryEntry, finalText);
-        return;
-
-      } catch (EmptyStringException e) {
-        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
-        textToAdd = consoleUtils.readUserInputWithPrompt(
-            "Enter the new text that will overwrite the existing text: (Back for back)");
-      }
-    }
-
-  }
 
   public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
     return diaryController.getListOfAllRegisteredDiaryEntries();
@@ -330,5 +284,18 @@ public class DiaryMenu {
 
   public void displayHeader(String s) {
 
+  }
+
+  public String addDiaryTextPrompt() {
+    return consoleUtils.readUserInputWithPrompt("Enter text to add");
+  }
+
+  public String overwriteDiaryTextPrompt() {
+    return consoleUtils.readUserInputWithPrompt("Enter text to overwrite");
+  }
+
+  public String overWriteDiaryTitlePrompt(DiaryEntry diaryEntry) {
+    consoleUtils.showMessage("Original title: " + diaryEntry.getEntryTitle());
+    return consoleUtils.readUserInputWithPrompt("Enter new title");
   }
 }

@@ -71,7 +71,7 @@ public class FindSpecificDiaryAction implements Action {
     if (diaries.isEmpty()) {
       diaryMenu.displayErrorMessage("No entries from that date");
     } else {
-      BrowseDiariesAction action = new BrowseDiariesAction(diaryMenu, diaries);
+      BrowseDiariesAction action = new BrowseDiariesAction(diaryMenu, diaryController, diaries);
       action.execute();
 
     }

@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.controller;
 
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
+import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.controller.validators.DiaryEntryValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
@@ -74,17 +75,17 @@ public class DiaryController {
 
 
 
-  public void validateEntryTitle(String title) {
+  public void validateEntryTitle(String title) throws InvalidInputException{
     List<String> errors = DiaryEntryValidator.validateTitle(title);
     if (!errors.isEmpty()) {
-      throw new InvalidDateException(String.join(". ", errors));
+      throw new InvalidInputException(String.join(". ", errors));
     }
   }
 
-  public void validateEntryText(String text) {
+  public void validateEntryText(String text) throws InvalidInputException{
     List<String> errors = DiaryEntryValidator.validateText(text);
     if (!errors.isEmpty()) {
-      throw new InvalidDateException(String.join(". ", errors));
+      throw new InvalidInputException(String.join(". ", errors));
     }
   }
 }

@@ -5,12 +5,7 @@ import edu.ntnu.idi.idatt.controller.exceptions.EmptyStringException;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
-import edu.ntnu.idi.idatt.controller.validators.DateValidator;
-import edu.ntnu.idi.idatt.controller.validators.DiaryEntryValidator;
-import edu.ntnu.idi.idatt.controller.validators.StringValidator;
-import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
-import edu.ntnu.idi.idatt.model.DiaryRegister;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,8 +49,6 @@ public class DiaryMenu {
 
   }
 
-  public void searchForDiaryEntryWithinTwoDates() {
-  }
 
   public LocalDateTime getSearchDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -85,15 +78,6 @@ public class DiaryMenu {
 
   }
 
-  //    for (int i = start; i < end; i++) {
-//      consoleUtils.showMessage(
-//          i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |"
-//              + consoleUtils.formatDateToView(diaryEntries.get(i)
-//              .getEntryDate()));
-//    }
-//
-//    return consoleUtils.readUserInputWithPrompt(
-//        "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
   public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
     consoleUtils.showColoredMessage("=== Registered Diary Entries (Page" + (page + 1) + ") ===",
@@ -114,11 +98,6 @@ public class DiaryMenu {
   }
 
 
-  public void createNewDiaryEntry() {
-    consoleUtils.showColoredMessage("=== Creating new Diary Entry ===", Color.WHITE);
-
-
-  }
 
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
     String[] messages = {"You have chosen the diary: \n",
@@ -190,15 +169,6 @@ public class DiaryMenu {
 
   }
 
-  private void displayListOfDiaries(List<DiaryEntry> diaries) {
-
-    if (diaries.isEmpty()) {
-      consoleUtils.showColoredMessage("Found no diaries", Color.RED);
-      return;
-    }
-
-
-  }
 
 
   public void readDiaryEntry(DiaryEntry diaryEntry) {
@@ -212,8 +182,7 @@ public class DiaryMenu {
     consoleUtils.printLine(Color.GREEN);
     consoleUtils.readUserInputWithPrompt("Press ENTER to continue");
   }
-
-
+  
   public void deleteDiaryEntry(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
     consoleUtils.showMessage("Are you sure you want to delete this diary from the register?");

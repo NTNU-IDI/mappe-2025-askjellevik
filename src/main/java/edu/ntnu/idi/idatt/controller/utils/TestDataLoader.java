@@ -27,27 +27,20 @@ public class TestDataLoader {
     LocalDateTime dateTime5 = LocalDateTime.of(2025, 3,25,18,0 );
     LocalDateTime dateTime6 = LocalDateTime.of(2025, 6,13,18,0 );
 
+    authorController.addAuthorToRegister("Andy Skjell", "and@mail.com");
+    authorController.addAuthorToRegister("Martn Basj", "mart@mail.com");
 
 
-    Author author1 = new Author("Andy Skjell", "and@mail.com");
-    Author author2 = new Author("Martn Basj", "mart@mail.com");
+    Author author1 = authorController.getAuthorByEmail("and@mail.com");
+    Author author2 = authorController.getAuthorByEmail("mart@mail.com");
 
-    DiaryEntry diary1 = new DiaryEntry(dateTime1, author1, "test", "tesasdas");
-    DiaryEntry diary2 = new DiaryEntry(dateTime2, author2, "tes3wt", "tesasdas");
-    DiaryEntry diary3 = new DiaryEntry(dateTime3, author1, "testwr3w", "tesasdas");
-    DiaryEntry diary4 = new DiaryEntry(dateTime4, author2, "test", "tesasdas");
-    DiaryEntry diary5 = new DiaryEntry(dateTime5, author1, "tes455t", "tesasdas");
-    DiaryEntry diary6 = new DiaryEntry(dateTime6, author2, "test", "tesasdas");
 
-    authorController.addAuthorToRegister(author1);
-    authorController.addAuthorToRegister(author2);
-
-    diaryController.addDiaryToRegister(diary1);
-    diaryController.addDiaryToRegister(diary2);
-    diaryController.addDiaryToRegister(diary3);
-    diaryController.addDiaryToRegister(diary4);
-    diaryController.addDiaryToRegister(diary5);
-    diaryController.addDiaryToRegister(diary6);
+    diaryController.addDiaryToRegister(dateTime1, author1, "test", "tesasdas");
+    diaryController.addDiaryToRegister(dateTime2, author2, "tes3wt", "tesasdas");
+    diaryController.addDiaryToRegister(dateTime3, author1, "testwr3w", "tesasdas");
+    diaryController.addDiaryToRegister(dateTime4, author2, "test", "tesasdas");
+    diaryController.addDiaryToRegister(dateTime5, author1, "tes455t", "tesasdas");
+    diaryController.addDiaryToRegister(dateTime6, author2, "test", "tesasdas");
 
   }
 

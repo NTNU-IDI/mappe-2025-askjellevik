@@ -25,7 +25,7 @@ public class BrowseAuthorsAction implements Action {
 
     @Override
     public void execute() {
-        List<Author> authors = authorMenu.getListOfAllRegisteredAuthors();
+        List<Author> authors = authorController.getListOfAuthorsInRegister();
 
         int page = 0;
         int pageSize = 5;
@@ -54,7 +54,7 @@ public class BrowseAuthorsAction implements Action {
             try {
                 int indexOfChosenAuthor = Integer.parseInt(userInput);
 
-                if (indexOfChosenAuthor < start || indexOfChosenAuthor > end) {
+                if (indexOfChosenAuthor < start || indexOfChosenAuthor >= end) {
                     authorMenu.displayPromptedMessage("The author ID was out of range");
                 }
 

@@ -5,6 +5,7 @@ import edu.ntnu.idi.idatt.controller.validators.AuthorValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
 
+import edu.ntnu.idi.idatt.model.exceptions.AuthorNotFoundException;
 import java.util.List;
 
 public class AuthorController {
@@ -17,9 +18,10 @@ public class AuthorController {
         this.diaryController = diaryController;
     }
 
-    public void addAuthorToRegister(String name, String email) {
+    public Author addAuthorToRegister(String name, String email) {
       Author authorToAdd = new Author(name, email);
         authorRegister.addAuthor(authorToAdd);
+        return authorToAdd;
     }
 
     public List<Author> getListOfAuthorsInRegister() {
@@ -53,6 +55,14 @@ public class AuthorController {
       if (!errors.isEmpty()) {
         throw new InvalidInputException(String.join(". ", errors));
       }
+    }
+
+    public Author getAuthorByEmail(String email) throws AuthorNotFoundException {
+      Author author = authorRegister.getAuthorByEmail(email);
+      if (author == null) {
+        throw new AuthorNotFoundException("Did not find an author with that email");
+      }
+      return author;
     }
 }
 

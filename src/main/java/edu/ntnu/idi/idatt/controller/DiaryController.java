@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.controller;
 
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.validators.DateValidator;
+import edu.ntnu.idi.idatt.controller.validators.DiaryEntryValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
@@ -18,8 +19,10 @@ public class DiaryController {
     this.diaryRegister = diaryRegister;
   }
 
-  public void addDiaryToRegister(DiaryEntry diaryEntry) {
-    diaryRegister.addDiaryEntry(diaryEntry);
+  public void addDiaryToRegister(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
+      String entryText) {
+    DiaryEntry diaryEntryToAdd = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
+    diaryRegister.addDiaryEntry(diaryEntryToAdd);
   }
 
   public List<DiaryEntry> getListOfDiaryEntriesByDate(LocalDateTime date) {
@@ -63,19 +66,26 @@ public class DiaryController {
     return diaryRegister.getAllDiaryEntries();
   }
 
-  public static void validateDate(LocalDateTime date) throws InvalidDateException {
-    List<String> errors = DateValidator.validateDate(date);
+  public void validateDate(LocalDateTime date) throws InvalidDateException {
+    List<String> errors = DiaryEntryValidator.validateDate(date);
     if (!errors.isEmpty()) {
-      throw new InvalidDateException(String.join(". ",errors));
+      throw new InvalidDateException(String.join(". ", errors));
     }
   }
 
-  public static void valdiateEmail() {
 
+
+  public void validateEntryTitle(String title) {
+    List<String> errors = DiaryEntryValidator.validateTitle(title);
+    if (!errors.isEmpty()) {
+      throw new InvalidDateException(String.join(". ", errors));
+    }
   }
 
-
-
-
-
+  public void validateEntryText(String text) {
+    List<String> errors = DiaryEntryValidator.validateText(text);
+    if (!errors.isEmpty()) {
+      throw new InvalidDateException(String.join(". ", errors));
+    }
+  }
 }

@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt.view.actions;
 
+import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.util.List;
@@ -7,21 +8,26 @@ import java.util.List;
 public class BrowseDiariesAction implements Action {
 
   private final DiaryMenu diaryMenu;
+  private final DiaryController diaryController;
   private List<DiaryEntry> diaryEntries;
 
-  public BrowseDiariesAction(DiaryMenu diaryMenu) {
+  public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController) {
     this.diaryMenu = diaryMenu;
-    this.diaryEntries = diaryMenu.getListOfAllRegisteredDiaryEntries();
-
+    this.diaryController = diaryController;
   }
 
-  public BrowseDiariesAction(DiaryMenu diaryMenu, List<DiaryEntry> diaryEntries) {
+  public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController, List<DiaryEntry> diaryEntries) {
     this.diaryMenu = diaryMenu;
+    this.diaryController = diaryController;
     this.diaryEntries = diaryEntries;
   }
 
   @Override
   public void execute() {
+
+    if (diaryEntries == null) {
+      diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
+    }
 
 
     int page = 0;
@@ -73,9 +79,7 @@ public class BrowseDiariesAction implements Action {
               diaryEntries = diaryMenu.getListOfAllRegisteredDiaryEntries();
               choosingSubMenu = false;
             }
-            case "back" -> {
-              choosingSubMenu = false;
-            }
+            case "back" -> choosingSubMenu = false;
           }
 
         }

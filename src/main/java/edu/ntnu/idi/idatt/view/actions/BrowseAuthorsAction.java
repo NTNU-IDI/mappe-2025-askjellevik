@@ -67,16 +67,14 @@ public class BrowseAuthorsAction implements Action {
                     switch (subMenuUserChoice) {
                         case "1" -> {
                             List<DiaryEntry> diaries = diaryController.getListOfAllEntriesBySpecificAuthor(chosenAuthor);
-                            Action action = new BrowseDiariesAction(diaryMenu,diaries);
+                            Action action = new BrowseDiariesAction(diaryMenu, diaryController, diaries);
                             action.execute();
                         }
                         case "2" -> {
                             Action action = new EditAuthorAction(authorMenu, authorController, chosenAuthor);
                             action.execute();
                         }
-                        case "back" -> {
-                            choosingSubMenu = false;
-                        }
+                        case "back" -> choosingSubMenu = false;
                     }
                 }
 

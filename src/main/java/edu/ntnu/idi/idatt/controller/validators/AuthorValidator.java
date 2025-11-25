@@ -34,7 +34,7 @@ public class AuthorValidator {
 
     if(!Pattern.compile(regexPattern)
         .matcher(name)
-        .matches()); {
+        .matches()) {
           errors.add("The name does not fit the full name format");
     }
     if (name.length() < 2) {

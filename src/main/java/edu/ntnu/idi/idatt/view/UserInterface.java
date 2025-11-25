@@ -71,7 +71,7 @@ public class UserInterface {
 
     this.mainMenuMap = new HashMap<>();
 
-    mainMenuMap.put("1", new BrowseDiariesAction(diaryMenu));
+    mainMenuMap.put("1", new BrowseDiariesAction(diaryMenu, diaryController));
     mainMenuMap.put("2", new CreateDiaryEntryAction(diaryMenu, diaryController, authorMenu, authorController));
     mainMenuMap.put("3", new FindSpecificDiaryAction(diaryMenu, diaryController));
     mainMenuMap.put("4", new BrowseAuthorsAction(authorMenu, diaryMenu, diaryController, authorController));

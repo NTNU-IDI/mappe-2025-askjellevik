@@ -6,7 +6,7 @@
 
   <groupId>edu.ntnu.idi.idatt</groupId>
   <artifactId>IDATT1003-diary-app</artifactId>
-  <version>0.3.1-SNAPSHOT</version>
+  <version>0.3.2-SNAPSHOT</version>
 
   <properties>
     <maven.compiler.source>21</maven.compiler.source>

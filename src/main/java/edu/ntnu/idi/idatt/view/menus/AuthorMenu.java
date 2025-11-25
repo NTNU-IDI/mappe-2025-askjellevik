@@ -38,7 +38,7 @@ public class AuthorMenu {
       while (true) {
         switch (userInput) {
           case "1" -> {
-            createNewAuthor();
+            //createNewAuthor();
             return;
           }
           case "2" -> {
@@ -60,7 +60,7 @@ public class AuthorMenu {
   }
 
 
-  public Author getAuthorOfNewDiaryEntry() {
+/*  public Author getAuthorOfNewDiaryEntry() {
     consoleUtils.showMessage("Choose the author of the diary entry:");
     consoleUtils.showMessage("Option 1: Register as a new author");
     consoleUtils.showMessage("Option 2: Choose an author that is already registered");
@@ -89,10 +89,10 @@ public class AuthorMenu {
     }
 
 
-  }
+  }*/
 
 
-  private Author createNewAuthor() {
+  /*private Author createNewAuthor() {
     consoleUtils.showColoredMessage("=== New Author ===", Color.BLUE);
     String authorName;
     String authorEmail;
@@ -120,7 +120,7 @@ public class AuthorMenu {
       return authorToAdd;
 
     }
-  }
+  }*/
 
   private Author browseRegisteredAuthors() {
     List<Author> authors = authorController.getListOfAuthorsInRegister();
@@ -220,14 +220,7 @@ public class AuthorMenu {
     }
   }
 
-  public List<Author> getListOfAllRegisteredAuthors() {
-    return authorController.getListOfAuthorsInRegister();
-  }
-
-  public String displayEntriesForSelection(List<Author> authors, int start,int end, int page) {
-    consoleUtils.showColoredMessage("=== Registered Authors (Page" + (page + 1) + ") ===", Color.WHITE);
-
-//    for (int i = start; i < end; i++) {
+  //    for (int i = start; i < end; i++) {
 //      consoleUtils.showMessage(
 //          i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |"
 //              + consoleUtils.formatDateToView(diaryEntries.get(i)
@@ -236,6 +229,10 @@ public class AuthorMenu {
 //
 //    return consoleUtils.readUserInputWithPrompt(
 //        "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
+  public String displayEntriesForSelection(List<Author> authors, int start,int end, int page) {
+    consoleUtils.showColoredMessage("=== Registered Authors (Page" + (page + 1) + ") ===", Color.WHITE);
+
+
     String leftAlignFormat = "| %-4d | %-20s |%n";
 
     System.out.format("+---+-----Page "+page+"--+%n");
@@ -270,11 +267,33 @@ public class AuthorMenu {
   }
 
   public void displayErrorMessage(String message) {
+    consoleUtils.showColoredMessage(message, Color.RED);
 
   }
 
   public String getAuthorEmailPrompt() {
     return consoleUtils.readUserInputWithPrompt("Enter the email of the author");
+  }
+
+  public void displayHeader(String header) {
+    consoleUtils.showColoredMessage(header, Color.WHITE);
+  }
+
+  public String subMenuForChoosingAuthor() {
+    while (true) {
+      consoleUtils.showColoredMessage("=== Choose author ===", Color.WHITE);
+      consoleUtils.showMessage("Option 1: Register a new author");
+      consoleUtils.showMessage("Option 2: Choose an existing author");
+      consoleUtils.showMessage("Option Back: Exit");
+
+      String userInput = consoleUtils.readUserInput();
+
+      if ("1".equals(userInput) || "2".equals(userInput) || "back".equals(
+          userInput)) {
+        return userInput;
+      }
+
+    }
   }
 }
 

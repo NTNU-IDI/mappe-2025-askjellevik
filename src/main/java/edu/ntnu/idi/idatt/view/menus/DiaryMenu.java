@@ -57,70 +57,31 @@ public class DiaryMenu {
   public void searchForDiaryEntryWithinTwoDates() {
   }
 
-  public void searchForDiaryEntryWithSpecificDate() {
-    consoleUtils.showColoredMessage("=== Searching for diary by date===", Color.WHITE);
-    consoleUtils.showMessage("Type Back to go back");
+  public LocalDateTime getSearchDate() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
 
     while (true) {
-      String userInput = consoleUtils.readUserInputWithPrompt("Enter the search date: dd-MM-YYYY");
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-      LocalDate entryDate;
-      LocalDateTime entryDateTime = null;
+      String userInput = consoleUtils.readUserInputWithPrompt("Enter the search date: dd-MM-yyyy");
 
       if ("back".equalsIgnoreCase(userInput)) {
-        return;
+        return null;
       }
 
       try {
-        entryDate = LocalDate.parse(userInput, formatter);
-        entryDateTime = entryDate.atStartOfDay();
-        if (!DiaryEntryValidator.validateDate(entryDateTime).isEmpty()) {
-          throw new InvalidDateException("The date is not valid");
-        }
+        LocalDate entryDate = LocalDate.parse(userInput, formatter);
+        return entryDate.atStartOfDay();
 
-      } catch (InvalidDateException | DateTimeParseException e) {
-        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
+      } catch (DateTimeParseException e) {
+        consoleUtils.showColoredMessage("Invalid date format (dd-MM-yyyy)", Color.RED);
       }
 
-      List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesByDate(entryDateTime);
 
-      if (diaries.isEmpty()) {
-        consoleUtils.showColoredMessage("No entries from that date found", Color.RED);
-      } else {
-        consoleUtils.showColoredMessage("Found " + diaries.size() + " diaries from that date:",
-            Color.CYAN);
-        displayListOfDiaries(diaries);
-        break;
-
-
-      }
     }
   }
 
-  public void searchForDiaryEntryByWord() {
-    consoleUtils.showColoredMessage("=== Searching for diary by word===", Color.WHITE);
-    consoleUtils.showMessage("Type Back to go back");
-
-    while (true) {
-      String searchWord = consoleUtils.readUserInputWithPrompt("Enter the search word: ");
-
-      if ("back".equalsIgnoreCase(searchWord)) {
-        return;
-      }
-
-      List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesWithSpecificWord(searchWord);
-
-      if (diaries.isEmpty()) {
-        consoleUtils.showColoredMessage("No entries with that word found", Color.RED);
-      } else {
-        consoleUtils.showColoredMessage("Found " + diaries.size() + " diaries with that word:",
-            Color.CYAN);
-        displayListOfDiaries(diaries);
-        break;
-
-
-      }
-    }
+  public String searchForDiaryEntryByWordPrompt() {
+    return consoleUtils.readUserInputWithPrompt("Enter the search word: ");
 
   }
 

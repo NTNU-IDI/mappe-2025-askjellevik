@@ -1,7 +1,6 @@
 package edu.ntnu.idi.idatt.controller;
 
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
-import edu.ntnu.idi.idatt.controller.validators.DateValidator;
 import edu.ntnu.idi.idatt.controller.validators.DiaryEntryValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;

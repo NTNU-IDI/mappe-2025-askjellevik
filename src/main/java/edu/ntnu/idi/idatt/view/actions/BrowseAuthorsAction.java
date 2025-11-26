@@ -35,7 +35,7 @@ public class BrowseAuthorsAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      String userInput = authorMenu.displayEntriesForSelection(authors, start, end, page+1);
+      String userInput = authorMenu.displayEntriesForSelection(authors, start, end, page + 1);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;
@@ -61,7 +61,8 @@ public class BrowseAuthorsAction implements Action {
 
         boolean choosingSubMenu = true;
         while (choosingSubMenu) {
-          String subMenuUserChoice = authorMenu.subMenuForAuthorManagementAction(chosenAuthor);
+          String subMenuUserChoice = authorMenu.subMenuForAuthorManagementAction(chosenAuthor,
+              authorController.getAmountOfEntriesBySpecificAuthor(chosenAuthor));
 
           switch (subMenuUserChoice) {
             case "1" -> {

@@ -10,23 +10,28 @@ public class BrowseDiariesAction implements Action {
   private final DiaryMenu diaryMenu;
   private final DiaryController diaryController;
   private List<DiaryEntry> diaryEntries;
+  private final boolean isBrowsingAllDiaries;
 
   public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController) {
     this.diaryMenu = diaryMenu;
     this.diaryController = diaryController;
+    this.isBrowsingAllDiaries = true;
   }
 
   public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController, List<DiaryEntry> diaryEntries) {
     this.diaryMenu = diaryMenu;
     this.diaryController = diaryController;
     this.diaryEntries = diaryEntries;
+    this.isBrowsingAllDiaries = false;
   }
 
   @Override
   public void execute() {
 
-    if (diaryEntries == null) {
-      diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
+
+
+    if (isBrowsingAllDiaries) {
+      this.diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
     }
 
 
@@ -75,9 +80,11 @@ public class BrowseDiariesAction implements Action {
               editDiaryAction.execute();
             }
             case "3" -> {
-              diaryMenu.deleteDiaryEntry(diaryEntry);
-              diaryEntries = diaryMenu.getListOfAllRegisteredDiaryEntries();
-              choosingSubMenu = false;
+              if (deleteDiaryEntry(diaryEntry)) {
+                diaryEntries.remove(diaryEntry);
+                choosingSubMenu = false;
+              }
+
             }
             case "back" -> choosingSubMenu = false;
           }
@@ -89,6 +96,24 @@ public class BrowseDiariesAction implements Action {
 
 
     }
+  }
+
+  private boolean deleteDiaryEntry(DiaryEntry diaryEntry) {
+    while (true) {
+      String userInput = diaryMenu.deleteDiaryEntryPrompt(diaryEntry);
+
+      if ("no".equalsIgnoreCase(userInput)) {
+        return false;
+      }
+      if ("yes".equalsIgnoreCase(userInput)) {
+        diaryController.deleteDiaryEntryInRegister(diaryEntry);
+        diaryMenu.displayPromptedMessage("Diary entry deleted");
+
+        return true;
+      }
+      diaryMenu.displayErrorMessage("Not valid input, yes/no");
+    }
+
   }
 }
 

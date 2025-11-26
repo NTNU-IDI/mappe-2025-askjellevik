@@ -12,24 +12,47 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+/**
+ * Controller class for managing, manipulating and validating data in the diary register.
+ *
+ **/
 public class DiaryController {
 
   private final DiaryRegister diaryRegister;
 
-
+  /**
+   * Constructs a DiaryController with the injected DiaryRegister.
+   *
+   * @param diaryRegister the DiaryRegister to be managed by this controller
+   */
   public DiaryController(DiaryRegister diaryRegister) {
     this.diaryRegister = diaryRegister;
   }
 
+  /**
+   * Gets a list of all the registered diary entries in the register.
+   *
+   * @return list of all registered diary entries
+   */
   public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
     return diaryRegister.getAllDiaryEntries();
   }
 
+  /**
+   * Adds a new diary entry to the register with the given parameters.
+   *
+   * @param entryDate the date of the diary entry
+   * @param entryAuthor the author of the diary entry
+   * @param entryTitle the title of the diary entry
+   * @param entryText the text of the diary entry
+   */
   public void addDiaryToRegister(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
       String entryText) {
     DiaryEntry diaryEntryToAdd = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
     diaryRegister.addDiaryEntry(diaryEntryToAdd);
   }
+
   /**
    * Deletes a diary entry from the register.
    *
@@ -40,6 +63,12 @@ public class DiaryController {
     diaryRegister.deleteDiaryEntry(diaryEntry.getEntryID());
   }
 
+  /**
+   * Searches for diary entries by date.
+   *
+   * @param date the date to search for
+   * @return a list of diary entries on the specified date
+   */
   public List<DiaryEntry> getListOfDiaryEntriesByDate(LocalDateTime date) {
     if (date == null) {
       return List.of();
@@ -65,8 +94,8 @@ public class DiaryController {
     }
 
     return getListOfAllRegisteredDiaryEntries().stream()
-        .filter(diaryEntry -> !diaryEntry.getEntryDate().isBefore(startDate) &&
-            !diaryEntry.getEntryDate().isAfter(endDate))
+        .filter(diaryEntry -> !diaryEntry.getEntryDate().isBefore(startDate)
+            && !diaryEntry.getEntryDate().isAfter(endDate))
         .collect(Collectors.toList());
 
   }
@@ -91,6 +120,12 @@ public class DiaryController {
   }
 
 
+  /**
+   * Returns the number of diary entries registered by a specific author.
+   *
+   * @param author the author desired to count entries for
+   * @return the number of diary entries by the specified author
+   */
   public int getAmountOfEntriesBySpecificAuthor(Author author) {
     if (author == null) {
       return 0;
@@ -118,6 +153,11 @@ public class DiaryController {
         .toList();
   }
 
+  /**
+   * Generates a map of authors and their corresponding number of diary entries.
+   *
+   * @return a map where the key is the author and the value is the number of entries by that author
+   */
   public Map<Author, Integer> getMapOfEntriesByAuthor() {
     return getListOfAllRegisteredDiaryEntries().stream()
         .map(DiaryEntry::getEntryAuthor)
@@ -126,6 +166,12 @@ public class DiaryController {
   }
 
 
+  /**
+   * Validates the date of a diary entry.
+   *
+   * @param date the date to validate
+   * @throws InvalidDateException if the date is invalid
+   */
   public void validateDate(LocalDateTime date) throws InvalidDateException {
     List<String> errors = DiaryEntryValidator.validateDate(date);
     if (!errors.isEmpty()) {
@@ -133,7 +179,12 @@ public class DiaryController {
     }
   }
 
-
+  /**
+   * Validates the title of a diary entry.
+   *
+   * @param title the title to validate
+   * @throws InvalidInputException if the title is invalid
+   */
   public void validateEntryTitle(String title) throws InvalidInputException {
     List<String> errors = DiaryEntryValidator.validateTitle(title);
     if (!errors.isEmpty()) {
@@ -141,6 +192,12 @@ public class DiaryController {
     }
   }
 
+  /**
+   * Validates the text of a diary entry.
+   *
+   * @param text the text to validate
+   * @throws InvalidInputException if the text is invalid
+   */
   public void validateEntryText(String text) throws InvalidInputException {
     List<String> errors = DiaryEntryValidator.validateText(text);
     if (!errors.isEmpty()) {

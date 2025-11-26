@@ -27,9 +27,8 @@ public class FindSpecificDiaryAction implements Action {
         case "1" -> searchForDiaryEntryByWord();
         case "2" -> searchForDiaryEntryWithSpecificDate();
         case "3" -> searchForDiaryEntryWithinTwoDates();
-        case "back" -> {
-          isSearching = false;
-        }
+        case "back" -> isSearching = false;
+        default -> diaryMenu.displayErrorMessage("Could not execute that command");
       }
     }
   }

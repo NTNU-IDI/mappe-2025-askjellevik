@@ -3,12 +3,9 @@ package edu.ntnu.idi.idatt.view.actions;
 import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
-import edu.ntnu.idi.idatt.controller.validators.AuthorValidator;
 import edu.ntnu.idi.idatt.model.Author;
-import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -54,9 +51,8 @@ public class CreateDiaryEntryAction implements Action {
           validAuthor = getValidAuthorFromBrowsing();
           choosingSubMenu = false;
         }
-        case "back" -> {
-          choosingSubMenu = false;
-        }
+        case "back" -> choosingSubMenu = false;
+        default -> diaryMenu.displayErrorMessage("Could not execute that command");
       }
     }
     if (validAuthor == null) {

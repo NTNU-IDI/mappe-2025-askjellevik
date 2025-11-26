@@ -39,31 +39,26 @@ public class CreateAuthorAction implements Action {
 
     }
 
-      String validEmail = null;
+    String validEmail = null;
 
-      while (validEmail == null) {
-        userInput = authorMenu.getAuthorEmailPrompt();
-        if ("back".equalsIgnoreCase(userInput)) {
-          return;
-        }
-        try {
-          authorController.validateAuthorEmail(userInput);
-          validEmail = userInput;
-        } catch (InvalidInputException e) {
-          authorMenu.displayErrorMessage(e.getMessage());
-        }
-}
+    while (validEmail == null) {
+      userInput = authorMenu.getAuthorEmailPrompt();
+      if ("back".equalsIgnoreCase(userInput)) {
+        return;
+      }
+      try {
+        authorController.validateAuthorEmail(userInput);
+        validEmail = userInput;
+      } catch (InvalidInputException e) {
+        authorMenu.displayErrorMessage(e.getMessage());
+      }
+    }
 
-
-        try {
-          this.createdAuthor = authorController.addAuthorToRegister(validName, validEmail);
-        }
-        catch (Exception e) {
-          authorMenu.displayErrorMessage("Unexpected error: " + e.getMessage());
-        }
-
-
-
+    try {
+      this.createdAuthor = authorController.addAuthorToRegister(validName, validEmail);
+    } catch (Exception e) {
+      authorMenu.displayErrorMessage("Unexpected error: " + e.getMessage());
+    }
 
 
   }

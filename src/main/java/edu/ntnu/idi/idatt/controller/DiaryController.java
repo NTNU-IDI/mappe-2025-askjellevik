@@ -50,10 +50,6 @@ public class DiaryController {
     return diaryRegister.getAllEntriesWithSpecificWord(word);
   }
 
-  public List<DiaryEntry> getListOfAllEntriesBySpecificAuthor(Author author) {
-    return diaryRegister.getAllEntriesByAuthor(author);
-  }
-
   public Map<Author, Integer> getMapOfDiaryEntriesByAuthors() {
     return diaryRegister.getMapOfAuthorEntryCounts();
   }
@@ -65,6 +61,10 @@ public class DiaryController {
   public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
     return diaryRegister.getAllDiaryEntries();
   }
+  public List<DiaryEntry> getListOfAllEntriesBySpecificAuthor(Author author) {
+    return diaryRegister.getAllEntriesByAuthor(author);
+  }
+
 
   public void validateDate(LocalDateTime date) throws InvalidDateException {
     List<String> errors = DiaryEntryValidator.validateDate(date);

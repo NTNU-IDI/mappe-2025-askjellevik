@@ -18,7 +18,8 @@ public class BrowseDiariesAction implements Action {
     this.isBrowsingAllDiaries = true;
   }
 
-  public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController, List<DiaryEntry> diaryEntries) {
+  public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController,
+      List<DiaryEntry> diaryEntries) {
     this.diaryMenu = diaryMenu;
     this.diaryController = diaryController;
     this.diaryEntries = diaryEntries;
@@ -28,12 +29,9 @@ public class BrowseDiariesAction implements Action {
   @Override
   public void execute() {
 
-
-
     if (isBrowsingAllDiaries) {
       this.diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
     }
-
 
     int page = 0;
     int pageSize = 5;
@@ -53,10 +51,9 @@ public class BrowseDiariesAction implements Action {
         page += 1;
         continue;
       }
-      if ("previous".equalsIgnoreCase(userInput) && page > 0 ) {
+      if ("previous".equalsIgnoreCase(userInput) && page > 0) {
         page -= 1;
         continue;
-
       }
       try {
 
@@ -87,6 +84,7 @@ public class BrowseDiariesAction implements Action {
 
             }
             case "back" -> choosingSubMenu = false;
+            default -> diaryMenu.displayErrorMessage("Could not execute that command");
           }
 
         }

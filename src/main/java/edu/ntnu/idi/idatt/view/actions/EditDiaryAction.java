@@ -30,9 +30,8 @@ public class EditDiaryAction implements Action {
         case "1" -> editDiaryTitle(diaryEntry);
         case "2" -> overwriteDiaryText(diaryEntry);
         case "3" -> addDiaryText(diaryEntry);
-        case "back" -> {
-          showSubMenu = false;
-        }
+        case "back" -> showSubMenu = false;
+        default -> diaryMenu.displayErrorMessage("Could not execute that command");
       }
 
     }

@@ -21,6 +21,7 @@ public class FindSpecificDiaryAction implements Action {
     boolean isSearching = true;
 
     while (isSearching) {
+      diaryMenu.displayMainHeader("Diary entry lookup ");
       String submenuUserChoice = diaryMenu.subMenuForFindingDiaryAction();
 
       switch (submenuUserChoice) {

@@ -23,7 +23,7 @@ public class DiaryMenu extends BaseMenu{
   public String subMenuForFindingDiaryAction() {
 
     while (true) {
-      consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);
+      /*consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);*/
       consoleUtils.showMessage("Option 1: Search for diary entry by word");
       consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
       consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
@@ -71,8 +71,6 @@ public class DiaryMenu extends BaseMenu{
 
   public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
-    consoleUtils.showColoredMessage("=== Registered Diary Entries ===",
-        Color.WHITE);
 
     String leftAlignFormat = "| %-1d | %-20s |%n";
 

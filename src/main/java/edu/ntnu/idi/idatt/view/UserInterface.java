@@ -50,7 +50,7 @@ public class UserInterface {
     AuthorRegister authorRegister = new AuthorRegister();
 
     DiaryController diaryController = new DiaryController(diaryRegister);
-    AuthorController authorController = new AuthorController(authorRegister, diaryController);
+    AuthorController authorController = new AuthorController(authorRegister);
 
     this.authorMenu = new AuthorMenu(consoleUtils);
     this.diaryMenu = new DiaryMenu(consoleUtils);

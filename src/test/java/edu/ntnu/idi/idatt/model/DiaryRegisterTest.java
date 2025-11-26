@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
 import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,6 +64,13 @@ public class DiaryRegisterTest {
   void testDeleteDiaryEntryThrowsException() {
     assertThrows(DiaryEntryNotFound.class , () -> diaryRegister.deleteDiaryEntry(null),
         "Did not find the diary entry to delete.");
+  }
+
+  @Test
+  void testDeleteDiaryEntryThrowsExceptionForUnknownId() {
+    UUID randomId = java.util.UUID.randomUUID();
+
+    assertThrows(DiaryEntryNotFound.class, () -> diaryRegister.deleteDiaryEntry(randomId));
   }
 
 

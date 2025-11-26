@@ -28,10 +28,10 @@ public class BaseMenu {
   }
 
   public void displayMainHeader(String header) {
-    consoleUtils.showColoredMessage("=== " + header + " ===", Color.WHITE);
+    consoleUtils.showColoredMessage("=== " + header + " ===", Color.CYAN);
   }
   public void displaySecondaryHeader (String header) {
-    consoleUtils.showColoredMessage("--- " + header + " ---", Color.WHITE);
+    consoleUtils.showColoredMessage("--- " + header + " ---", Color.CYAN);
   }
   public void displayThirdHeader (String header) {
     consoleUtils.showColoredMessage("### " + header + " ###", Color.MAGENTA);

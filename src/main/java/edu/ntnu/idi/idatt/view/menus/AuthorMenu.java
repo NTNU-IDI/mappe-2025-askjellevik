@@ -12,8 +12,6 @@ public class AuthorMenu extends BaseMenu{
     super(consoleUtils);
   }
 
-
-
   public String subMenuForAuthorManagementAction(Author author, int amountOfEntries) {
     String[] messages = {"You have chosen the author: \n",
             author.getName(), " |  email: ",
@@ -39,13 +37,6 @@ public class AuthorMenu extends BaseMenu{
 
   }
 
-
-  public String editAuthorEmailPrompt(Author author) {
-    consoleUtils.showColoredMessage("=== Change author email ===", Color.WHITE);
-    consoleUtils.showMessage("Original email: "+ author.getEmail());
-      return consoleUtils.readUserInputWithPrompt("Enter new email: ");
-  }
-
   public String subMenuForEditingAuthorAction(Author author) {
     while (true) {
       consoleUtils.showColoredMessage("=== Author editing ===", Color.WHITE);
@@ -63,8 +54,7 @@ public class AuthorMenu extends BaseMenu{
     }
   }
 
-
-  public String displayEntriesForSelection(List<Author> authors, int start,int end, int page) {
+  public String displayAuthorsForSelection(List<Author> authors, int start,int end, int page) {
     consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
 
 
@@ -79,33 +69,6 @@ public class AuthorMenu extends BaseMenu{
     System.out.format("+---+----------------------+%n");
     return consoleUtils.readUserInputWithPrompt(
             "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
-  }
-
-  public void displayPromptedMessage(String s) {
-    consoleUtils.showColoredMessage(s, Color.RED);
-  }
-
-  public String editAuthorNamePrompt(Author author) {
-    consoleUtils.showColoredMessage("=== Change author name ===", Color.WHITE);
-    consoleUtils.showMessage("Original name: "+ author.getName());
-    return consoleUtils.readUserInputWithPrompt("Enter new name: ");
-  }
-
-  public String getAuthorNamePrompt() {
-      return consoleUtils.readUserInputWithPrompt("Enter the name of the author");
-  }
-
-  public void displayErrorMessage(String message) {
-    consoleUtils.showColoredMessage(message, Color.RED);
-
-  }
-
-  public String getAuthorEmailPrompt() {
-    return consoleUtils.readUserInputWithPrompt("Enter the email of the author");
-  }
-
-  public void displayHeader(String header) {
-    consoleUtils.showColoredMessage(header, Color.WHITE);
   }
 
   public String subMenuForChoosingAuthor() {

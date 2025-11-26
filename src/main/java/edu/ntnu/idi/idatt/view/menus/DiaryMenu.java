@@ -1,9 +1,7 @@
 package edu.ntnu.idi.idatt.view.menus;
 
-import edu.ntnu.idi.idatt.controller.DiaryController;
-import edu.ntnu.idi.idatt.controller.exceptions.EmptyStringException;
+
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
-import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 
@@ -42,7 +40,6 @@ public class DiaryMenu extends BaseMenu{
 
 
   }
-
 
   public LocalDateTime getSearchDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -90,8 +87,6 @@ public class DiaryMenu extends BaseMenu{
         "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
 
   }
-
-
 
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
     String[] messages = {"You have chosen the diary: \n",
@@ -163,8 +158,6 @@ public class DiaryMenu extends BaseMenu{
 
   }
 
-
-
   public void readDiaryEntry(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("===== Reading diary entry =====", Color.MAGENTA);
     consoleUtils.showMessage(diaryEntry.getEntryTitle());
@@ -211,35 +204,4 @@ public class DiaryMenu extends BaseMenu{
   }
 
 
-
-  public void displayPromptedMessage(String string) {
-    consoleUtils.showColoredMessage(string, Color.RED);
-  }
-
-  public String getDiaryTitlePrompt() {
-    return consoleUtils.readUserInputWithPrompt("Enter the diary title: ");
-  }
-
-  public void displayErrorMessage(String error) {
-    consoleUtils.showColoredMessage(error, Color.RED);
-  }
-
-  public String getDiaryTextPrompt() {
-    return consoleUtils.readUserInputWithPrompt("Enter the diary text:");
-  }
-
-  public void displayHeader(String s) {
-
-  }
-
-  public String addDiaryTextPrompt() {
-    return consoleUtils.readUserInputWithPrompt("Enter text to add");
-  }
-
-
-
-  public String overwriteDiaryTitlePrompt(DiaryEntry diaryEntry) {
-    consoleUtils.showMessage("Original title: " + diaryEntry.getEntryTitle());
-    return consoleUtils.readUserInputWithPrompt("Enter new title");
-  }
 }

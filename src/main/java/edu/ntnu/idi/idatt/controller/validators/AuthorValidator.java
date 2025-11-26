@@ -28,9 +28,10 @@ public class AuthorValidator {
     /* Chat-GPT prompt:
     *
     *   Make a regex pattern to check that it's a valid name, not enforcing capitalization or formatting.
+    *   also allowing for names with hyphens, apostrophes and spaces.
     * */
 
-    String regexPattern = "^[a-zA-Z'\\s-]+$";
+    String regexPattern = "^[a-zA-ZÀ-ÿ'’-]+(?: [a-zA-ZÀ-ÿ'’-]+)*$\n";
 
     if(!Pattern.compile(regexPattern)
         .matcher(name)

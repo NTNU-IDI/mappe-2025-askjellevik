@@ -8,13 +8,11 @@ import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 public class EditAuthorAction implements Action {
 
   private final AuthorMenu authorMenu;
-  private final AuthorController authorController;
   private final Author author;
 
 
-  public EditAuthorAction(AuthorMenu authorMenu, AuthorController authorController, Author author) {
+  public EditAuthorAction(AuthorMenu authorMenu, Author author) {
     this.authorMenu = authorMenu;
-    this.authorController = authorController;
     this.author = author;
   }
 

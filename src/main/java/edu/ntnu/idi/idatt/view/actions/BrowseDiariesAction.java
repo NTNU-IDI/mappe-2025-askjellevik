@@ -82,7 +82,7 @@ public class BrowseDiariesAction implements Action {
           switch (submenuUserChoice) {
             case "1" -> diaryMenu.readDiaryEntry(diaryEntry);
             case "2" -> {
-              Action editDiaryAction = new EditDiaryAction(diaryMenu, diaryEntry, diaryController);
+              Action editDiaryAction = new EditDiaryAction(diaryMenu, diaryEntry);
               editDiaryAction.execute();
             }
             case "3" -> {

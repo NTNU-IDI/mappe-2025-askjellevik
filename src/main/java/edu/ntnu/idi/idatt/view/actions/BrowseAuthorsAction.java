@@ -75,7 +75,7 @@ public class BrowseAuthorsAction implements Action {
               action.execute();
             }
             case "2" -> {
-              Action action = new EditAuthorAction(authorMenu, authorController, chosenAuthor);
+              Action action = new EditAuthorAction(authorMenu, chosenAuthor);
               action.execute();
             }
             case "back" -> choosingSubMenu = false;

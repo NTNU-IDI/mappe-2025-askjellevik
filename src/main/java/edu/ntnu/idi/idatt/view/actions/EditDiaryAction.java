@@ -10,13 +10,10 @@ public class EditDiaryAction implements Action {
 
   private final DiaryMenu diaryMenu;
   private final DiaryEntry diaryEntry;
-  private final DiaryController diaryController;
 
-  public EditDiaryAction(DiaryMenu diaryMenu, DiaryEntry diaryEntry,
-      DiaryController diaryController) {
+  public EditDiaryAction(DiaryMenu diaryMenu, DiaryEntry diaryEntry) {
     this.diaryMenu = diaryMenu;
     this.diaryEntry = diaryEntry;
-    this.diaryController = diaryController;
   }
 
   @Override

@@ -35,14 +35,6 @@ public class DiaryController {
     diaryRegister.deleteDiaryEntry(diaryEntry);
   }
 
-  public void setDiaryText(DiaryEntry diaryEntry, String diaryText) {
-    diaryEntry.setEntryText(diaryText);
-  }
-
-  public void setDiaryTitle(DiaryEntry diaryEntry, String diaryTitle) {
-    diaryEntry.setEntryTitle(diaryTitle);
-  }
-
   public List<DiaryEntry> getListOfDiaryEntriesWithinDates(LocalDateTime startDate,
       LocalDateTime endDate) {
 

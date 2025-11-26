@@ -20,13 +20,13 @@ public class CreateAuthorAction implements Action {
   @Override
   public void execute() {
 
-    authorMenu.displayHeader("=== Creating new author ===");
+    authorMenu.displayMainHeader("Creating new author");
 
     String userInput;
     String validName = null;
 
     while (validName == null) {
-      userInput = authorMenu.getAuthorNamePrompt();
+      userInput = authorMenu.getUserStringWithPrompt("Enter the name of the author");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }
@@ -42,7 +42,7 @@ public class CreateAuthorAction implements Action {
     String validEmail = null;
 
     while (validEmail == null) {
-      userInput = authorMenu.getAuthorEmailPrompt();
+      userInput = authorMenu.getUserStringWithPrompt("Enter the email of the author");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }

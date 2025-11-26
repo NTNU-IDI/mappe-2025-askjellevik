@@ -28,7 +28,7 @@ public class CreateDiaryEntryAction implements Action {
   @Override
   public void execute() {
 
-    diaryMenu.displayHeader("=== Creating new diary entry ===");
+    diaryMenu.displayMainHeader("Creating new diary entry");
 
     LocalDateTime validDate = getValidDate();
     if (validDate == null) {
@@ -82,7 +82,7 @@ public class CreateDiaryEntryAction implements Action {
     String validText = null;
     String userInput;
     while (validText == null) {
-      userInput = diaryMenu.getDiaryTextPrompt();
+      userInput = diaryMenu.getUserStringWithPrompt("Enter the diary text");
       if ("back".equalsIgnoreCase(userInput)) {
         return null;
       }
@@ -101,7 +101,7 @@ public class CreateDiaryEntryAction implements Action {
     String userInput;
 
     while (validTitle == null) {
-      userInput = diaryMenu.getDiaryTitlePrompt();
+      userInput = diaryMenu.getUserStringWithPrompt("Enter the diary title");
       if ("back".equalsIgnoreCase(userInput)) {
         return null;
       }
@@ -149,7 +149,7 @@ public class CreateDiaryEntryAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      String userInput = authorMenu.displayEntriesForSelection(authors, start, end, page+1);
+      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page+1);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return null;
@@ -167,14 +167,14 @@ public class CreateDiaryEntryAction implements Action {
         int indexOfChosenAuthor = Integer.parseInt(userInput);
 
         if (indexOfChosenAuthor < start || indexOfChosenAuthor >= end) {
-          authorMenu.displayPromptedMessage("The author ID was out of range");
+          authorMenu.displayErrorMessage("The author ID was out of range");
           continue;
         }
 
         validAuthor = authors.get(indexOfChosenAuthor);
 
       } catch (NumberFormatException e) {
-        authorMenu.displayPromptedMessage("Wrong input format");
+        authorMenu.displayErrorMessage("Wrong input format");
       }
 
     }

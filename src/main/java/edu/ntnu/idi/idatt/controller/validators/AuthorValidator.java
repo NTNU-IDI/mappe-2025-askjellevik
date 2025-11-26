@@ -31,7 +31,7 @@ public class AuthorValidator {
     *   also allowing for names with hyphens, apostrophes and spaces.
     * */
 
-    String regexPattern = "^[a-zA-ZÀ-ÿ'’-]+(?: [a-zA-ZÀ-ÿ'’-]+)*$\n";
+    String regexPattern = "^[a-zA-ZÀ-ÿ'’-]+(?:[ -][a-zA-ZÀ-ÿ'’-]+)*$";
 
     if(!Pattern.compile(regexPattern)
         .matcher(name)

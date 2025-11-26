@@ -27,8 +27,8 @@ public class TestDataLoader {
     LocalDateTime dateTime5 = LocalDateTime.of(2025, 3,25,18,0 );
     LocalDateTime dateTime6 = LocalDateTime.of(2025, 6,13,18,0 );
 
-    authorController.addAuthorToRegister("Andy Skjell", "and@mail.com");
-    authorController.addAuthorToRegister("Martn Basj", "mart@mail.com");
+    authorController.addAuthorToRegister("Hallgeir", "Kvadsheim", "and@mail.com");
+    authorController.addAuthorToRegister("Martin", "Aronsen", "mart@mail.com");
 
 
     Author author1 = authorController.getAuthorByEmail("and@mail.com");

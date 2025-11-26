@@ -48,7 +48,7 @@ public class DiaryRegister {
    * @throws DiaryEntryNotFound if the diary entry ID is null
    */
   public void deleteDiaryEntry(UUID diaryEntryId) {
-    if (diaryEntryId == null) {
+    if (diaryEntryId == null || !diaryRegister.containsKey(diaryEntryId)) {
       throw new DiaryEntryNotFound("Did not find the diary entry to delete.");
     }
     diaryRegister.remove(diaryEntryId);

@@ -29,16 +29,25 @@ public class EditAuthorAction implements Action {
 
       switch (subMenuUserChoice) {
         case "1" -> {
+          authorMenu.displaySimpleMessage("Original first name: " + author.getFirstName());
+          String newName = authorMenu.getUserStringWithPrompt("Enter the new first name:");
+          AuthorValidator.validateName(newName);
+          author.setFirstName(newName);
+          authorMenu.displaySuccessMessage("First name updated successfully.");
+        }
+        case "2" -> {
+          authorMenu.displaySimpleMessage("Original last name: " + author.getLastName());
+          String newName = authorMenu.getUserStringWithPrompt("Enter the new last name:");
+          AuthorValidator.validateName(newName);
+          author.setLastName(newName);
+          authorMenu.displaySuccessMessage("Last name updated successfully.");
+        }
+        case "3" -> {
           authorMenu.displaySimpleMessage("Original email: " + author.getEmail());
           String newEmail = authorMenu.getUserStringWithPrompt("Enter the new email: ");
           AuthorValidator.validateEmail(newEmail);
           author.setEmail(newEmail);
-        }
-        case "2" -> {
-          authorMenu.displaySimpleMessage("Original name: " + author.getName());
-          String newName = authorMenu.getUserStringWithPrompt("Enter the new name:");
-          AuthorValidator.validateName(newName);
-          author.setName(newName);
+          authorMenu.displaySuccessMessage("Email updated successfully.");
         }
         case "back" -> {
           choosingSubMenu = false;

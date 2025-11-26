@@ -19,7 +19,7 @@ public class DiaryRegisterTest {
   @BeforeEach
   void setUp() {
     diaryRegister = new DiaryRegister();
-    author = new Author("Test Author", "test.author@mail.com");
+    author = new Author("Test",  "Author", "test.author@mail.com");
   }
 
 @Test
@@ -71,6 +71,8 @@ public class DiaryRegisterTest {
     UUID randomId = java.util.UUID.randomUUID();
 
     assertThrows(DiaryEntryNotFound.class, () -> diaryRegister.deleteDiaryEntry(randomId));
+
+
   }
 
 

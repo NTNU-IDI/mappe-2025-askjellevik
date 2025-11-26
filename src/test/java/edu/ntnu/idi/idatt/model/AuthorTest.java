@@ -13,7 +13,7 @@ public class AuthorTest {
 
   @BeforeEach
   void setUp() {
-    author = new Author("Navn Navnesen", "navn@mail.com");
+    author = new Author("Navn", "Navnesen", "navn@mail.com");
   }
 
   @Test
@@ -38,7 +38,7 @@ public class AuthorTest {
 
   @Test
   void testIdNotEqual() {
-    Author anotherAuthor = new Author("Name Namesom", "nameson@mail.com");
+    Author anotherAuthor = new Author("Name", "Nameson", "nameson@mail.com");
 
     assertNotEquals(author.getId(), anotherAuthor.getId());
   }

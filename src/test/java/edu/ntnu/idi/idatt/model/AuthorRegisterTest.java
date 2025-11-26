@@ -28,7 +28,7 @@ public class AuthorRegisterTest {
 
   @Test
   void testAddAuthor() {
-    Author author = new Author("Test Author", "test@mail.com");
+    Author author = new Author("Test",  "Author", "test@mail.com");
 
     authorRegister.addAuthor(author);
     List<Author> authors = authorRegister.getAllAuthors();

@@ -8,19 +8,22 @@ import java.util.UUID;
 public class Author {
 
   private final UUID id;
-  private String name;
+  private String firstName;
+  private String lastName;
   private String email;
 
 
   /**
    * Constructs an Author with the specified id, name, and email.
    *
-   * @param name  the name of the author
+   * @param firstName the first name of the author
+   * @param lastName the last name of the author
    * @param email the email of the author
    */
-  public Author(String name, String email) {
+  public Author(String firstName, String lastName, String email) {
     this.id = UUID.randomUUID();
-    this.name = name;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
   }
 
@@ -37,7 +40,23 @@ public class Author {
    * @return the author's name
    */
   public String getName() {
-    return name;
+    return firstName + " " + lastName;
+  }
+
+  /**   Gets the first name of the author.
+   *
+   * @return the author's first name
+   */
+  public String getFirstName() {
+    return firstName;
+  }
+
+  /**   Gets the last name of the author.
+   *
+   * @return the author's last name
+   */
+  public String getLastName() {
+    return lastName;
   }
 
   /**   Gets the email of the author.
@@ -56,17 +75,26 @@ public class Author {
     this.email = email;
   }
 
-  /**   Sets the name of the author.
+  /**   Sets the first name of the author.
    *
-   * @param name the new name of the author
+   * @param firstName the new name of the author
    */
-  public void setName(String name) {
-    this.name = name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
+
+  /**   Sets the last name of the author.
+   *
+   * @param lastName the new name of the author
+   */
+  public void setLastName(String lastName) {
+    this.firstName = lastName;
+  }
+
 
   @Override
   public String toString() {
-    return "Author: " + name + " (Email: " + email + ")";
+    return "Author: " + getName() + " (Email: " + email + ")";
   }
 
 }

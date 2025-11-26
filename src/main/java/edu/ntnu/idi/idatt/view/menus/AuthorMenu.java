@@ -41,13 +41,14 @@ public class AuthorMenu extends BaseMenu{
   public String subMenuForEditingAuthorAction(Author author) {
     while (true) {
       consoleUtils.showColoredMessage("=== Author editing ===", Color.WHITE);
-      consoleUtils.showMessage("Option 1: Edit the authors name");
-      consoleUtils.showMessage("Option 2: Edit the authors email");
+      consoleUtils.showMessage("Option 1: Edit the authors first name");
+      consoleUtils.showMessage("Option 2: Edit the authors last name");
+      consoleUtils.showMessage("Option 3: Edit the authors email");
       consoleUtils.showMessage("Option Back: Exit author editing");
 
       String userInput = consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "back".equals(
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
           userInput)) {
         return userInput;
       }

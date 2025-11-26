@@ -36,12 +36,13 @@ public class AuthorController {
   /**
    * Adds a new author to the register with the given parameters.
    *
-   * @param name the name of the author
+   * @param firstName the first name of the author
+   * @param lastName the last name of the author
    * @param email the email of the author
    * @return the added author
    */
-  public Author addAuthorToRegister(String name, String email) {
-    Author authorToAdd = new Author(name, email);
+  public Author addAuthorToRegister(String firstName, String lastName, String email) {
+    Author authorToAdd = new Author(firstName, lastName, email);
     authorRegister.addAuthor(authorToAdd);
     return authorToAdd;
   }

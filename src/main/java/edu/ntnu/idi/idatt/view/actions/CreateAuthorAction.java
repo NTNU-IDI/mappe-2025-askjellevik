@@ -23,16 +23,31 @@ public class CreateAuthorAction implements Action {
     authorMenu.displayMainHeader("Creating new author");
 
     String userInput;
-    String validName = null;
+    String validFirstName = null;
 
-    while (validName == null) {
-      userInput = authorMenu.getUserStringWithPrompt("Enter the name of the author");
+    while (validFirstName == null) {
+      userInput = authorMenu.getUserStringWithPrompt("Enter the first name of the author");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }
       try {
         authorController.validateAuthorName(userInput);
-        validName = userInput;
+        validFirstName = userInput;
+      } catch (InvalidInputException e) {
+        authorMenu.displayErrorMessage(e.getMessage());
+      }
+
+    }
+
+    String validLastName = null;
+    while (validLastName == null) {
+      userInput = authorMenu.getUserStringWithPrompt("Enter the last name of the author");
+      if ("back".equalsIgnoreCase(userInput)) {
+        return;
+      }
+      try {
+        authorController.validateAuthorName(userInput);
+        validLastName = userInput;
       } catch (InvalidInputException e) {
         authorMenu.displayErrorMessage(e.getMessage());
       }
@@ -55,7 +70,7 @@ public class CreateAuthorAction implements Action {
     }
 
     try {
-      this.createdAuthor = authorController.addAuthorToRegister(validName, validEmail);
+      this.createdAuthor = authorController.addAuthorToRegister(validFirstName, validLastName, validEmail);
     } catch (Exception e) {
       authorMenu.displayErrorMessage("Unexpected error: " + e.getMessage());
     }

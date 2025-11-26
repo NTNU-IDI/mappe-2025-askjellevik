@@ -15,7 +15,7 @@ public class DiaryEntryTest {
 
   @BeforeEach
   void setUp() {
-    author = new Author("Navn Navnesen", "navn.navnesen@mail.com");
+    author = new Author("Navn",  "Navnesen", "navn.navnesen@mail.com");
     entryDate = LocalDateTime.of(2024, 6, 15, 10, 30);
     diaryEntry = new DiaryEntry(entryDate, author, "Test title", "Test text.");
   }

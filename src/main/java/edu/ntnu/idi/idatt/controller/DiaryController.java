@@ -45,7 +45,16 @@ public class DiaryController {
 
   public List<DiaryEntry> getListOfDiaryEntriesWithinDates(LocalDateTime startDate,
       LocalDateTime endDate) {
-    return diaryRegister.getAllEntriesWithinDates(startDate, endDate);
+
+    if (startDate == null || endDate == null) {
+      return List.of();
+    }
+
+    return getListOfAllRegisteredDiaryEntries().stream()
+        .filter(diaryEntry -> diaryEntry.getEntryDate().isAfter(startDate) &&
+            diaryEntry.getEntryDate().isBefore(endDate))
+        .collect(Collectors.toList());
+
   }
 
   public List<DiaryEntry> getListOfDiaryEntriesWithSpecificWord(String word) {

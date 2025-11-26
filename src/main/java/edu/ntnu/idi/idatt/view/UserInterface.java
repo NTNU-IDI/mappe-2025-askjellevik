@@ -14,6 +14,7 @@ import edu.ntnu.idi.idatt.view.actions.CreateDiaryEntryAction;
 import edu.ntnu.idi.idatt.view.actions.ExitProgramAction;
 import edu.ntnu.idi.idatt.view.actions.FindSpecificDiaryAction;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
+import edu.ntnu.idi.idatt.view.menus.BaseMenu;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,7 @@ public class UserInterface {
   private final ConsoleUtils consoleUtils;
   private DiaryMenu diaryMenu;
   private AuthorMenu authorMenu;
+  private BaseMenu baseMenu;
   private boolean running;
   private Map<String, Action> mainMenuMap;
 
@@ -53,6 +55,7 @@ public class UserInterface {
 
     this.authorMenu = new AuthorMenu(consoleUtils);
     this.diaryMenu = new DiaryMenu(consoleUtils);
+    this.baseMenu = new BaseMenu(consoleUtils);
 
     boolean validInput = false;
     while (!validInput) {

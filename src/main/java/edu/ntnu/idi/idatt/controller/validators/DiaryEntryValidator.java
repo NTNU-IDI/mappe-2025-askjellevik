@@ -3,7 +3,6 @@ package edu.ntnu.idi.idatt.controller.validators;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class DiaryEntryValidator {
 
@@ -12,10 +11,11 @@ public class DiaryEntryValidator {
 
     if (title == null || title.isEmpty()) {
       errors.add("The title can not be empty");
+      return errors;
     }
 
 
-    if (title != null && title.length() > 30) {
+    if (title.length() > 30) {
       errors.add("The title can not be longer than 30 characters");
     }
 
@@ -31,6 +31,7 @@ public class DiaryEntryValidator {
 
     if (text == null || text.isEmpty()) {
       errors.add("The text can not be empty");
+      return errors;
     }
 
     return errors;
@@ -41,7 +42,7 @@ public class DiaryEntryValidator {
     List<String> errors = new ArrayList<>();
 
     if (date == null) {
-      errors.add("Date cannot be empty");
+      errors.add("The date can not be null");
       return errors;
     }
 

@@ -41,7 +41,7 @@ public class BrowseDiariesAction implements Action {
       int start = page * pageSize;
       int end = Math.min(diaryEntries.size(), start + pageSize);
 
-      String userInput = diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page);
+      String userInput = diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page+1);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;

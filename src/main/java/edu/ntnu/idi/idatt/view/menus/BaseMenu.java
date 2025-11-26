@@ -15,11 +15,25 @@ public class BaseMenu {
     return consoleUtils.readUserInputWithPrompt(prompt);
   }
 
-  public void displayRedMessage(String message) {
+  public void displayErrorMessage(String message) {
     consoleUtils.showColoredMessage(message, Color.RED);
   }
 
-  public void displayWhiteHeader(String header) {
+  public void displaySuccessMessage(String message) {
+    consoleUtils.showColoredMessage(message, Color.BLUE);
+  }
+
+  public void displaySimpleMessage(String message) {
+    consoleUtils.showMessage(message);
+  }
+
+  public void displayMainHeader(String header) {
     consoleUtils.showColoredMessage("=== " + header + " ===", Color.WHITE);
+  }
+  public void displaySecondaryHeader (String header) {
+    consoleUtils.showColoredMessage("--- " + header + " ---", Color.WHITE);
+  }
+  public void displayThirdHeader (String header) {
+    consoleUtils.showColoredMessage("### " + header + " ###", Color.MAGENTA);
   }
 }

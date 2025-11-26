@@ -6,8 +6,8 @@ import edu.ntnu.idi.idatt.controller.validators.DiaryEntryValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
+import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,20 +21,42 @@ public class DiaryController {
     this.diaryRegister = diaryRegister;
   }
 
+  public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
+    return diaryRegister.getAllDiaryEntries();
+  }
+
   public void addDiaryToRegister(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
       String entryText) {
     DiaryEntry diaryEntryToAdd = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
     diaryRegister.addDiaryEntry(diaryEntryToAdd);
   }
+  /**
+   * Deletes a diary entry from the register.
+   *
+   * @param diaryEntry the diary entry to delete
+   * @throws DiaryEntryNotFound if the diary entry is null
+   */
+  public void deleteDiaryEntryInRegister(DiaryEntry diaryEntry) {
+    diaryRegister.deleteDiaryEntry(diaryEntry.getEntryID());
+  }
 
   public List<DiaryEntry> getListOfDiaryEntriesByDate(LocalDateTime date) {
-    return diaryRegister.searchDiaryEntryByDate(date);
+    if (date == null) {
+      return List.of();
+    }
+
+    return getListOfAllRegisteredDiaryEntries().stream()
+        .filter(diaryEntry -> diaryEntry.getEntryDate().toLocalDate().equals(date.toLocalDate()))
+        .toList();
   }
 
-  public void deleteDiaryEntryInRegister(DiaryEntry diaryEntry) {
-    diaryRegister.deleteDiaryEntry(diaryEntry);
-  }
-
+  /**
+   * Retrieves all diary entries within the specified date range.
+   *
+   * @param startDate the start date of the range
+   * @param endDate   the end date of the range
+   * @return a list of diary entries within the date range
+   */
   public List<DiaryEntry> getListOfDiaryEntriesWithinDates(LocalDateTime startDate,
       LocalDateTime endDate) {
 
@@ -43,12 +65,18 @@ public class DiaryController {
     }
 
     return getListOfAllRegisteredDiaryEntries().stream()
-        .filter(diaryEntry -> diaryEntry.getEntryDate().isAfter(startDate) &&
-            diaryEntry.getEntryDate().isBefore(endDate))
+        .filter(diaryEntry -> !diaryEntry.getEntryDate().isBefore(startDate) &&
+            !diaryEntry.getEntryDate().isAfter(endDate))
         .collect(Collectors.toList());
 
   }
 
+  /**
+   * Retrieves all diary entries that contain a specific word in their title or text.
+   *
+   * @param word the word to search for
+   * @return a list of diary entries containing the specified word
+   */
   public List<DiaryEntry> getListOfDiaryEntriesWithSpecificWord(String word) {
     if (word == null || word.isEmpty()) {
       return List.of();
@@ -62,20 +90,39 @@ public class DiaryController {
         .collect(Collectors.toList());
   }
 
-  public Map<Author, Integer> getMapOfDiaryEntriesByAuthors() {
-    return diaryRegister.getMapOfAuthorEntryCounts();
+
+  public int getAmountOfEntriesBySpecificAuthor(Author author) {
+    if (author == null) {
+      return 0;
+    }
+
+    return (int) getListOfAllRegisteredDiaryEntries().stream()
+        .filter(diaryEntry -> diaryEntry.getEntryAuthor().equals(author))
+        .count();
   }
 
-  public Integer getAmountOfEntriesBySpecificAuthor(Author author) {
-    return diaryRegister.getAmountOfDiaryEntriesBySpecificAuthor(author);
-  }
 
-  public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
-    return diaryRegister.getAllDiaryEntries();
-  }
-
+  /**
+   * Retrieves all diary entries authored by a specific author.
+   *
+   * @param author the author whose entries to retrieve
+   * @return a list of diary entries by the specified author
+   */
   public List<DiaryEntry> getListOfAllEntriesBySpecificAuthor(Author author) {
-    return diaryRegister.getAllEntriesByAuthor(author);
+    if (author == null) {
+      return List.of();
+    }
+
+    return getListOfAllRegisteredDiaryEntries().stream()
+        .filter(diaryEntry -> diaryEntry.getEntryAuthor().equals(author))
+        .toList();
+  }
+
+  public Map<Author, Integer> getMapOfEntriesByAuthor() {
+    return getListOfAllRegisteredDiaryEntries().stream()
+        .map(DiaryEntry::getEntryAuthor)
+        .collect(Collectors.groupingBy(s -> s, Collectors.summingInt(e -> 1)));
+
   }
 
 

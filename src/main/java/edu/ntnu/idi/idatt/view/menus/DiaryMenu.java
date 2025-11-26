@@ -75,12 +75,12 @@ public class DiaryMenu {
 
   public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
-    consoleUtils.showColoredMessage("=== Registered Diary Entries (Page" + (page + 1) + ") ===",
+    consoleUtils.showColoredMessage("=== Registered Diary Entries ===",
         Color.WHITE);
 
     String leftAlignFormat = "| %-1d | %-20s |%n";
 
-    System.out.format("+---+-------Page " + page + "---------+%n");
+    System.out.format("+---+-------Page " + page +  "---------+%n");
     System.out.format("|KEY| Title                |%n");
     System.out.format("+---+----------------------+%n");
     for (int i = start; i < end; i++) {
@@ -226,7 +226,7 @@ public class DiaryMenu {
   }
 
   public String getDiaryTextPrompt() {
-    return null;
+    return consoleUtils.readUserInputWithPrompt("Enter the diary text:");
   }
 
   public void displayHeader(String s) {

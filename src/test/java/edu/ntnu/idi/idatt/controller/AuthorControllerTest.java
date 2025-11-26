@@ -49,7 +49,7 @@ public class AuthorControllerTest {
 
   @Test
   void testGetAuthorByEmailReturnsCorrectAuthor() throws AuthorNotFoundException {
-    Author addedAuthor = authorController.addAuthorToRegister("Test Author", "test@mail.com");
+    Author addedAuthor = authorController.addAuthorToRegister("Test",  "Author", "test@mail.com");
     Author authorByEmail = authorController.getAuthorByEmail("test@mail.com");
 
     assert(addedAuthor.equals(authorByEmail));

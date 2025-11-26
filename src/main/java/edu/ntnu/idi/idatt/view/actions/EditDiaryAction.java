@@ -89,7 +89,7 @@ public class EditDiaryAction implements Action {
     String validTitleToSet = null;
 
     while (validTitleToSet == null) {
-      String userInput = diaryMenu.overWriteDiaryTitlePrompt(diaryEntry);
+      String userInput = diaryMenu.overwriteDiaryTitlePrompt(diaryEntry);
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }

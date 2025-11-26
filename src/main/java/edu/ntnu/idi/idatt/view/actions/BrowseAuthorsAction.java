@@ -35,7 +35,7 @@ public class BrowseAuthorsAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      String userInput = authorMenu.displayEntriesForSelection(authors, start, end, page + 1);
+      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page + 1);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;
@@ -53,7 +53,7 @@ public class BrowseAuthorsAction implements Action {
         int indexOfChosenAuthor = Integer.parseInt(userInput);
 
         if (indexOfChosenAuthor < start || indexOfChosenAuthor >= end) {
-          authorMenu.displayPromptedMessage("The author ID was out of range");
+          authorMenu.displayErrorMessage("The author ID was out of range");
           continue;
         }
 
@@ -81,7 +81,7 @@ public class BrowseAuthorsAction implements Action {
         }
 
       } catch (NumberFormatException e) {
-        authorMenu.displayPromptedMessage("Wrong input format");
+        authorMenu.displayErrorMessage("Wrong input format");
       }
     }
   }

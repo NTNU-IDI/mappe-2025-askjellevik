@@ -60,7 +60,7 @@ public class BrowseDiariesAction implements Action {
         int indexOfChosenDiary = Integer.parseInt(userInput);
 
         if (indexOfChosenDiary < start || indexOfChosenDiary >= end) {
-          diaryMenu.displayPromptedMessage("The input key was out of range");
+          diaryMenu.displayErrorMessage("The input key was out of range");
           continue;
         }
 
@@ -89,7 +89,7 @@ public class BrowseDiariesAction implements Action {
 
         }
       } catch (NumberFormatException e) {
-        diaryMenu.displayPromptedMessage("Wrong input format");
+        diaryMenu.displayErrorMessage("Wrong input format");
       }
 
 
@@ -105,7 +105,7 @@ public class BrowseDiariesAction implements Action {
       }
       if ("yes".equalsIgnoreCase(userInput)) {
         diaryController.deleteDiaryEntryInRegister(diaryEntry);
-        diaryMenu.displayPromptedMessage("Diary entry deleted");
+        diaryMenu.displaySuccessMessage("Diary entry deleted");
 
         return true;
       }

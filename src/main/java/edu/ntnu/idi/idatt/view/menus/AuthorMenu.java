@@ -189,18 +189,12 @@ public class AuthorMenu {
 
 
   }
-
-  public void findAuthorsEntries(Author author) {
-  }
+  
 
   public String editAuthorEmailPrompt(Author author) {
     consoleUtils.showColoredMessage("=== Change author email ===", Color.WHITE);
     consoleUtils.showMessage("Original email: "+ author.getEmail());
       return consoleUtils.readUserInputWithPrompt("Enter new email: ");
-  }
-
-  public Author chooseRegisteredAuthors() {
-    return null;
   }
 
   public String subMenuForEditingAuthorAction(Author author) {
@@ -220,28 +214,20 @@ public class AuthorMenu {
     }
   }
 
-  //    for (int i = start; i < end; i++) {
-//      consoleUtils.showMessage(
-//          i + page + "  |" + diaryEntries.get(i).getEntryTitle() + "    |"
-//              + consoleUtils.formatDateToView(diaryEntries.get(i)
-//              .getEntryDate()));
-//    }
-//
-//    return consoleUtils.readUserInputWithPrompt(
-//        "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
+
   public String displayEntriesForSelection(List<Author> authors, int start,int end, int page) {
-    consoleUtils.showColoredMessage("=== Registered Authors (Page" + (page + 1) + ") ===", Color.WHITE);
+    consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
 
 
-    String leftAlignFormat = "| %-4d | %-20s |%n";
+    String leftAlignFormat = "| %-1d | %-20s |%n";
 
-    System.out.format("+---+-----Page "+page+"--+%n");
-    System.out.format("|ID | Name               |%n");
-    System.out.format("+---+--------------------+%n");
+    System.out.format("+---+-------Page " + page + "---------+%n");
+    System.out.format("|KEY| Name                 |%n");
+    System.out.format("+---+----------------------+%n");
     for (int i = start; i < end; i++) {
       System.out.format(leftAlignFormat, i, authors.get(i).getName());
     }
-    System.out.format("+-----------------+------+%n");
+    System.out.format("+---+----------------------+%n");
     return consoleUtils.readUserInputWithPrompt(
             "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
   }

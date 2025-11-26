@@ -7,6 +7,7 @@ import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.util.List;
+import java.util.Map;
 
 public class BrowseAuthorsAction implements Action {
 
@@ -35,7 +36,9 @@ public class BrowseAuthorsAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page + 1);
+      Map<Author, Integer> mapOfEntriesByAuthor= diaryController.getMapOfEntriesByAuthor();
+
+      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page + 1, mapOfEntriesByAuthor);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;
@@ -62,7 +65,7 @@ public class BrowseAuthorsAction implements Action {
         boolean choosingSubMenu = true;
         while (choosingSubMenu) {
           String subMenuUserChoice = authorMenu.subMenuForAuthorManagementAction(chosenAuthor,
-              authorController.getAmountOfEntriesBySpecificAuthor(chosenAuthor));
+              diaryController.getAmountOfEntriesBySpecificAuthor(chosenAuthor));
 
           switch (subMenuUserChoice) {
             case "1" -> {

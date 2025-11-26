@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.view.menus;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
 import edu.ntnu.idi.idatt.model.Author;
 import java.util.List;
+import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
 
 public class AuthorMenu extends BaseMenu{
@@ -54,19 +55,19 @@ public class AuthorMenu extends BaseMenu{
     }
   }
 
-  public String displayAuthorsForSelection(List<Author> authors, int start,int end, int page) {
+  public String displayAuthorsForSelection(List<Author> authors, int start,int end, int page, Map<Author, Integer> authorIntegerMap) {
     consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
 
 
-    String leftAlignFormat = "| %-1d | %-20s |%n";
+    String leftAlignFormat = "| %-1d | %-20s | %-4d| %n";
 
-    System.out.format("+---+-------Page " + page + "---------+%n");
-    System.out.format("|KEY| Name                 |%n");
-    System.out.format("+---+----------------------+%n");
+    System.out.format("+---+-------Page " + page + "--------------+%n");
+    System.out.format("|KEY| Name                 |Count|%n");
+    System.out.format("+---+----------------------------+%n");
     for (int i = start; i < end; i++) {
-      System.out.format(leftAlignFormat, i, authors.get(i).getName());
+      System.out.format(leftAlignFormat, i, authors.get(i).getName(), authorIntegerMap.get(authors.get(i)));
     }
-    System.out.format("+---+----------------------+%n");
+    System.out.format("+---+---------------------------+%n");
     return consoleUtils.readUserInputWithPrompt(
             "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
   }

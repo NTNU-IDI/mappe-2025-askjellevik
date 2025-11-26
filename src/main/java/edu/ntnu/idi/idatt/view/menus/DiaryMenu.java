@@ -18,14 +18,9 @@ import org.fusesource.jansi.Ansi.Color;
 public class DiaryMenu {
 
   private final ConsoleUtils consoleUtils;
-  private final DiaryController diaryController;
-  private final AuthorMenu authorMenu;
 
-  public DiaryMenu(DiaryController diaryController, ConsoleUtils consoleUtils,
-      AuthorMenu authorMenu) {
-    this.diaryController = diaryController;
+  public DiaryMenu(ConsoleUtils consoleUtils) {
     this.consoleUtils = consoleUtils;
-    this.authorMenu = authorMenu;
   }
 
   public String subMenuForFindingDiaryAction() {
@@ -83,15 +78,15 @@ public class DiaryMenu {
     consoleUtils.showColoredMessage("=== Registered Diary Entries (Page" + (page + 1) + ") ===",
         Color.WHITE);
 
-    String leftAlignFormat = "| %-4d | %-20s |%n";
+    String leftAlignFormat = "| %-1d | %-20s |%n";
 
-    System.out.format("+---+-----Page " + page + "--+%n");
-    System.out.format("|ID | Title              |%n");
-    System.out.format("+---+--------------------+%n");
+    System.out.format("+---+-------Page " + page + "---------+%n");
+    System.out.format("|KEY| Title                |%n");
+    System.out.format("+---+----------------------+%n");
     for (int i = start; i < end; i++) {
       System.out.format(leftAlignFormat, i, diaryEntries.get(i).getEntryTitle());
     }
-    System.out.format("+-----------------+------+%n");
+    System.out.format("+---+----------------------+%n");
     return consoleUtils.readUserInputWithPrompt(
         "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
 
@@ -183,7 +178,7 @@ public class DiaryMenu {
     consoleUtils.readUserInputWithPrompt("Press ENTER to continue");
   }
   
-  public void deleteDiaryEntry(DiaryEntry diaryEntry) {
+  public String deleteDiaryEntryPrompt(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
     consoleUtils.showMessage("Are you sure you want to delete this diary from the register?");
     String[] messages = {
@@ -192,19 +187,10 @@ public class DiaryMenu {
     Color[] colors = {Color.WHITE, Color.DEFAULT, Color.WHITE, Color.DEFAULT, Color.WHITE};
 
     consoleUtils.showMessageWithMultipleColors(messages, colors);
-    String userInput = consoleUtils.readUserInputWithPrompt("Yes/No");
-    while (true) {
-      if ("yes".equalsIgnoreCase(userInput)) {
-        diaryController.deleteDiaryEntryInRegister(diaryEntry);
-        consoleUtils.showColoredMessage("Diary entry deleted.", Color.BLACK);
-        return;
-      }
-      if ("no".equalsIgnoreCase(userInput)) {
-        return;
-      }
-      consoleUtils.showColoredMessage("Not a valid input, Yes/No", Color.RED);
-      userInput = consoleUtils.readUserInput();
-    }
+
+
+    return consoleUtils.readUserInputWithPrompt("Yes/No");
+
   }
 
   public String subMenuForEditingDiaryAction() {
@@ -226,45 +212,6 @@ public class DiaryMenu {
   }
 
 
-  /*public void editDiaryTitle(DiaryEntry diaryEntry) {
-    consoleUtils.showColoredMessage("### Editing Diary Title ###", Color.MAGENTA);
-    consoleUtils.showMessage("Original title: " + diaryEntry.getEntryTitle());
-    consoleUtils.showMessage("------------------------------");
-
-    String newTitle = consoleUtils.readUserInputWithPrompt(
-        "Enter the new title: (Back for back)");
-    while (true) {
-      if ("back".equalsIgnoreCase(newTitle)) {
-        return;
-      }
-
-      try {
-
-        StringValidator.validateDiaryTitle(newTitle);
-
-        diaryController.setDiaryTitle(diaryEntry, newTitle);
-        return;
-
-      } catch (InvalidInputException | EmptyStringException e) {
-        consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
-        newTitle = consoleUtils.readUserInputWithPrompt(
-            "Enter the new title: (Back for back)");
-      }
-
-    }
-
-  }*/
-
-
-/*  public String overwriteDiaryTextPrompt() {
-    return consoleUtils.readUserInputWithPrompt()
-
-  }*/
-
-
-  public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
-    return diaryController.getListOfAllRegisteredDiaryEntries();
-  }
 
   public void displayPromptedMessage(String string) {
     consoleUtils.showColoredMessage(string, Color.RED);
@@ -294,7 +241,7 @@ public class DiaryMenu {
     return consoleUtils.readUserInputWithPrompt("Enter text to overwrite");
   }
 
-  public String overWriteDiaryTitlePrompt(DiaryEntry diaryEntry) {
+  public String overwriteDiaryTitlePrompt(DiaryEntry diaryEntry) {
     consoleUtils.showMessage("Original title: " + diaryEntry.getEntryTitle());
     return consoleUtils.readUserInputWithPrompt("Enter new title");
   }

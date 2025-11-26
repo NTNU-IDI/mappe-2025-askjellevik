@@ -53,7 +53,7 @@ public class EditDiaryAction implements Action {
         validTextToAdd = userInput;
 
         String finalDiaryText = String.join(" ", diaryEntry.getEntryText(), validTextToAdd);
-        diaryController.setDiaryText(diaryEntry, finalDiaryText);
+        diaryEntry.setEntryText(finalDiaryText);
       } catch (InvalidInputException e) {
         diaryMenu.displayErrorMessage(e.getMessage());
       }
@@ -75,7 +75,7 @@ public class EditDiaryAction implements Action {
         DiaryEntryValidator.validateText(userInput);
         validTextToSet = userInput;
 
-        diaryController.setDiaryText(diaryEntry, validTextToSet);
+        diaryEntry.setEntryText(validTextToSet);
       } catch (InvalidInputException e) {
         diaryMenu.displayErrorMessage(e.getMessage());
       }
@@ -97,7 +97,7 @@ public class EditDiaryAction implements Action {
         DiaryEntryValidator.validateText(userInput);
         validTitleToSet = userInput;
 
-        diaryController.setDiaryTitle(diaryEntry, validTitleToSet);
+        diaryEntry.setEntryTitle(validTitleToSet);
       } catch (InvalidInputException e) {
         diaryMenu.displayErrorMessage(e.getMessage());
       }

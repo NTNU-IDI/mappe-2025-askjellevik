@@ -7,8 +7,10 @@ import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DiaryController {
 
@@ -47,7 +49,16 @@ public class DiaryController {
   }
 
   public List<DiaryEntry> getListOfDiaryEntriesWithSpecificWord(String word) {
-    return diaryRegister.getAllEntriesWithSpecificWord(word);
+    if (word == null || word.isEmpty()) {
+      return List.of();
+    }
+
+    String lowerWord = word.toLowerCase().trim();
+
+    return getListOfAllRegisteredDiaryEntries().stream()
+        .filter(diaryEntry -> diaryEntry.getEntryTitle().toLowerCase().contains(lowerWord)
+            || diaryEntry.getEntryText().toLowerCase().contains(lowerWord))
+        .collect(Collectors.toList());
   }
 
   public Map<Author, Integer> getMapOfDiaryEntriesByAuthors() {
@@ -61,6 +72,7 @@ public class DiaryController {
   public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
     return diaryRegister.getAllDiaryEntries();
   }
+
   public List<DiaryEntry> getListOfAllEntriesBySpecificAuthor(Author author) {
     return diaryRegister.getAllEntriesByAuthor(author);
   }
@@ -74,15 +86,14 @@ public class DiaryController {
   }
 
 
-
-  public void validateEntryTitle(String title) throws InvalidInputException{
+  public void validateEntryTitle(String title) throws InvalidInputException {
     List<String> errors = DiaryEntryValidator.validateTitle(title);
     if (!errors.isEmpty()) {
       throw new InvalidInputException(String.join(". ", errors));
     }
   }
 
-  public void validateEntryText(String text) throws InvalidInputException{
+  public void validateEntryText(String text) throws InvalidInputException {
     List<String> errors = DiaryEntryValidator.validateText(text);
     if (!errors.isEmpty()) {
       throw new InvalidInputException(String.join(". ", errors));

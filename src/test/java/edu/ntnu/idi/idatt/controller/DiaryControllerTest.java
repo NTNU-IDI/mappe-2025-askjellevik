@@ -23,7 +23,7 @@ public class DiaryControllerTest {
   void setUp() {
     diaryRegister = new DiaryRegister();
     diaryController = new DiaryController(diaryRegister);
-    author = new Author("Test Author", "test.author@mail.com");
+    author = new Author("Test",  "Author", "test.author@mail.com");
   }
 
   @Test
@@ -194,7 +194,7 @@ public class DiaryControllerTest {
         "Test title 1",
         "Test text 1."
     );
-    Author author2 = new Author("Another Author", "another@mail.com");
+    Author author2 = new Author("Another" ,"Author", "another@mail.com");
     DiaryEntry diaryEntry2 = new DiaryEntry(
         java.time.LocalDateTime.of(2024, 6, 16, 10, 30),
         author2,

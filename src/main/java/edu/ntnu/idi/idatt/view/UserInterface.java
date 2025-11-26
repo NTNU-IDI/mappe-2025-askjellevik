@@ -51,7 +51,7 @@ public class UserInterface {
     DiaryController diaryController = new DiaryController(diaryRegister);
     AuthorController authorController = new AuthorController(authorRegister, diaryController);
 
-    this.authorMenu = new AuthorMenu(authorController, consoleUtils);
+    this.authorMenu = new AuthorMenu(consoleUtils);
     this.diaryMenu = new DiaryMenu(consoleUtils);
 
     boolean validInput = false;

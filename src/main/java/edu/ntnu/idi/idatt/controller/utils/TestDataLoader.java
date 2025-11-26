@@ -35,12 +35,12 @@ public class TestDataLoader {
     Author author2 = authorController.getAuthorByEmail("mart@mail.com");
 
 
-    diaryController.addDiaryToRegister(dateTime1, author1, "test", "tesasdas");
-    diaryController.addDiaryToRegister(dateTime2, author2, "tes3wt", "tesasdas");
-    diaryController.addDiaryToRegister(dateTime3, author1, "testwr3w", "tesasdas");
-    diaryController.addDiaryToRegister(dateTime4, author2, "test", "tesasdas");
-    diaryController.addDiaryToRegister(dateTime5, author1, "tes455t", "tesasdas");
-    diaryController.addDiaryToRegister(dateTime6, author2, "test", "tesasdas");
+    diaryController.addDiaryToRegister(dateTime1, author1, "Diary 1", "Diary text 1");
+    diaryController.addDiaryToRegister(dateTime2, author2, "Diary 2", "Diary text 2");
+    diaryController.addDiaryToRegister(dateTime3, author1, "Diary 3", "Diary text 3");
+    diaryController.addDiaryToRegister(dateTime4, author2, "Diary 4", "Diary text 4");
+    diaryController.addDiaryToRegister(dateTime5, author1, "Diary 5", "Diary text 5");
+    diaryController.addDiaryToRegister(dateTime6, author2, "Diary 6", "Diary text 6");
 
   }
 

@@ -15,12 +15,11 @@ import java.util.List;
 
 import org.fusesource.jansi.Ansi.Color;
 
-public class DiaryMenu {
+public class DiaryMenu extends BaseMenu{
 
-  private final ConsoleUtils consoleUtils;
 
   public DiaryMenu(ConsoleUtils consoleUtils) {
-    this.consoleUtils = consoleUtils;
+    super(consoleUtils);
   }
 
   public String subMenuForFindingDiaryAction() {
@@ -237,9 +236,7 @@ public class DiaryMenu {
     return consoleUtils.readUserInputWithPrompt("Enter text to add");
   }
 
-  public String overwriteDiaryTextPrompt() {
-    return consoleUtils.readUserInputWithPrompt("Enter text to overwrite");
-  }
+
 
   public String overwriteDiaryTitlePrompt(DiaryEntry diaryEntry) {
     consoleUtils.showMessage("Original title: " + diaryEntry.getEntryTitle());

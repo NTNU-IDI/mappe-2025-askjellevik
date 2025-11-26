@@ -5,9 +5,9 @@ import org.fusesource.jansi.Ansi.Color;
 
 public class BaseMenu {
 
-  private final ConsoleUtils consoleUtils;
+  protected final ConsoleUtils consoleUtils;
 
-  public BaseMenu(ConsoleUtils consoleUtils) {
+  protected BaseMenu(ConsoleUtils consoleUtils) {
     this.consoleUtils = consoleUtils;
   }
 

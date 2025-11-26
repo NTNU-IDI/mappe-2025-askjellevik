@@ -5,12 +5,11 @@ import edu.ntnu.idi.idatt.model.Author;
 import java.util.List;
 import org.fusesource.jansi.Ansi.Color;
 
-public class AuthorMenu {
+public class AuthorMenu extends BaseMenu{
 
-  private final ConsoleUtils consoleUtils;
 
   public AuthorMenu(ConsoleUtils consoleUtils) {
-    this.consoleUtils = consoleUtils;
+    super(consoleUtils);
   }
 
 

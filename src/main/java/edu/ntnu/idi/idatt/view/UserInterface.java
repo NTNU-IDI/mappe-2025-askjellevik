@@ -34,7 +34,6 @@ public class UserInterface {
   private final ConsoleUtils consoleUtils;
   private DiaryMenu diaryMenu;
   private AuthorMenu authorMenu;
-  private BaseMenu baseMenu;
   private boolean running;
   private Map<String, Action> mainMenuMap;
 
@@ -55,7 +54,6 @@ public class UserInterface {
 
     this.authorMenu = new AuthorMenu(consoleUtils);
     this.diaryMenu = new DiaryMenu(consoleUtils);
-    this.baseMenu = new BaseMenu(consoleUtils);
 
     boolean validInput = false;
     while (!validInput) {

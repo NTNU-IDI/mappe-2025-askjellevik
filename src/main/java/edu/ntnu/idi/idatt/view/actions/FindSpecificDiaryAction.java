@@ -18,16 +18,20 @@ public class FindSpecificDiaryAction implements Action {
 
   @Override
   public void execute() {
-    String submenuUserChoice = diaryMenu.subMenuForFindingDiaryAction();
+    boolean isSearching = true;
 
-    switch (submenuUserChoice) {
-      case "1" -> searchForDiaryEntryByWord();
-      case "2" -> searchForDiaryEntryWithSpecificDate();
-      case "3" -> searchForDiaryEntryWithinTwoDates();
-      case "back" -> {
+    while (isSearching) {
+      String submenuUserChoice = diaryMenu.subMenuForFindingDiaryAction();
+
+      switch (submenuUserChoice) {
+        case "1" -> searchForDiaryEntryByWord();
+        case "2" -> searchForDiaryEntryWithSpecificDate();
+        case "3" -> searchForDiaryEntryWithinTwoDates();
+        case "back" -> {
+          isSearching = false;
+        }
       }
     }
-
   }
 
   private void searchForDiaryEntryWithinTwoDates() {

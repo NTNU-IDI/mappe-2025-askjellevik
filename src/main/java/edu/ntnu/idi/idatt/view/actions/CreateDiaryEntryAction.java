@@ -8,6 +8,7 @@ import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class CreateDiaryEntryAction implements Action {
 
@@ -149,7 +150,10 @@ public class CreateDiaryEntryAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page+1);
+      Map<Author, Integer> mapOfEntriesByAuthor= diaryController.getMapOfEntriesByAuthor();
+
+
+      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page+1, mapOfEntriesByAuthor);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return null;

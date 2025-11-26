@@ -24,11 +24,12 @@ public class AuthorMenu extends BaseMenu{
     while (true) {
       consoleUtils.showMessage("Option 1: Browse this authors diary entries");
       consoleUtils.showMessage("Option 2: Edit this author");
+      consoleUtils.showMessage("Option 3: Create a diary entry for this author");
       consoleUtils.showMessage("Option Back: Return to main menu");
 
       String userInput = consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "back".equals(userInput)) {
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(userInput)) {
         return userInput;
       }
 

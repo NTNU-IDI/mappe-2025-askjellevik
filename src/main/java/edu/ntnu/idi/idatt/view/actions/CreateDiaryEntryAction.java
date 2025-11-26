@@ -16,6 +16,7 @@ public class CreateDiaryEntryAction implements Action {
   private final DiaryController diaryController;
   private final AuthorMenu authorMenu;
   private final AuthorController authorController;
+  private Author authorOfDiaryEntry;
 
   public CreateDiaryEntryAction(DiaryMenu diaryMenu, DiaryController diaryController,
       AuthorMenu authorMenu,
@@ -24,6 +25,17 @@ public class CreateDiaryEntryAction implements Action {
     this.diaryController = diaryController;
     this.authorMenu = authorMenu;
     this.authorController = authorController;
+    this.authorOfDiaryEntry = null;
+  }
+
+  public CreateDiaryEntryAction(DiaryMenu diaryMenu, DiaryController diaryController,
+      AuthorMenu authorMenu,
+      AuthorController authorController, Author authorOfDiaryEntry) {
+    this.diaryMenu = diaryMenu;
+    this.diaryController = diaryController;
+    this.authorMenu = authorMenu;
+    this.authorController = authorController;
+    this.authorOfDiaryEntry = authorOfDiaryEntry;
   }
 
   @Override
@@ -36,28 +48,32 @@ public class CreateDiaryEntryAction implements Action {
       return;
     }
 
-
     Author validAuthor = null;
-    boolean choosingSubMenu = true;
-    while (choosingSubMenu) {
-      String subMenuUserChoice = authorMenu.subMenuForChoosingAuthor();
-      switch (subMenuUserChoice) {
-        case "1" -> {
-          CreateAuthorAction action  = new CreateAuthorAction(authorMenu, authorController);
-          action.execute();
-          validAuthor = action.getCreatedAuthor();
-          choosingSubMenu = false;
+    if (authorOfDiaryEntry == null) {
+      boolean choosingSubMenu = true;
+      while (choosingSubMenu) {
+        String subMenuUserChoice = authorMenu.subMenuForChoosingAuthor();
+        switch (subMenuUserChoice) {
+          case "1" -> {
+            CreateAuthorAction action  = new CreateAuthorAction(authorMenu, authorController);
+            action.execute();
+            validAuthor = action.getCreatedAuthor();
+            choosingSubMenu = false;
+          }
+          case "2" -> {
+            validAuthor = getValidAuthorFromBrowsing();
+            choosingSubMenu = false;
+          }
+          case "back" -> choosingSubMenu = false;
+          default -> diaryMenu.displayErrorMessage("Could not execute that command");
         }
-        case "2" -> {
-          validAuthor = getValidAuthorFromBrowsing();
-          choosingSubMenu = false;
-        }
-        case "back" -> choosingSubMenu = false;
-        default -> diaryMenu.displayErrorMessage("Could not execute that command");
       }
-    }
-    if (validAuthor == null) {
-      return;
+
+      if (validAuthor == null) {
+        return;
+      }
+    } else {
+      validAuthor = authorOfDiaryEntry;
     }
 
     String validTitle = getValidTitle();

@@ -36,9 +36,10 @@ public class BrowseAuthorsAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      Map<Author, Integer> mapOfEntriesByAuthor= diaryController.getMapOfEntriesByAuthor();
+      Map<Author, Integer> mapOfEntriesByAuthor = diaryController.getMapOfEntriesByAuthor();
 
-      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page + 1, mapOfEntriesByAuthor);
+      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page + 1,
+          mapOfEntriesByAuthor);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;
@@ -76,6 +77,11 @@ public class BrowseAuthorsAction implements Action {
             }
             case "2" -> {
               Action action = new EditAuthorAction(authorMenu, chosenAuthor);
+              action.execute();
+            }
+            case "3" -> {
+              Action action = new CreateDiaryEntryAction(diaryMenu, diaryController, authorMenu,
+                  authorController, chosenAuthor);
               action.execute();
             }
             case "back" -> choosingSubMenu = false;

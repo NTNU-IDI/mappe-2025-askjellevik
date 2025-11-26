@@ -1,7 +1,6 @@
 package edu.ntnu.idi.idatt.model;
 
 import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,115 +32,33 @@ public class DiaryRegister {
   }
 
   /**
-   * Searches for diary entries by date.
+   * Gets a single diary entry from the diary register by its UUID.
    *
-   * @param date the date to search for
-   * @return a list of diary entries on the specified date
-   */
-  public List<DiaryEntry> searchDiaryEntryByDate(LocalDateTime date) {
-    List<DiaryEntry> entriesOnDate = new ArrayList<>();
-    for (DiaryEntry entry : diaryRegister.values()) {
-      if (entry.getEntryDate().toLocalDate().equals(date.toLocalDate())) {
-        entriesOnDate.add(entry);
-      }
-    }
-    return entriesOnDate;
+   * @param id the diary UUID id
+   * @return the DiaryEntry object
+   * */
+  public DiaryEntry getDiaryEntryById(UUID id) {
+    return diaryRegister.get(id);
   }
 
   /**
    * Deletes a diary entry from the register.
    *
-   * @param diaryEntry the diary entry to delete
-   * @throws DiaryEntryNotFound if the diary entry is null
+   * @param diaryEntryId the UUID of diary entry to delete
+   * @throws DiaryEntryNotFound if the diary entry ID is null
    */
-  public void deleteDiaryEntry(DiaryEntry diaryEntry) {
-    if (diaryEntry == null) {
+  public void deleteDiaryEntry(UUID diaryEntryId) {
+    if (diaryEntryId == null) {
       throw new DiaryEntryNotFound("Did not find the diary entry to delete.");
     }
-    diaryRegister.remove(diaryEntry.getEntryID());
+    diaryRegister.remove(diaryEntryId);
   }
 
   /**
-   * Retrieves all diary entries within the specified date range.
+   * Gets a list of all the registered diary entries in the register.
    *
-   * @param startDate the start date of the range
-   * @param endDate   the end date of the range
-   * @return a list of diary entries within the date range
+   * @return list of all registered diary entries
    */
-  public List<DiaryEntry> getAllEntriesWithinDates(LocalDateTime startDate, LocalDateTime endDate) {
-    List<DiaryEntry> entriesWithinDates = new ArrayList<>();
-    for (DiaryEntry entry : diaryRegister.values()) {
-      if (!entry.getEntryDate().isBefore(startDate) && !entry.getEntryDate().isAfter(endDate)) {
-        entriesWithinDates.add(entry);
-      }
-    }
-    return entriesWithinDates;
-  }
-
-  /**
-   * Retrieves all diary entries that contain a specific word in their title or text.
-   *
-   * @param word the word to search for
-   * @return a list of diary entries containing the specified word
-   */
-  public List<DiaryEntry> getAllEntriesWithSpecificWord(String word) {
-    List<DiaryEntry> entriesWithWord = new ArrayList<>();
-
-    if (word == null || word.isBlank()) {
-      return entriesWithWord;
-    }
-
-    String lowerWord = word.toLowerCase().trim();
-
-    for (DiaryEntry entry : diaryRegister.values()) {
-      if (entry.getEntryTitle().toLowerCase().contains(lowerWord)
-          || entry.getEntryText().toLowerCase().contains(lowerWord)) {
-        entriesWithWord.add(entry);
-      }
-    }
-
-    return entriesWithWord;
-  }
-
-  /**
-   * Retrieves all diary entries authored by a specific author.
-   *
-   * @param author the author whose entries to retrieve
-   * @return a list of diary entries by the specified author
-   */
-  public List<DiaryEntry> getAllEntriesByAuthor(Author author) {
-    List<DiaryEntry> entriesByAuthor = new ArrayList<>();
-
-    for (DiaryEntry entry : diaryRegister.values()) {
-      if (entry.getEntryAuthor().equals(author)) {
-        entriesByAuthor.add(entry);
-      }
-    }
-    return entriesByAuthor;
-  }
-
-  public Map<Author, Integer> getMapOfAuthorEntryCounts() {
-    Map<Author, Integer> authorEntryCounts = new HashMap<>();
-
-    for (DiaryEntry entry : diaryRegister.values()) {
-      Author author = entry.getEntryAuthor();
-      authorEntryCounts.put(author, authorEntryCounts.getOrDefault(author, 0) + 1);
-    }
-
-    return authorEntryCounts;
-  }
-
-  public Integer getAmountOfDiaryEntriesBySpecificAuthor(Author author) {
-    int amountOfEntries = 0;
-    for (DiaryEntry diaryEntry : diaryRegister.values()) {
-      if (diaryEntry.getEntryAuthor().getId().equals(author.getId())) {
-        amountOfEntries += 1;
-      }
-    }
-    return amountOfEntries;
-  }
-
-
   public List<DiaryEntry> getAllDiaryEntries() {
     return new ArrayList<>(diaryRegister.values());
   }

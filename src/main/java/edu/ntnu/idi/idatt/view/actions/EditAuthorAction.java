@@ -29,12 +29,14 @@ public class EditAuthorAction implements Action {
 
       switch (subMenuUserChoice) {
         case "1" -> {
-          String newEmail = authorMenu.editAuthorEmailPrompt(author);
+          authorMenu.displaySimpleMessage("Original email: " + author.getEmail());
+          String newEmail = authorMenu.getUserStringWithPrompt("Enter the new email: ");
           AuthorValidator.validateEmail(newEmail);
           authorController.setNewEmail(author, newEmail);
         }
         case "2" -> {
-          String newName = authorMenu.editAuthorNamePrompt(author);
+          authorMenu.displaySimpleMessage("Original name: " + author.getName());
+          String newName = authorMenu.getUserStringWithPrompt("Enter the new name:");
           AuthorValidator.validateName(newName);
           authorController.setNewName(author, newName);
         }

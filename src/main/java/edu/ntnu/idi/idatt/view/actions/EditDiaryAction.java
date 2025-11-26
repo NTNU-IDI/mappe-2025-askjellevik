@@ -39,12 +39,12 @@ public class EditDiaryAction implements Action {
   }
 
   private void addDiaryText(DiaryEntry diaryEntry) {
-    diaryMenu.displayHeader("### Adding text ###");
+    diaryMenu.displayThirdHeader("Adding text to entry");
 
     String validTextToAdd = null;
 
     while (validTextToAdd == null) {
-      String userInput = diaryMenu.addDiaryTextPrompt();
+      String userInput = diaryMenu.getUserStringWithPrompt("Enter the text to add: ");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }
@@ -62,12 +62,12 @@ public class EditDiaryAction implements Action {
   }
 
   private void overwriteDiaryText(DiaryEntry diaryEntry) {
-    diaryMenu.displayHeader("### Overwriting text ###");
+    diaryMenu.displayThirdHeader("Overwriting text");
 
     String validTextToSet = null;
 
     while (validTextToSet == null) {
-      String userInput = diaryMenu.overwriteDiaryTextPrompt();
+      String userInput = diaryMenu.getUserStringWithPrompt("Enter new diary text:");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }
@@ -83,12 +83,13 @@ public class EditDiaryAction implements Action {
   }
 
   private void editDiaryTitle(DiaryEntry diaryEntry) {
-    diaryMenu.displayHeader("### Editing title ###");
+    diaryMenu.displayThirdHeader("Editing title");
 
     String validTitleToSet = null;
 
     while (validTitleToSet == null) {
-      String userInput = diaryMenu.overwriteDiaryTitlePrompt(diaryEntry);
+      diaryMenu.displaySimpleMessage("Original title: " + diaryEntry.getEntryTitle());
+      String userInput = diaryMenu.getUserStringWithPrompt("Enter new title");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }

@@ -31,7 +31,8 @@ public class ConsoleUtils {
 
   }
 
-  public void showMessageWithMultipleColors(String[] strings, Color[] colors) {
+  public void showMessageWithMultipleColors(String[] strings, Color[] colors)
+      throws IllegalArgumentException {
     /* Chat-GPT prompt:
      *
      *   How do I make the method print out a one-line message with multiple colors?*/

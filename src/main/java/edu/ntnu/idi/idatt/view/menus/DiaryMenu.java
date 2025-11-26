@@ -94,7 +94,7 @@ public class DiaryMenu extends BaseMenu{
     Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE,
         Color.CYAN};
 
-    consoleUtils.showMessageWithMultipleColors(messages, colors);
+    tryShowMessageWithMultipleColors(messages, colors);
 
     while (true) {
       consoleUtils.showMessage("Option 1: Read this diary entry");
@@ -176,7 +176,7 @@ public class DiaryMenu extends BaseMenu{
         , consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
     Color[] colors = {Color.WHITE, Color.DEFAULT, Color.WHITE, Color.DEFAULT, Color.WHITE};
 
-    consoleUtils.showMessageWithMultipleColors(messages, colors);
+    tryShowMessageWithMultipleColors(messages, colors);
 
 
     return consoleUtils.readUserInputWithPrompt("Yes/No");

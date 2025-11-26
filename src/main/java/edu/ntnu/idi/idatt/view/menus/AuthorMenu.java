@@ -18,7 +18,7 @@ public class AuthorMenu extends BaseMenu{
             author.getEmail(), " diary entries registered: ", String.valueOf(amountOfEntries)};
     Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN};
 
-    consoleUtils.showMessageWithMultipleColors(messages, colors);
+    tryShowMessageWithMultipleColors(messages, colors);
 
     while (true) {
       consoleUtils.showMessage("Option 1: Browse this authors diary entries");

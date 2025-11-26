@@ -36,4 +36,12 @@ public class BaseMenu {
   public void displayThirdHeader (String header) {
     consoleUtils.showColoredMessage("### " + header + " ###", Color.MAGENTA);
   }
+
+  public void tryShowMessageWithMultipleColors(String[] messages, Color[] colors) {
+    try {
+      consoleUtils.showMessageWithMultipleColors(messages, colors);
+    } catch (IllegalArgumentException e) {
+      displayErrorMessage(e.getMessage());
+    }
+  }
 }

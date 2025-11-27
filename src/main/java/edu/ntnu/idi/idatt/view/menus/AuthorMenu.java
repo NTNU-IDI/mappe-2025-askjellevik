@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
 
-public class AuthorMenu extends BaseMenu{
+public class AuthorMenu extends BaseMenu {
 
 
   public AuthorMenu(ConsoleUtils consoleUtils) {
@@ -15,8 +15,8 @@ public class AuthorMenu extends BaseMenu{
 
   public String subMenuForAuthorManagementAction(Author author, int amountOfEntries) {
     String[] messages = {"You have chosen the author: \n",
-            author.getName(), " |  email: ",
-            author.getEmail(), " diary entries registered: ", String.valueOf(amountOfEntries)};
+        author.getName(), " |  email: ",
+        author.getEmail(), " diary entries registered: ", String.valueOf(amountOfEntries)};
     Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN};
 
     tryShowMessageWithMultipleColors(messages, colors);
@@ -29,7 +29,8 @@ public class AuthorMenu extends BaseMenu{
 
       String userInput = consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(userInput)) {
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
+          userInput)) {
         return userInput;
       }
 
@@ -57,21 +58,23 @@ public class AuthorMenu extends BaseMenu{
     }
   }
 
-  public String displayAuthorsForSelection(List<Author> authors, int start,int end, int page, Map<Author, Integer> authorIntegerMap) {
+  public String displayAuthorsForSelection(List<Author> authors, int start, int end, int page,
+      Map<Author, Integer> authorIntegerMap) {
     consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
 
-
-    String leftAlignFormat = "| %-1d | %-20s | %-4d| %n";
 
     System.out.format("+---+-------Page " + page + "--------------+%n");
     System.out.format("|KEY| Name                 |Count|%n");
     System.out.format("+---+----------------------------+%n");
+
+    String leftAlignFormat = "| %-1d | %-20s | %-4d| %n";
     for (int i = start; i < end; i++) {
-      System.out.format(leftAlignFormat, i, authors.get(i).getName(), authorIntegerMap.get(authors.get(i)));
+      System.out.format(leftAlignFormat, i, authors.get(i).getName(),
+          authorIntegerMap.get(authors.get(i)));
     }
     System.out.format("+---+---------------------------+%n");
     return consoleUtils.readUserInputWithPrompt(
-            "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
+        "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
   }
 
   public String subMenuForChoosingAuthor() {

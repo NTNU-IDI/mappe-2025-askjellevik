@@ -4,16 +4,14 @@ package edu.ntnu.idi.idatt.view.menus;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-
 import org.fusesource.jansi.Ansi.Color;
 
-public class DiaryMenu extends BaseMenu{
+public class DiaryMenu extends BaseMenu {
 
 
   public DiaryMenu(ConsoleUtils consoleUtils) {
@@ -23,7 +21,6 @@ public class DiaryMenu extends BaseMenu{
   public String subMenuForFindingDiaryAction() {
 
     while (true) {
-      /*consoleUtils.showColoredMessage("=== Diary entry lookup ===", Color.WHITE);*/
       consoleUtils.showMessage("Option 1: Search for diary entry by word");
       consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
       consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
@@ -43,7 +40,6 @@ public class DiaryMenu extends BaseMenu{
 
   public LocalDateTime getSearchDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
 
     while (true) {
       String userInput = consoleUtils.readUserInputWithPrompt("Enter the search date: dd-MM-yyyy");
@@ -72,11 +68,12 @@ public class DiaryMenu extends BaseMenu{
   public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
 
-    String leftAlignFormat = "| %-1d | %-20s |%n";
 
-    System.out.format("+---+-------Page " + page +  "---------+%n");
+    System.out.format("+---+-------Page " + page + "---------+%n");
     System.out.format("|KEY| Title                |%n");
     System.out.format("+---+----------------------+%n");
+
+    String leftAlignFormat = "| %-1d | %-20s |%n";
     for (int i = start; i < end; i++) {
       System.out.format(leftAlignFormat, i, diaryEntries.get(i).getEntryTitle());
     }
@@ -88,8 +85,8 @@ public class DiaryMenu extends BaseMenu{
 
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
     String[] messages = {"You have chosen the diary: \n",
-        diaryEntry.getEntryTitle(), " written by "
-        , diaryEntry.getEntryAuthor().getName(), " registered ",
+        diaryEntry.getEntryTitle(), " written by ",
+        diaryEntry.getEntryAuthor().getName(), " registered ",
         consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
     Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE,
         Color.CYAN};
@@ -167,17 +164,16 @@ public class DiaryMenu extends BaseMenu{
     consoleUtils.printLine(Color.GREEN);
     consoleUtils.readUserInputWithPrompt("Press ENTER to continue");
   }
-  
+
   public String deleteDiaryEntryPrompt(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
     consoleUtils.showMessage("Are you sure you want to delete this diary from the register?");
     String[] messages = {
-        diaryEntry.getEntryTitle(), " by ", diaryEntry.getEntryAuthor().getName(), " from "
-        , consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
+        diaryEntry.getEntryTitle(), " by ", diaryEntry.getEntryAuthor().getName(), " from ",
+        consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
     Color[] colors = {Color.WHITE, Color.DEFAULT, Color.WHITE, Color.DEFAULT, Color.WHITE};
 
     tryShowMessageWithMultipleColors(messages, colors);
-
 
     return consoleUtils.readUserInputWithPrompt("Yes/No");
 

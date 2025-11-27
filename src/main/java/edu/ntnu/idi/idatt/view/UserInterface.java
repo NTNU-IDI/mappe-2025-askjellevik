@@ -14,7 +14,6 @@ import edu.ntnu.idi.idatt.view.actions.CreateDiaryEntryAction;
 import edu.ntnu.idi.idatt.view.actions.ExitProgramAction;
 import edu.ntnu.idi.idatt.view.actions.FindSpecificDiaryAction;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
-import edu.ntnu.idi.idatt.view.menus.BaseMenu;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,18 +31,25 @@ import org.fusesource.jansi.Ansi.Color;
 public class UserInterface {
 
   private final ConsoleUtils consoleUtils;
-  private DiaryMenu diaryMenu;
-  private AuthorMenu authorMenu;
   private boolean running;
   private Map<String, Action> mainMenuMap;
 
 
+  /**
+   * Constructs the UserInterface and initializes the console utilities and setting running to true.
+   *
+   */
   public UserInterface() {
     consoleUtils = new ConsoleUtils();
     running = true;
   }
 
 
+  /**
+   * Initializes the user interface by creating the registers, controllers, and menus.
+   * The user is also given a choice to load test data into the application.
+   * Main menu user input options are mapped to their corresponding actions.
+   * */
   public void init() {
 
     DiaryRegister diaryRegister = new DiaryRegister();
@@ -52,8 +58,8 @@ public class UserInterface {
     DiaryController diaryController = new DiaryController(diaryRegister);
     AuthorController authorController = new AuthorController(authorRegister);
 
-    this.authorMenu = new AuthorMenu(consoleUtils);
-    this.diaryMenu = new DiaryMenu(consoleUtils);
+    AuthorMenu authorMenu = new AuthorMenu(consoleUtils);
+    DiaryMenu diaryMenu = new DiaryMenu(consoleUtils);
 
     boolean validInput = false;
     while (!validInput) {
@@ -63,34 +69,41 @@ public class UserInterface {
         loader.loadTestData(diaryController, authorController);
         consoleUtils.showMessage("Loaded data");
         validInput = true;
-      }
-      if ("n".equalsIgnoreCase(loadData)) {
+      } else if ("n".equalsIgnoreCase(loadData)) {
         validInput = true;
+      } else {
+        consoleUtils.showMessage("Not valid input, enter (yes/no)");
       }
-      consoleUtils.showMessage("Not valid input, enter (yes/no)");
     }
 
     this.mainMenuMap = new HashMap<>();
 
     mainMenuMap.put("1", new BrowseDiariesAction(diaryMenu, diaryController));
-    mainMenuMap.put("2", new CreateDiaryEntryAction(diaryMenu, diaryController, authorMenu, authorController));
+    mainMenuMap.put("2",
+        new CreateDiaryEntryAction(diaryMenu, diaryController, authorMenu, authorController));
     mainMenuMap.put("3", new FindSpecificDiaryAction(diaryMenu, diaryController));
-    mainMenuMap.put("4", new BrowseAuthorsAction(authorMenu, diaryMenu, diaryController, authorController));
+    mainMenuMap.put("4",
+        new BrowseAuthorsAction(authorMenu, diaryMenu, diaryController, authorController));
     mainMenuMap.put("5", new ExitProgramAction(this, consoleUtils));
 
 
   }
 
+  /**
+   * Starts the main loop of the user interface by showing main menu.
+   * */
   public void start() {
 
     while (running) {
       showMainMenu();
 
-
     }
 
   }
 
+  /**
+   * Displays the main menu and collect user input to execute the corresponding menu action.
+   * */
   public void showMainMenu() {
     consoleUtils.showColoredMessage("==== Main Menu ====", Color.GREEN);
     consoleUtils.showMessage("1. Browse the registered diary entries");
@@ -112,6 +125,9 @@ public class UserInterface {
   }
 
 
+  /**
+   * Exits the program by setting running to false.
+   * */
   public void exitProgram() {
     running = false;
   }

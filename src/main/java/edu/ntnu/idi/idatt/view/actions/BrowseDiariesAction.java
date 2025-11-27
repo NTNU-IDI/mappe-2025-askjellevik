@@ -31,6 +31,10 @@ public class BrowseDiariesAction implements Action {
 
     if (isBrowsingAllDiaries) {
       this.diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
+      if (this.diaryEntries.isEmpty()) {
+        diaryMenu.displayErrorMessage("No diary entries registered yet");
+        return;
+      }
     }
 
     int page = 0;

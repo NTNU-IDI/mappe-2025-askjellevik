@@ -156,6 +156,10 @@ public class CreateDiaryEntryAction implements Action {
   private Author getValidAuthorFromBrowsing() {
 
     List<Author> authors = authorController.getListOfAuthorsInRegister();
+    if (authors.isEmpty()) {
+      diaryMenu.displayErrorMessage("No authors registered yet");
+      return null;
+    }
     Author validAuthor = null;
 
     int page = 0;

@@ -27,6 +27,10 @@ public class BrowseAuthorsAction implements Action {
   @Override
   public void execute() {
     List<Author> authors = authorController.getListOfAuthorsInRegister();
+    if (authors.isEmpty()) {
+      diaryMenu.displayErrorMessage("No authors registered yet");
+      return;
+    }
 
     int page = 0;
     int pageSize = 5;

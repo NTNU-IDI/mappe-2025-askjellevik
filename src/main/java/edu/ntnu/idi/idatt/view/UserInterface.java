@@ -56,7 +56,7 @@ public class UserInterface {
     AuthorRegister authorRegister = new AuthorRegister();
 
     DiaryController diaryController = new DiaryController(diaryRegister);
-    AuthorController authorController = new AuthorController(authorRegister);
+    AuthorController authorController = new AuthorController(authorRegister, diaryController);
 
     AuthorMenu authorMenu = new AuthorMenu(consoleUtils);
     DiaryMenu diaryMenu = new DiaryMenu(consoleUtils);
@@ -105,6 +105,7 @@ public class UserInterface {
    * Displays the main menu and collect user input to execute the corresponding menu action.
    * */
   public void showMainMenu() {
+    consoleUtils.clearScreen();
     consoleUtils.showColoredMessage("==== Main Menu ====", Color.GREEN);
     consoleUtils.showMessage("1. Browse the registered diary entries");
     consoleUtils.showMessage("2. Create a new diary entry");

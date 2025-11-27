@@ -79,4 +79,16 @@ public class ConsoleUtils {
     System.out.println(Ansi.ansi().fg(color).a("------------------").reset());
 
   }
+
+  public String readUserInputWithFixedOptions(String[] options) {
+    while (true) {
+      String input = readUserInput();
+      for (String option : options) {
+        if (option.equalsIgnoreCase(input)) {
+          return option;
+        }
+      }
+      showColoredMessage("Invalid input. Please try again.", Color.RED);
+    }
+  }
 }

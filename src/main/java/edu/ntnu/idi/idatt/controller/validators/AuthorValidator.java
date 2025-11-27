@@ -4,8 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Validator class for validating author data.
+ */
 public class AuthorValidator {
 
+  /**
+   * Validates the given email.
+   * The email must meet these criteria:
+   * <ul>
+   *   <li>Not be null or empty</li>
+   *   <li>Contain one @ character</li>
+   *   <li>Contain a domain after the @ character</li>
+   * </ul>
+   *
+   * @param email the email to validate
+   * @return a list of error messages, empty if the email is valid
+   */
   public static List<String> validateEmail(String email) {
     List<String> errors = new ArrayList<>();
 
@@ -24,10 +39,21 @@ public class AuthorValidator {
 
     return errors;
 
-
   }
 
 
+  /**
+   * Validates the given name.
+   * The name must meet these criteria:
+   * <ul>
+   *   <li>Not be null or empty</li>
+   *   <li>Be at least 2 characters long</li>
+   *   <li>Contain only valid name characters (letters, hyphens, apostrophes, spaces)</li>
+   * </ul>
+   *
+   * @param name the name to validate
+   * @return a list of error messages, empty if the name is valid
+   */
   public static List<String> validateName(String name) {
     List<String> errors = new ArrayList<>();
 

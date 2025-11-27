@@ -4,8 +4,23 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Validator class for validating diary entry fields.
+ */
 public class DiaryEntryValidator {
 
+
+  /**
+   * Validates the given diary title.
+   * The title must meet these criteria:
+   * <ul>
+   *   <li>Not be null or empty</li>
+   *   <li>Not be longer than 30 characters</li>
+   * </ul>
+   *
+   * @param title the title to validate
+   * @return a list of error messages, empty if the title is valid
+   */
   public static List<String> validateTitle(String title) {
     List<String> errors = new ArrayList<>();
 
@@ -24,7 +39,16 @@ public class DiaryEntryValidator {
 
   }
 
-
+  /**
+   * Validates the given text.
+   * The text must meet these criteria:
+   * <ul>
+   *   <li>Not be null or empty</li>
+   * </ul>
+   *
+   * @param text the email to validate
+   * @return a list of error messages, empty if the email is valid
+   */
   public static List<String> validateText(String text) {
     List<String> errors = new ArrayList<>();
 
@@ -38,6 +62,17 @@ public class DiaryEntryValidator {
 
   }
 
+  /**
+   * Validates the given date.
+   * The date must meet these criteria:
+   * <ul>
+   *   <li>Not be null or empty</li>
+   *   <li>Not be in the future</li>
+   * </ul>
+   *
+   * @param date the date to validate
+   * @return a list of error messages, empty if the date is valid
+   */
   public static List<String> validateDate(LocalDateTime date) {
     List<String> errors = new ArrayList<>();
 

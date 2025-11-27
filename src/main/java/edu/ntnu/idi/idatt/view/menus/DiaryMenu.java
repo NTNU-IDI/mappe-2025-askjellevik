@@ -105,15 +105,15 @@ public class DiaryMenu extends BaseMenu {
    */
   public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
-    System.out.format("+---+-------Page " + page + "---------+%n");
-    System.out.format("|KEY| Title                |%n");
-    System.out.format("+---+----------------------+%n");
+    System.out.format("+---+------------Page " + page + "--------------+%n");
+    System.out.format("|KEY| Title                          |%n");
+    System.out.format("+---+--------------------------------+%n");
 
-    String leftAlignFormat = "| %-1d | %-20s |%n";
+    String leftAlignFormat = "| %-1d | %-30s |%n";
     for (int i = start; i < end; i++) {
       System.out.format(leftAlignFormat, i, diaryEntries.get(i).getEntryTitle());
     }
-    System.out.format("+---+----------------------+%n");
+    System.out.format("+---+--------------------------------+%n");
     return consoleUtils.readUserInputWithPrompt(
         "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
   }

@@ -165,7 +165,7 @@ public class DiaryMenu extends BaseMenu {
   public LocalDateTime getDateOfNewDiaryEntry() {
     consoleUtils.showMessage("Choose date for the diary entry:");
     consoleUtils.showMessage("Option 1: Automatically choose the current time");
-    consoleUtils.showMessage("Option 2: Enter date manually as ");
+    consoleUtils.showMessage("Option 2: Enter date manually");
     consoleUtils.showMessage("Back: Go back");
 
     String userInput;

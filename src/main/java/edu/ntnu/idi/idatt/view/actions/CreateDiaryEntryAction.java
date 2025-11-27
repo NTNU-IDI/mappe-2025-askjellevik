@@ -170,7 +170,7 @@ public class CreateDiaryEntryAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      Map<Author, Integer> mapOfEntriesByAuthor= diaryController.getMapOfEntriesByAuthor();
+      Map<Author, Integer> mapOfEntriesByAuthor= authorController.getMapOfEntriesByAuthor();
 
 
       authorMenu.displayAuthorsForSelection(authors, start, end, page+1, mapOfEntriesByAuthor);

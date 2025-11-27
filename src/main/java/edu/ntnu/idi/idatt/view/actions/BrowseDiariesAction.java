@@ -98,6 +98,7 @@ public class BrowseDiariesAction implements Action {
             case "2" -> {
               Action editDiaryAction = new EditDiaryAction(diaryMenu, diaryEntry);
               editDiaryAction.execute();
+
             }
             case "3" -> {
               if (deleteDiaryEntry(diaryEntry)) {

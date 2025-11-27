@@ -1,7 +1,5 @@
 package edu.ntnu.idi.idatt.view.menus;
 
-
-import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import java.time.LocalDate;
@@ -11,13 +9,28 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import org.fusesource.jansi.Ansi.Color;
 
+/**
+ * Menu class for displaying diary-related submenus and prompts to the user.
+ * Extends the BaseMenu to utilize common menu functionalities.
+ *
+ * @author andskj
+ */
 public class DiaryMenu extends BaseMenu {
 
 
+  /**
+   * Constructs the DiaryMenu with the injected ConsoleUtils for user interaction.
+   */
   public DiaryMenu(ConsoleUtils consoleUtils) {
     super(consoleUtils);
   }
 
+  /**
+   * Displays the submenu for finding diary entries and returns the user's choice.
+   * Options include search by word, by date, within two dates or returning.
+   *
+   * @return the user input as a String.
+   */
   public String subMenuForFindingDiaryAction() {
 
     while (true) {
@@ -38,6 +51,15 @@ public class DiaryMenu extends BaseMenu {
 
   }
 
+  /**
+   * Prompts the user to enter a search date in the format dd-MM-yyyy.
+   * The input is validated and parsed to a LocalDateTime object.
+   * If the user enters "back", the method returns null.
+   *
+   *
+   *
+   * @return the parsed LocalDateTime object or null if the user chooses to go back.
+   */
   public LocalDateTime getSearchDate() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -60,15 +82,29 @@ public class DiaryMenu extends BaseMenu {
     }
   }
 
+  /**
+   * Prompts the user to enter a search word for finding diary entries and returns it.
+   *
+   * @return the search word entered by the user as a String.
+   */
   public String searchForDiaryEntryByWordPrompt() {
     return consoleUtils.readUserInputWithPrompt("Enter the search word: ");
 
   }
 
+  /**
+   * Displays a paginated list of diary entries for user selection.
+   * Each entry is shown with its key and title.
+   * The user can navigate through pages or select a diary entry by its key.
+   *
+   * @param diaryEntries the list of diary entries to display.
+   * @param start the starting index for the current page.
+   * @param end the ending index for the current page.
+   * @param page the current page number.
+   * @return the user input as a String.
+   */
   public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
-
-
     System.out.format("+---+-------Page " + page + "---------+%n");
     System.out.format("|KEY| Title                |%n");
     System.out.format("+---+----------------------+%n");
@@ -80,9 +116,15 @@ public class DiaryMenu extends BaseMenu {
     System.out.format("+---+----------------------+%n");
     return consoleUtils.readUserInputWithPrompt(
         "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
-
   }
 
+  /**
+   * Displays the submenu for managing a specific diary entry and returns the user's choice.
+   * Options include reading, editing, deleting the diary entry, or returning.
+   *
+   * @param diaryEntry the diary entry to manage.
+   * @return the user input as a String.
+   */
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
     String[] messages = {"You have chosen the diary: \n",
         diaryEntry.getEntryTitle(), " written by ",
@@ -112,6 +154,14 @@ public class DiaryMenu extends BaseMenu {
 
   }
 
+  /**
+   * Prompts the user to choose a date for a new diary entry.
+   * The user can either use the current date which will return LocalDateTime.now(),
+   * or enter a date manually in the format dd-MM-yyyy HH:mm.
+   * If the user enters "back", the method returns null.
+   *
+   * @return the chosen LocalDateTime for the new diary entry or null if the user chooses to go back.
+   */
   public LocalDateTime getDateOfNewDiaryEntry() {
     consoleUtils.showMessage("Choose date for the diary entry:");
     consoleUtils.showMessage("Option 1: Automatically choose the current time");
@@ -125,15 +175,16 @@ public class DiaryMenu extends BaseMenu {
 
     while (true) {
       userInput = consoleUtils.readUserInputWithPrompt("Enter your choice:");
+      if ("back".equalsIgnoreCase(userInput)) {
+        return null;
+      }
+
       if ("1".equals(userInput)) {
         entryDate = LocalDateTime.now();
         consoleUtils.showMessage("Using the current date and time: " + entryDate.format(formatter));
         return entryDate;
+      }
 
-      }
-      if ("back".equalsIgnoreCase(userInput)) {
-        return null;
-      }
       if ("2".equalsIgnoreCase(userInput)) {
         String dateString = consoleUtils.readUserInputWithPrompt(
             "Enter the date as dd-MM-yyyy HH:mm;");
@@ -144,7 +195,7 @@ public class DiaryMenu extends BaseMenu {
           entryDate = LocalDateTime.parse(dateString, formatter);
           return entryDate;
 
-        } catch (InvalidDateException | DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
           consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
         }
 
@@ -153,6 +204,13 @@ public class DiaryMenu extends BaseMenu {
 
   }
 
+  /**
+   * Displays the full details of a diary entry to the user.
+   * Includes title, author, date, and the entry text.
+   * Waits for the user to press ENTER before returning.
+   *
+   * @param diaryEntry the diary entry to read.
+   */
   public void readDiaryEntry(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("===== Reading diary entry =====", Color.MAGENTA);
     consoleUtils.showMessage(diaryEntry.getEntryTitle());
@@ -165,6 +223,13 @@ public class DiaryMenu extends BaseMenu {
     consoleUtils.readUserInputWithPrompt("Press ENTER to continue");
   }
 
+  /**
+   * Prompts the user for confirmation before deleting a diary entry.
+   * Displays the diary entry details and retrieves a Yes/No response from the user.
+   *
+   * @param diaryEntry the diary entry to be deleted.
+   * @return the user's response as a String.
+   */
   public String deleteDiaryEntryPrompt(DiaryEntry diaryEntry) {
     consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
     consoleUtils.showMessage("Are you sure you want to delete this diary from the register?");
@@ -179,9 +244,14 @@ public class DiaryMenu extends BaseMenu {
 
   }
 
+  /**
+   * Displays the submenu for editing a diary entry and returns the user's choice.
+   * Options include editing the title, overwriting the text, adding to the text, or returning.
+   *
+   * @return the user input as a String.
+   */
   public String subMenuForEditingDiaryAction() {
     while (true) {
-      consoleUtils.showColoredMessage("=== Diary entry editing ===", Color.WHITE);
       consoleUtils.showMessage("Option 1: Edit the diary entry title");
       consoleUtils.showMessage("Option 2: Overwrite the diary entry text");
       consoleUtils.showMessage("Option 3: Add text to the existing diary entry text");

@@ -41,14 +41,26 @@ public class DiaryController {
 
   /**
    * Adds a new diary entry to the register with the given parameters.
+   * For safety, all parameters are validated before creating and adding the diary entry.
    *
    * @param entryDate the date of the diary entry
    * @param entryAuthor the author of the diary entry
    * @param entryTitle the title of the diary entry
    * @param entryText the text of the diary entry
+   * @throws InvalidDateException   if the date is invalid
+   * @throws InvalidInputException  if the title or text is invalid
    */
   public void addDiaryToRegister(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
-      String entryText) {
+      String entryText) throws InvalidDateException, InvalidInputException{
+
+    validateDate(entryDate);
+    validateEntryTitle(entryTitle);
+    validateEntryText(entryText);
+
+    if (entryAuthor == null) {
+      throw new InvalidInputException("Author cannot be null");
+    }
+
     DiaryEntry diaryEntryToAdd = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
     diaryRegister.addDiaryEntry(diaryEntryToAdd);
   }

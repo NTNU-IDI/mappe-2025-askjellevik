@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.view.actions;
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BrowseDiariesAction implements Action {
@@ -22,7 +23,7 @@ public class BrowseDiariesAction implements Action {
       List<DiaryEntry> diaryEntries) {
     this.diaryMenu = diaryMenu;
     this.diaryController = diaryController;
-    this.diaryEntries = diaryEntries;
+    this.diaryEntries = new ArrayList<>(diaryEntries);
     this.isBrowsingAllDiaries = false;
   }
 

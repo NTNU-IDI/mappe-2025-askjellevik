@@ -10,6 +10,7 @@ import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -215,5 +216,13 @@ public class DiaryController {
     if (!errors.isEmpty()) {
       throw new InvalidInputException(String.join(". ", errors));
     }
+  }
+
+  public DiaryEntry getDiaryEntryByID(UUID id) throws DiaryEntryNotFound {
+    DiaryEntry diaryEntry = diaryRegister.getDiaryEntryById(id);
+    if (diaryEntry == null) {
+      throw new DiaryEntryNotFound("No diary entry found with the given ID");
+    }
+    return diaryEntry;
   }
 }

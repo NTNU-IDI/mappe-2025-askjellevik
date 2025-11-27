@@ -228,10 +228,9 @@ public class DiaryControllerTest {
     diaryRegister.addDiaryEntry(diaryEntry1);
     diaryRegister.addDiaryEntry(diaryEntry2);
 
-    Map<Author, Integer> authorEntryCounts = diaryController.getMapOfEntriesByAuthor();
+    Integer authorEntryCounts = diaryController.getAmountOfEntriesBySpecificAuthor(author);
 
-    assertEquals(1, authorEntryCounts.size());
-    assertEquals(2, authorEntryCounts.get(author));
+    assertEquals(2, authorEntryCounts);
   }
 
 }

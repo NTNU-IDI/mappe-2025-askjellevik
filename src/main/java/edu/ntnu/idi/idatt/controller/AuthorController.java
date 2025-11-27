@@ -4,8 +4,11 @@ import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.controller.validators.AuthorValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
+import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.exceptions.AuthorNotFoundException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Controller class for managing, manipulating and validating data in the author register.
@@ -14,14 +17,17 @@ import java.util.List;
 public class AuthorController {
 
   private final AuthorRegister authorRegister;
+  private final DiaryController diaryController;
 
   /**
    * Constructs a DiaryController with the injected DiaryRegister.
    *
    * @param authorRegister the AuthorController to be managed by this controller
+   * @param diaryController the DiaryController to get diary entries from;
    */
-  public AuthorController(AuthorRegister authorRegister) {
+  public AuthorController(AuthorRegister authorRegister, DiaryController diaryController) {
     this.authorRegister = authorRegister;
+    this.diaryController = diaryController;
   }
 
   /**
@@ -90,6 +96,25 @@ public class AuthorController {
     }
     return author;
   }
+
+  /**
+   * Generates a map of authors and their corresponding number of diary entries.
+   *
+   * @return a map where the key is the author and the value is the number of entries by that author
+   */
+  public Map<Author, Integer> getMapOfEntriesByAuthor() {
+    Map<Author, Integer> countsByRegisteredAuthors =
+        diaryController.getListOfAllRegisteredDiaryEntries().stream()
+            .map(DiaryEntry::getEntryAuthor)
+            .collect(Collectors.groupingBy(s -> s, Collectors.summingInt(e -> 1)));
+
+    return authorRegister.getAllAuthors().stream()
+        .collect(Collectors.toMap(
+            author -> author,
+            author -> countsByRegisteredAuthors.getOrDefault(author, 0)
+        ));
+  }
+
 }
 
 

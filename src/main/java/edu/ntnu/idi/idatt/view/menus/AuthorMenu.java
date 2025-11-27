@@ -95,7 +95,7 @@ public class AuthorMenu extends BaseMenu {
    * @param authorIntegerMap a map containing authors and their corresponding diary entry counts.
    * @return the user input as a String.
    */
-  public String displayAuthorsForSelection(List<Author> authors, int start, int end, int page,
+  public void displayAuthorsForSelection(List<Author> authors, int start, int end, int page,
       Map<Author, Integer> authorIntegerMap) {
     consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
 
@@ -110,8 +110,8 @@ public class AuthorMenu extends BaseMenu {
           authorIntegerMap.get(authors.get(i)));
     }
     System.out.format("+---+---------------------------+%n");
-    return consoleUtils.readUserInputWithPrompt(
-        "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
+/*    return consoleUtils.readUserInputWithPrompt(
+        "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");*/
   }
 
   /**

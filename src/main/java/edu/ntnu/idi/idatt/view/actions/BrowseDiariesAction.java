@@ -50,7 +50,17 @@ public class BrowseDiariesAction implements Action {
 
 
 
-      String userInput = diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page+1);
+      diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page+1);
+
+      String promptMessage = "Options: (KEY)";
+      if (end < diaryEntries.size()) {
+        promptMessage += ", NEXT";
+      }
+      if ( page > 0) {
+        promptMessage += ", PREV";
+      }
+      promptMessage += " |  BACK";
+      String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;
@@ -60,7 +70,7 @@ public class BrowseDiariesAction implements Action {
         page += 1;
         continue;
       }
-      if ("previous".equalsIgnoreCase(userInput) && page > 0) {
+      if ("prev".equalsIgnoreCase(userInput) && page > 0) {
         page -= 1;
         continue;
       }

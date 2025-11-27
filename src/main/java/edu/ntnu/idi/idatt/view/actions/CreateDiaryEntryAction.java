@@ -169,7 +169,17 @@ public class CreateDiaryEntryAction implements Action {
       Map<Author, Integer> mapOfEntriesByAuthor= diaryController.getMapOfEntriesByAuthor();
 
 
-      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page+1, mapOfEntriesByAuthor);
+      authorMenu.displayAuthorsForSelection(authors, start, end, page+1, mapOfEntriesByAuthor);
+
+      String promptMessage = "Options: (KEY)";
+      if (end < authors.size()) {
+        promptMessage += ", NEXT";
+      }
+      if ( page > 0) {
+        promptMessage += ", PREV";
+      }
+      promptMessage += " |  BACK";
+      String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return null;

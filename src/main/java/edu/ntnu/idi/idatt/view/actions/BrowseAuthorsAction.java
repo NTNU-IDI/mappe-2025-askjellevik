@@ -38,8 +38,18 @@ public class BrowseAuthorsAction implements Action {
 
       Map<Author, Integer> mapOfEntriesByAuthor = diaryController.getMapOfEntriesByAuthor();
 
-      String userInput = authorMenu.displayAuthorsForSelection(authors, start, end, page + 1,
+      authorMenu.displayAuthorsForSelection(authors, start, end, page + 1,
           mapOfEntriesByAuthor);
+
+      String promptMessage = "Options: (KEY)";
+      if (end < authors.size()) {
+        promptMessage += ", NEXT";
+      }
+      if ( page > 0) {
+        promptMessage += ", PREV";
+      }
+      promptMessage += " |  BACK";
+      String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
 
       if ("back".equalsIgnoreCase(userInput)) {
         return;
@@ -48,7 +58,7 @@ public class BrowseAuthorsAction implements Action {
         page += 1;
         continue;
       }
-      if ("previous".equalsIgnoreCase(userInput) && page > 0) {
+      if ("prev".equalsIgnoreCase(userInput) && page > 0) {
         page -= 1;
         continue;
       }

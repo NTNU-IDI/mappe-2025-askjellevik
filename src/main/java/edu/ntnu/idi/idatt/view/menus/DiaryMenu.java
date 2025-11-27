@@ -103,7 +103,7 @@ public class DiaryMenu extends BaseMenu {
    * @param page the current page number.
    * @return the user input as a String.
    */
-  public String displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
+  public void displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
     System.out.format("+---+------------Page " + page + "--------------+%n");
     System.out.format("|KEY| Title                          |%n");
@@ -114,8 +114,8 @@ public class DiaryMenu extends BaseMenu {
       System.out.format(leftAlignFormat, i, diaryEntries.get(i).getEntryTitle());
     }
     System.out.format("+---+--------------------------------+%n");
-    return consoleUtils.readUserInputWithPrompt(
-        "Enter '(Diary key)', 'Next' or 'Previous'  | 'Back' for back");
+/*    return consoleUtils.readUserInputWithPrompt(
+        "Enter '(Diary key)', 'Next' or 'Prev'  | 'Back' for back");*/
   }
 
   /**

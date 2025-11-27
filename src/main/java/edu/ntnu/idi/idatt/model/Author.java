@@ -88,7 +88,7 @@ public class Author {
    * @param lastName the new name of the author
    */
   public void setLastName(String lastName) {
-    this.firstName = lastName;
+    this.lastName = lastName;
   }
 
 

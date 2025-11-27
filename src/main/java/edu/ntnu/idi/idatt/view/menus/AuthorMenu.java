@@ -6,13 +6,31 @@ import java.util.List;
 import java.util.Map;
 import org.fusesource.jansi.Ansi.Color;
 
+
+/**
+ * Menu class for displaying author-related submenus and prompts to the user.
+ * Extends the BaseMenu to utilize common menu functionalities.
+ *
+ * @author andskj
+ */
 public class AuthorMenu extends BaseMenu {
 
 
+  /**
+   * Constructs the AuthorMenu with the injected ConsoleUtils for user interaction.
+   */
   public AuthorMenu(ConsoleUtils consoleUtils) {
     super(consoleUtils);
   }
 
+  /**
+   * Displays the submenu for author management actions and returns the user's choice.
+   * Options include browsing diary entries, editing the author, creating a diary entry, or returning.
+   *
+   * @param author the author being managed
+   * @param amountOfEntries the number of diary entries registered to the author
+   * @return the user input as a String.
+   */
   public String subMenuForAuthorManagementAction(Author author, int amountOfEntries) {
     String[] messages = {"You have chosen the author: \n",
         author.getName(), " |  email: ",
@@ -40,6 +58,13 @@ public class AuthorMenu extends BaseMenu {
 
   }
 
+  /**
+   * Displays the submenu for editing an author's details and returns the user's choice.
+   * Options include editing the first name, last name, email, or returning.
+   *
+   * @param author the author being edited
+   * @return the user input as a String.
+   */
   public String subMenuForEditingAuthorAction(Author author) {
     while (true) {
       consoleUtils.showColoredMessage("=== Author editing ===", Color.WHITE);
@@ -58,6 +83,18 @@ public class AuthorMenu extends BaseMenu {
     }
   }
 
+  /**
+   * Displays a paginated list of authors for user selection.
+   * Each author is shown with their key, name, and count of diary entries.
+   * The user can navigate through pages or select an author by their key.
+   *
+   * @param authors the list of authors to display.
+   * @param start the starting index for the current page.
+   * @param end the ending index for the current page.
+   * @param page the current page number.
+   * @param authorIntegerMap a map containing authors and their corresponding diary entry counts.
+   * @return the user input as a String.
+   */
   public String displayAuthorsForSelection(List<Author> authors, int start, int end, int page,
       Map<Author, Integer> authorIntegerMap) {
     consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
@@ -77,6 +114,12 @@ public class AuthorMenu extends BaseMenu {
         "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");
   }
 
+  /**
+   * Displays a submenu for the user to choose an author when creating a diary entry.
+   * Options include registering a new author, choosing an existing author, or returning.
+   *
+   * @return the user input as a String.
+   * */
   public String subMenuForChoosingAuthor() {
     while (true) {
       consoleUtils.showColoredMessage("=== Choose author ===", Color.WHITE);

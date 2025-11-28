@@ -55,9 +55,9 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryWithinTwoDates() {
     diaryMenu.displaySecondaryHeader("Searching within two dates");
 
-    LocalDateTime startSearchDate = diaryMenu.getSearchDate();
+    LocalDateTime startSearchDate = diaryMenu.getSearchDate("Enter the start date: dd-MM-yyyy");
 
-    LocalDateTime endSearchDate = diaryMenu.getSearchDate();
+    LocalDateTime endSearchDate = diaryMenu.getSearchDate("Enter the end date: dd-MM-yyyy");
 
     List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesWithinDates(startSearchDate,
         endSearchDate);
@@ -74,7 +74,7 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryWithSpecificDate() {
     diaryMenu.displaySecondaryHeader("Searching by date");
 
-    LocalDateTime searchDate = diaryMenu.getSearchDate();
+    LocalDateTime searchDate = diaryMenu.getSearchDate("Enter the search date: dd-MM-yyyy");
 
     List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesByDate(searchDate);
 

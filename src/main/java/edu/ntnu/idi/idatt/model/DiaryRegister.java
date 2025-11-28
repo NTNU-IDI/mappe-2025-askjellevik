@@ -32,16 +32,6 @@ public class DiaryRegister {
   }
 
   /**
-   * Gets a single diary entry from the diary register by its UUID.
-   *
-   * @param id the diary UUID id
-   * @return the DiaryEntry object
-   * */
-  public DiaryEntry getDiaryEntryById(UUID id) {
-    return diaryRegister.get(id);
-  }
-
-  /**
    * Deletes a diary entry from the register.
    *
    * @param diaryEntryId the UUID of diary entry to delete

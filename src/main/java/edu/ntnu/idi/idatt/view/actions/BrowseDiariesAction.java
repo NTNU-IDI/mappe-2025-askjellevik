@@ -163,10 +163,15 @@ public class BrowseDiariesAction implements Action {
         return false;
       }
       if ("yes".equalsIgnoreCase(userInput)) {
-        diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryID());
-        diaryMenu.displaySuccessMessage("Diary entry deleted");
 
-        return true;
+        try {
+          diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryID());
+          diaryMenu.displaySuccessMessage("Diary entry deleted");
+          return true;
+        } catch (Exception e) {
+          diaryMenu.displayErrorMessage("Could not delete the diary entry");
+          return false;
+        }
       }
       diaryMenu.displayErrorMessage("Not valid input, yes/no");
     }

@@ -10,7 +10,6 @@ import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -76,7 +75,7 @@ public class DiaryController {
    * @param diaryEntryId the diary entry to delete
    * @throws DiaryEntryNotFound if the diary entry is null
    */
-  public void deleteDiaryEntryInRegister(UUID diaryEntryId) {
+  public void deleteDiaryEntryInRegister(UUID diaryEntryId) throws DiaryEntryNotFound {
     diaryRegister.deleteDiaryEntry(diaryEntryId);
   }
 
@@ -170,17 +169,6 @@ public class DiaryController {
         .toList();
   }
 
-  /**
-   * Generates a map of authors and their corresponding number of diary entries.
-   *
-   * @return a map where the key is the author and the value is the number of entries by that author
-   */
-  public Map<Author, Integer> getMapOfEntriesByAuthor() {
-    return getListOfAllRegisteredDiaryEntries().stream()
-        .map(DiaryEntry::getEntryAuthor)
-        .collect(Collectors.groupingBy(s -> s, Collectors.summingInt(e -> 1)));
-
-  }
 
 
   /**
@@ -261,11 +249,4 @@ public class DiaryController {
     }
   }
 
-  public DiaryEntry getDiaryEntryByID(UUID id) throws DiaryEntryNotFound {
-    DiaryEntry diaryEntry = diaryRegister.getDiaryEntryById(id);
-    if (diaryEntry == null) {
-      throw new DiaryEntryNotFound("No diary entry found with the given ID");
-    }
-    return diaryEntry;
-  }
 }

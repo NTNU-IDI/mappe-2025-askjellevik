@@ -101,7 +101,6 @@ public class DiaryMenu extends BaseMenu {
    * @param start the starting index for the current page.
    * @param end the ending index for the current page.
    * @param page the current page number.
-   * @return the user input as a String.
    */
   public void displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
@@ -114,8 +113,6 @@ public class DiaryMenu extends BaseMenu {
       System.out.format(leftAlignFormat, i, diaryEntries.get(i).getEntryTitle());
     }
     System.out.format("+---+--------------------------------+%n");
-/*    return consoleUtils.readUserInputWithPrompt(
-        "Enter '(Diary key)', 'Next' or 'Prev'  | 'Back' for back");*/
   }
 
   /**
@@ -181,7 +178,9 @@ public class DiaryMenu extends BaseMenu {
 
       if ("1".equals(userInput)) {
         entryDate = LocalDateTime.now();
+        consoleUtils.printLine(Color.GREEN);
         consoleUtils.showMessage("Using the current date and time: " + entryDate.format(formatter));
+        consoleUtils.showMessage("");
         return entryDate;
       }
 

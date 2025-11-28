@@ -93,7 +93,6 @@ public class AuthorMenu extends BaseMenu {
    * @param end the ending index for the current page.
    * @param page the current page number.
    * @param authorIntegerMap a map containing authors and their corresponding diary entry counts.
-   * @return the user input as a String.
    */
   public void displayAuthorsForSelection(List<Author> authors, int start, int end, int page,
       Map<Author, Integer> authorIntegerMap) {
@@ -110,8 +109,6 @@ public class AuthorMenu extends BaseMenu {
           authorIntegerMap.get(authors.get(i)));
     }
     System.out.format("+---+---------------------------+%n");
-/*    return consoleUtils.readUserInputWithPrompt(
-        "Enter '(Author ID)', 'Next' or 'Previous'  | 'Back' for back");*/
   }
 
   /**

@@ -1,7 +1,10 @@
 package edu.ntnu.idi.idatt.view.actions;
 
+import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.DiaryController;
+import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
+import edu.ntnu.idi.idatt.model.exceptions.AuthorNotFoundException;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,13 +17,16 @@ public class FindSpecificDiaryAction implements Action {
 
   private final DiaryMenu diaryMenu;
   private final DiaryController diaryController;
+  private final AuthorController authorController;
 
   /**
    * Constructs a FindSpecificDiaryAction with the injected dependencies.
    */
-  public FindSpecificDiaryAction(DiaryMenu diaryMenu, DiaryController diaryController) {
+  public FindSpecificDiaryAction(DiaryMenu diaryMenu, DiaryController diaryController,
+      AuthorController authorController) {
     this.diaryMenu = diaryMenu;
     this.diaryController = diaryController;
+    this.authorController = authorController;
   }
 
   /**
@@ -41,10 +47,32 @@ public class FindSpecificDiaryAction implements Action {
         case "1" -> searchForDiaryEntryByWord();
         case "2" -> searchForDiaryEntryWithSpecificDate();
         case "3" -> searchForDiaryEntryWithinTwoDates();
+        case "4" -> searchForDiaryEntryByAuthor();
         case "back" -> isSearching = false;
         default -> diaryMenu.displayErrorMessage("Could not execute that command");
       }
     }
+  }
+
+  private void searchForDiaryEntryByAuthor() {
+    diaryMenu.displaySecondaryHeader("Searching by author");
+
+    String authorEmail = diaryMenu.getUserStringWithPrompt("Enter the author's email:");
+    Author foundAuthor;
+
+    try {
+      foundAuthor = authorController.getAuthorByEmail(authorEmail);
+
+
+    } catch (AuthorNotFoundException e) {
+      diaryMenu.displayErrorMessage("Found no author with that email");
+      return;
+    }
+
+    List<DiaryEntry> diaries = diaryController.getListOfAllEntriesBySpecificAuthor(foundAuthor);
+    displaySearchResultsWithAction(diaries);
+
+
   }
 
   /**
@@ -107,7 +135,7 @@ public class FindSpecificDiaryAction implements Action {
    */
   private void displaySearchResultsWithAction(List<DiaryEntry> diaries) {
     if (diaries.isEmpty()) {
-      diaryMenu.displayErrorMessage("No entries from that date");
+      diaryMenu.displayErrorMessage("Found no diary entries matching the search criteria");
     } else {
       BrowseDiariesAction action = new BrowseDiariesAction(diaryMenu, diaryController, diaries);
       action.execute();

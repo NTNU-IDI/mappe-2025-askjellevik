@@ -37,12 +37,13 @@ public class DiaryMenu extends BaseMenu {
       consoleUtils.showMessage("Option 1: Search for diary entry by word");
       consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
       consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
+      consoleUtils.showMessage("Option 4: Search for diary entry by author email");
       consoleUtils.showMessage("Option Back: Go back");
 
       String userInput = consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
-          userInput)) {
+      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput)
+          || "4".equals(userInput) || "back".equals(userInput)) {
         return userInput;
       } else {
         displayErrorMessage("That was not a valid option");
@@ -112,7 +113,7 @@ public class DiaryMenu extends BaseMenu {
 
     String leftAlignFormat = "| %-1d | %-30s | %-10s |%n";
     for (int i = start; i < end; i++) {
-      System.out.format(leftAlignFormat, i+1, diaryEntries.get(i).getEntryTitle(),
+      System.out.format(leftAlignFormat, i + 1, diaryEntries.get(i).getEntryTitle(),
           diaryEntries.get(i).getEntryAuthor().getLastName());
     }
     System.out.format("+---+---------------------------------------------+%n");
@@ -165,7 +166,8 @@ public class DiaryMenu extends BaseMenu {
    * or enter a date manually in the format dd-MM-yyyy HH:mm.
    * If the user enters "back", the method returns null.
    *
-   * @return the chosen LocalDateTime for the new diary entry or null if the user chooses to go back.
+   * @return the chosen LocalDateTime for the new diary entry
+   * or null if the user chooses to go back.
    */
   public LocalDateTime getDateOfNewDiaryEntry() {
     displaySecondaryHeader("Date selection");
@@ -190,8 +192,7 @@ public class DiaryMenu extends BaseMenu {
         consoleUtils.showMessage("Using the current date and time" + entryDate.format(formatter));
         consoleUtils.showMessage("");
         return entryDate;
-      }
-      else if ("2".equalsIgnoreCase(userInput)) {
+      } else if ("2".equalsIgnoreCase(userInput)) {
         while (true) {
           String dateString = consoleUtils.readUserInputWithPrompt(
               "Enter the date as dd-MM-yyyy HH:mm");
@@ -203,7 +204,7 @@ public class DiaryMenu extends BaseMenu {
             return entryDate;
 
           } catch (DateTimeParseException e) {
-          displayErrorMessage("That was not a valid date and time");
+            displayErrorMessage("That was not a valid date and time");
           }
         }
 

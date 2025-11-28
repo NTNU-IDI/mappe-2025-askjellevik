@@ -83,12 +83,13 @@ public class ConsoleUtils {
   /**
    * Method to read user input from the console with a prompt.
    * The input is trimmed to remove potential whitespace before and after the input.
+   * A semicolon is added after the prompt for better readability.
    *
    * @param prompt The prompt message to be displayed before reading input.
    * @return The user input as a trimmed string.
    */
   public String readUserInputWithPrompt(String prompt) {
-    System.out.println(prompt);
+    System.out.print(prompt + ": ");
     return scanner.nextLine().trim();
   }
 
@@ -100,7 +101,7 @@ public class ConsoleUtils {
    * @return The user input as a trimmed string.
    */
   public String readUserInput() {
-    return readUserInputWithPrompt("Enter input: ");
+    return readUserInputWithPrompt("Enter input");
   }
 
 

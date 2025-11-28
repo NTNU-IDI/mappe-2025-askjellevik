@@ -101,7 +101,7 @@ public class ConsoleUtils {
    * @return The user input as a trimmed string.
    */
   public String readUserInput() {
-    return readUserInputWithPrompt("Enter input");
+    return readUserInputWithPrompt("What do you want to do? ");
   }
 
 

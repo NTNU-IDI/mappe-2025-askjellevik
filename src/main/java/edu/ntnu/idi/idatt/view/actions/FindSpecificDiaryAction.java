@@ -57,7 +57,7 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryByAuthor() {
     diaryMenu.displaySecondaryHeader("Searching by author");
 
-    String authorEmail = diaryMenu.getUserStringWithPrompt("Enter the author's email:");
+    String authorEmail = diaryMenu.getUserStringWithPrompt("Enter the author's email");
     Author foundAuthor;
 
     try {
@@ -83,9 +83,17 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryWithinTwoDates() {
     diaryMenu.displaySecondaryHeader("Searching within two dates");
 
-    LocalDateTime startSearchDate = diaryMenu.getSearchDate("Enter the start date: dd-MM-yyyy");
+    LocalDateTime startSearchDate = diaryMenu.getSearchDate("Cancel or Enter the start date: dd-MM-yyyy");
 
-    LocalDateTime endSearchDate = diaryMenu.getSearchDate("Enter the end date: dd-MM-yyyy");
+    if (startSearchDate == null) {
+      return;
+    }
+
+    LocalDateTime endSearchDate = diaryMenu.getSearchDate("Cancel or Enter the end date: dd-MM-yyyy");
+
+    if (endSearchDate == null) {
+      return;
+    }
 
     List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesWithinDates(startSearchDate,
         endSearchDate);
@@ -102,7 +110,7 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryWithSpecificDate() {
     diaryMenu.displaySecondaryHeader("Searching by date");
 
-    LocalDateTime searchDate = diaryMenu.getSearchDate("Enter the search date: dd-MM-yyyy");
+    LocalDateTime searchDate = diaryMenu.getSearchDate("Cancel or Enter the search date: dd-MM-yyyy");
 
     List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesByDate(searchDate);
 

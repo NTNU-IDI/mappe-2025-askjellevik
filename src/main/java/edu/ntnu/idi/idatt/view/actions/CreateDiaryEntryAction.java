@@ -139,8 +139,8 @@ public class CreateDiaryEntryAction implements Action {
     String validText = null;
     String userInput;
     while (validText == null) {
-      userInput = diaryMenu.getUserStringWithPrompt("Enter the diary text");
-      if ("back".equalsIgnoreCase(userInput)) {
+      userInput = diaryMenu.getUserStringWithPrompt("Cancel or Enter the diary text");
+      if ("cancel".equalsIgnoreCase(userInput)) {
         return null;
       }
       try {
@@ -165,8 +165,8 @@ public class CreateDiaryEntryAction implements Action {
     String userInput;
 
     while (validTitle == null) {
-      userInput = diaryMenu.getUserStringWithPrompt("Enter the diary title");
-      if ("back".equalsIgnoreCase(userInput)) {
+      userInput = diaryMenu.getUserStringWithPrompt("Cancel or Enter the diary title");
+      if ("cancel".equalsIgnoreCase(userInput)) {
         return null;
       }
       try {

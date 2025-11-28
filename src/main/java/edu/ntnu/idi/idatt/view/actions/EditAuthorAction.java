@@ -45,7 +45,7 @@ public class EditAuthorAction implements Action {
       switch (subMenuUserChoice) {
         case "1" -> {
           authorMenu.displaySimpleMessage("Original first name: " + author.getFirstName());
-          String newName = authorMenu.getUserStringWithPrompt("Enter the new first name:");
+          String newName = authorMenu.getUserStringWithPrompt("Enter the new first name");
 
           try {
             authorController.updateAuthorFirstName(author, newName);
@@ -56,7 +56,7 @@ public class EditAuthorAction implements Action {
         }
         case "2" -> {
           authorMenu.displaySimpleMessage("Original last name: " + author.getLastName());
-          String newName = authorMenu.getUserStringWithPrompt("Enter the new last name:");
+          String newName = authorMenu.getUserStringWithPrompt("Enter the new last name");
 
           try {
             authorController.updateAuthorLastName(author, newName);
@@ -67,7 +67,7 @@ public class EditAuthorAction implements Action {
         }
         case "3" -> {
           authorMenu.displaySimpleMessage("Original email: " + author.getEmail());
-          String newEmail = authorMenu.getUserStringWithPrompt("Enter the new email: ");
+          String newEmail = authorMenu.getUserStringWithPrompt("Enter the new email");
 
           try {
             authorController.updateAuthorEmail(author, newEmail);

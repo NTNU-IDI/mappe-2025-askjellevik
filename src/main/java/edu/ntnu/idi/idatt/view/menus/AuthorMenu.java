@@ -32,6 +32,7 @@ public class AuthorMenu extends BaseMenu {
    * @return the user input as a String.
    */
   public String subMenuForAuthorManagementAction(Author author, int amountOfEntries) {
+    consoleUtils.clearScreen();
     String[] messages = {"You have chosen the author: \n",
         author.getName(), " |  email: ",
         author.getEmail(), " diary entries registered: ", String.valueOf(amountOfEntries)};

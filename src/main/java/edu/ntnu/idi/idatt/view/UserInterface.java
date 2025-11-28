@@ -74,7 +74,7 @@ public class UserInterface {
       } else if ("n".equalsIgnoreCase(loadData)) {
         validInput = true;
       } else {
-        consoleUtils.showMessage("Not valid input, enter (yes/no)");
+        consoleUtils.showMessage("Not valid input, enter (y for yes , n for no)");
       }
     }
 

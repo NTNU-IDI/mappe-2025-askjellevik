@@ -33,6 +33,7 @@ public class UserInterface {
   private final ConsoleUtils consoleUtils;
   private boolean running;
   private Map<String, Action> mainMenuMap;
+  private String errorMessage;
 
 
   /**
@@ -42,6 +43,7 @@ public class UserInterface {
   public UserInterface() {
     consoleUtils = new ConsoleUtils();
     running = true;
+    errorMessage = null;
   }
 
 
@@ -106,12 +108,19 @@ public class UserInterface {
    * */
   public void showMainMenu() {
     consoleUtils.clearScreen();
-    consoleUtils.showColoredMessage("==== Main Menu ====", Color.GREEN);
+    consoleUtils.showColoredMessage("======= Main Menu =======", Color.GREEN);
     consoleUtils.showMessage("1. Browse the registered diary entries");
     consoleUtils.showMessage("2. Create a new diary entry");
     consoleUtils.showMessage("3. Find a specific diary entry");
     consoleUtils.showMessage("4. Browse and manage the registered authors");
+    consoleUtils.showMessage("-  -  -  -  -  -  -  -  -  -  -  -  -  -  -");
     consoleUtils.showMessage("5. Exit program");
+    consoleUtils.showMessage("");
+
+    if (errorMessage != null) {
+      consoleUtils.showColoredMessage(errorMessage, Color.RED);
+      errorMessage = null;
+    }
 
     String userInput = consoleUtils.readUserInput();
 
@@ -120,7 +129,7 @@ public class UserInterface {
     if (action != null) {
       action.execute();
     } else {
-      consoleUtils.showColoredMessage("Invalid menu option, try again", Color.RED);
+      errorMessage = "Invalid menu option, try again";
     }
 
   }

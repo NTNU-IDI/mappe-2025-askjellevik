@@ -20,13 +20,25 @@ public class AuthorTest {
   void testGetters() {
     assertEquals("Navn Navnesen", author.getName());
     assertEquals("navn@mail.com", author.getEmail());
+    assertEquals("Navn", author.getFirstName());
+    assertEquals("Navnesen", author.getLastName());
   }
 
   @Test
-  void testSetters() {
+  void testSetEmail() {
     author.setEmail("navn.navnesen@mail.com");
 
     assertEquals("navn.navnesen@mail.com", author.getEmail());
+  }
+
+  @Test
+  void testSetName() {
+    author.setFirstName("Ola");
+    author.setLastName("Nordmann");
+
+    assertEquals("Ola", author.getFirstName());
+    assertEquals("Nordmann", author.getLastName());
+
   }
 
   @Test

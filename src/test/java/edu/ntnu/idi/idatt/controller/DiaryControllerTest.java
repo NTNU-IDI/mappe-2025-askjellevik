@@ -2,14 +2,16 @@ package edu.ntnu.idi.idatt.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
+import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -232,5 +234,134 @@ public class DiaryControllerTest {
 
     assertEquals(2, authorEntryCounts);
   }
+
+  @Test
+  void testDeleteDiaryEntry() {
+    DiaryEntry diaryEntry = new DiaryEntry(
+        java.time.LocalDateTime.of(2024, 6, 15, 10, 30),
+        author,
+        "Test title",
+        "Test text."
+    );
+
+    diaryRegister.addDiaryEntry(diaryEntry);
+    assertEquals(1, diaryController.getListOfAllRegisteredDiaryEntries().size());
+
+    diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryID());
+
+
+    assertEquals(0, diaryController.getListOfAllRegisteredDiaryEntries().size());
+  }
+
+  @Test
+  void testDeleteDiaryEntryThrowsException() {
+    assertThrows(Exception.class, () ->
+        diaryController.deleteDiaryEntryInRegister(null)
+    );
+  }
+
+  @Test
+  void testUpdateDiaryEntryTitle() {
+    DiaryEntry diaryEntry = new DiaryEntry(
+        java.time.LocalDateTime.of(2024, 6, 15, 10, 30),
+        author,
+        "Old Title",
+        "Test text."
+    );
+    diaryRegister.addDiaryEntry(diaryEntry);
+
+
+    diaryController.updateDiaryEntryTitle(diaryEntry, "New Title");
+
+    assertEquals("New Title", diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryTitle());
+  }
+
+  @Test
+  void testUpdateDiaryEntryTitleThrowsException() {
+    DiaryEntry diaryEntry = new DiaryEntry(
+        java.time.LocalDateTime.of(2024, 6, 15, 10, 30),
+        author,
+        "Test title",
+        "Test text."
+    );
+
+    assertThrows(InvalidInputException.class, () ->
+        diaryController.updateDiaryEntryTitle(diaryEntry, "")
+    );
+  }
+
+
+  @Test
+  void testUpdateDiaryEntryText() {
+    DiaryEntry diaryEntry = new DiaryEntry(
+        java.time.LocalDateTime.of(2024, 6, 15, 10, 30),
+        author,
+        "Title",
+        "Old test text."
+    );
+    diaryRegister.addDiaryEntry(diaryEntry);
+
+
+    diaryController.updateDiaryEntryText(diaryEntry, "New test text.");
+
+    assertEquals("New test text.", diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryText());
+  }
+
+  @Test
+  void testUpdateDiaryEntryTextThrowsException() {
+    DiaryEntry diaryEntry = new DiaryEntry(
+        java.time.LocalDateTime.of(2024, 6, 15, 10, 30),
+        author,
+        "Title",
+        "Old test text."
+    );
+
+    assertThrows(InvalidInputException.class, () ->
+        diaryController.updateDiaryEntryText(diaryEntry, "")
+    );
+  }
+
+  @Test
+  void testUpdateDiaryEntryTextByAdding() {
+    DiaryEntry diaryEntry = new DiaryEntry(
+        java.time.LocalDateTime.of(2024, 6, 15, 10, 30),
+        author,
+        "Title",
+        "Old test text."
+    );
+    diaryRegister.addDiaryEntry(diaryEntry);
+
+
+    diaryController.updateDiaryEntryTextByAdding(diaryEntry, "This text is added.");
+
+    assertEquals("Old test text.\nThis text is added.", diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryText());
+  }
+
+  @Test
+  void testUpdateDiaryEntryTextByAddingThrowsException() {
+    DiaryEntry diaryEntry = new DiaryEntry(
+        java.time.LocalDateTime.of(2024, 6, 15, 10, 30),
+        author,
+        "Test title",
+        "Test text."
+    );
+    diaryRegister.addDiaryEntry(diaryEntry);
+
+    assertThrows(InvalidInputException.class, () ->
+        diaryController.updateDiaryEntryText(diaryEntry, "")
+    );
+  }
+
+  @Test
+  void testValidateDateThrowsException() {
+    LocalDateTime invalidDate = null;
+
+    assertThrows(InvalidDateException.class, () ->
+        diaryController.validateDate(invalidDate)
+    );
+  }
+
+
+
 
 }

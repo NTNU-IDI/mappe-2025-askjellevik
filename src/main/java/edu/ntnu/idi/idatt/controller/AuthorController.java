@@ -5,7 +5,7 @@ import edu.ntnu.idi.idatt.controller.validators.AuthorValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
-import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExsistsException;
+import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExistsException;
 import edu.ntnu.idi.idatt.model.exceptions.AuthorNotFoundException;
 import java.util.List;
 import java.util.Map;
@@ -50,14 +50,14 @@ public class AuthorController {
    * @return the added author
    */
   public Author addAuthorToRegister(String firstName, String lastName, String email)
-      throws InvalidInputException, AuthorAlreadyExsistsException {
+      throws InvalidInputException, AuthorAlreadyExistsException {
     validateAuthorName(firstName);
     validateAuthorName(lastName);
     validateAuthorEmail(email);
 
     try {
       getAuthorByEmail(email);
-      throw new AuthorAlreadyExsistsException("An author with that email already exists.");
+      throw new AuthorAlreadyExistsException("An author with that email already exists.");
     } catch (AuthorNotFoundException e) {
       // If AuthorNotFoundException is thrown, it means the author does not exist.
     }

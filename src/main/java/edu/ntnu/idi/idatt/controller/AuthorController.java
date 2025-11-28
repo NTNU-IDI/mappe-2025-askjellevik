@@ -98,11 +98,20 @@ public class AuthorController {
    *
    * @param author the author to update
    * @param newEmail the new name to set
-   * @throws InvalidInputException if the new name is invalid
+   * @throws InvalidInputException if the new email is invalid
+   * @throws AuthorAlreadyExistsException if an author with the new email already exists
    */
   public void updateAuthorEmail(Author author, String newEmail)
-      throws InvalidInputException {
+      throws InvalidInputException, AuthorAlreadyExistsException {
     validateAuthorEmail(newEmail);
+
+    try {
+      getAuthorByEmail(newEmail);
+      throw new AuthorAlreadyExistsException("An author with that email already exists.");
+    } catch (AuthorNotFoundException e) {
+      // If AuthorNotFoundException is thrown, it means the author does not exist.
+    }
+
     author.setEmail(newEmail);
   }
 

@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.view.actions;
 import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
+import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExistsException;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 
 /**
@@ -72,7 +73,7 @@ public class EditAuthorAction implements Action {
           try {
             authorController.updateAuthorEmail(author, newEmail);
             authorMenu.displaySuccessMessage("Email updated successfully.");
-          } catch (InvalidInputException e) {
+          } catch (InvalidInputException | AuthorAlreadyExistsException e) {
             authorMenu.displayErrorMessage(e.getMessage());
           }
         }

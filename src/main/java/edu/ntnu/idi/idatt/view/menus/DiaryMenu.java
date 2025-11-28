@@ -88,7 +88,7 @@ public class DiaryMenu extends BaseMenu {
    * @return the search word entered by the user as a String.
    */
   public String searchForDiaryEntryByWordPrompt() {
-    return consoleUtils.readUserInputWithPrompt("Enter the search word: ");
+    return consoleUtils.readUserInputWithPrompt("Enter the search word");
 
   }
 
@@ -160,7 +160,7 @@ public class DiaryMenu extends BaseMenu {
    * @return the chosen LocalDateTime for the new diary entry or null if the user chooses to go back.
    */
   public LocalDateTime getDateOfNewDiaryEntry() {
-    consoleUtils.showMessage("Choose date for the diary entry:");
+    displaySecondaryHeader("Date selection");
     consoleUtils.showMessage("Option 1: Automatically choose the current time");
     consoleUtils.showMessage("Option 2: Enter date manually");
     consoleUtils.showMessage("Back: Go back");
@@ -171,7 +171,7 @@ public class DiaryMenu extends BaseMenu {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     while (true) {
-      userInput = consoleUtils.readUserInputWithPrompt("Enter your choice:");
+      userInput = consoleUtils.readUserInputWithPrompt("Enter your choice");
       if ("back".equalsIgnoreCase(userInput)) {
         return null;
       }
@@ -179,26 +179,31 @@ public class DiaryMenu extends BaseMenu {
       if ("1".equals(userInput)) {
         entryDate = LocalDateTime.now();
         consoleUtils.printLine(Color.GREEN);
-        consoleUtils.showMessage("Using the current date and time: " + entryDate.format(formatter));
+        consoleUtils.showMessage("Using the current date and time" + entryDate.format(formatter));
         consoleUtils.showMessage("");
         return entryDate;
       }
+      else if ("2".equalsIgnoreCase(userInput)) {
+        while (true) {
+          String dateString = consoleUtils.readUserInputWithPrompt(
+              "Enter the date as dd-MM-yyyy HH:mm;");
+          if ("back".equalsIgnoreCase(dateString)) {
+            return null;
+          }
+          try {
+            entryDate = LocalDateTime.parse(dateString, formatter);
+            return entryDate;
 
-      if ("2".equalsIgnoreCase(userInput)) {
-        String dateString = consoleUtils.readUserInputWithPrompt(
-            "Enter the date as dd-MM-yyyy HH:mm;");
-        if ("back".equalsIgnoreCase(dateString)) {
-          return null;
+          } catch (DateTimeParseException e) {
+          displayErrorMessage("That was not a valid date and time");
+          }
         }
-        try {
-          entryDate = LocalDateTime.parse(dateString, formatter);
-          return entryDate;
 
-        } catch (DateTimeParseException e) {
-          consoleUtils.showColoredMessage(e.getMessage(), Color.RED);
-        }
 
+      } else {
+        displayErrorMessage("That was not a valid option");
       }
+
     }
 
   }

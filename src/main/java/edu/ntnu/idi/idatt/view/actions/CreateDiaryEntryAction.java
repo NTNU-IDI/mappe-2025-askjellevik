@@ -41,6 +41,7 @@ public class CreateDiaryEntryAction implements Action {
   @Override
   public void execute() {
 
+
     diaryMenu.displayMainHeader("Creating new diary entry");
 
     LocalDateTime validDate = getValidDate();

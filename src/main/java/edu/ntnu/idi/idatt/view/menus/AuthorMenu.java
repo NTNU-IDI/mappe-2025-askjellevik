@@ -119,7 +119,7 @@ public class AuthorMenu extends BaseMenu {
    * */
   public String subMenuForChoosingAuthor() {
     while (true) {
-      consoleUtils.showColoredMessage("=== Choose author ===", Color.WHITE);
+      displaySecondaryHeader("Author selection");
       consoleUtils.showMessage("Option 1: Register a new author");
       consoleUtils.showMessage("Option 2: Choose an existing author");
       consoleUtils.showMessage("Option Back: Exit");

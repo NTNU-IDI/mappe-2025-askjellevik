@@ -21,11 +21,13 @@ public class BaseMenu {
 
   /**
    * Prompts the user with a message and return their input.
+   * A blank line is displayed before the prompt for better readability.
    *
    * @param prompt the message to display to the user.
    * @return The user's input as a String.
    */
   public String getUserStringWithPrompt(String prompt) {
+    consoleUtils.showMessage("");
     return consoleUtils.readUserInputWithPrompt(prompt);
   }
 
@@ -63,6 +65,7 @@ public class BaseMenu {
    * @param header the header text to display.
    */
   public void displayMainHeader(String header) {
+    consoleUtils.clearScreen();
     consoleUtils.showColoredMessage("=== " + header + " ===", Color.CYAN);
   }
 

@@ -100,16 +100,16 @@ public class AuthorMenu extends BaseMenu {
     consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
 
 
-    System.out.format("+---+-------Page " + page + "--------------+%n");
-    System.out.format("|KEY| Name                 |Count|%n");
-    System.out.format("+---+----------------------------+%n");
+    System.out.format("+---+---------Page " + page + "---------------+%n");
+    System.out.format("|KEY| Name                 |Diaries|%n");
+    System.out.format("+---+------------------------------+%n");
 
-    String leftAlignFormat = "| %-1d | %-20s | %-4d| %n";
+    String leftAlignFormat = "| %-1d | %-20s | %-6d| %n";
     for (int i = start; i < end; i++) {
       System.out.format(leftAlignFormat, i+1, authors.get(i).getName(),
           authorIntegerMap.get(authors.get(i)));
     }
-    System.out.format("+---+---------------------------+%n");
+    System.out.format("+---+------------------------------+%n");
   }
 
   /**

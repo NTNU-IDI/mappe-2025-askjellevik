@@ -58,7 +58,8 @@ public class BrowseDiariesAction implements Action {
   public void execute() {
 
     if (isBrowsingAllDiaries) {
-      this.diaryEntries = diaryController.getListOfAllRegisteredDiaryEntries();
+      List<DiaryEntry> immutableList = diaryController.getListOfAllRegisteredDiaryEntries();
+      this.diaryEntries = new ArrayList<>(immutableList);
       if (this.diaryEntries.isEmpty()) {
         diaryMenu.displayErrorMessage("No diary entries registered yet");
         return;

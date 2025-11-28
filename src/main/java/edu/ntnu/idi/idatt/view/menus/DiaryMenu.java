@@ -130,7 +130,7 @@ public class DiaryMenu extends BaseMenu {
     consoleUtils.showMessage("");
     displaySecondaryHeader("You hae chosen the diary entry:");
     String[] messages = {
-        diaryEntry.getEntryTitle(), " written by ",
+        diaryEntry.getEntryTitle(), "\nWritten by ",
         diaryEntry.getEntryAuthor().getName(), " registered ",
         consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
     Color[] colors = {Color.YELLOW, Color.WHITE, Color.YELLOW, Color.WHITE,

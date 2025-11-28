@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.view.actions;
 
 import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.DiaryController;
+import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
@@ -198,7 +199,7 @@ public class CreateDiaryEntryAction implements Action {
       try {
         diaryController.validateDate(userInputDate);
         validDate = userInputDate;
-      } catch (InvalidInputException e) {
+      } catch (InvalidDateException e) {
         diaryMenu.displayErrorMessage(e.getMessage());
       }
     }

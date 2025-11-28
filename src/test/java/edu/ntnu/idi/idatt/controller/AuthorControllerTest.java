@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
@@ -88,7 +89,7 @@ public class AuthorControllerTest {
   }
 
   @Test
-  void testUpdateAuthorEmailThrowsException() {
+  void testUpdateAuthorEmailThrowsInvalidException() {
     Author author = new Author("Test", "Author", "email.mail.com");
 
     assertThrows(InvalidInputException.class, () ->
@@ -97,26 +98,34 @@ public class AuthorControllerTest {
   }
 
   @Test
-  void testGetMapOfEntriesByAuthor () {
-    authorController.addAuthorToRegister("Test", "Author", "test@mail.com");
-    authorController.addAuthorToRegister("Another", "Authorer", "tester@lyse.net");
-
-    Author author1 = authorController.getAuthorByEmail("test@mail.com");
-    Author author2 = authorController.getAuthorByEmail("tester@lyse.net");
-
-    LocalDateTime date = LocalDateTime.of(2023, 1, 1, 12, 0);
-
-    diaryController.addDiaryToRegister(date, author1,  "Title1", "Text1");
-    diaryController.addDiaryToRegister(date, author1,  "Title2", "Text2");
-    diaryController.addDiaryToRegister(date, author2,  "Title3", "Text3");
+  void testUpdateAuthorEmailThrowsAlreadyExistsException() {
+    authorController.addAuthorToRegister("Test", "Author", "email@that.exist");
+    Author author = authorController.addAuthorToRegister("Another", "Authorer",
+        "another@to.update");
 
 
-
-    Map<Author, Integer> entriesByAuthor = authorController.getMapOfEntriesByAuthor();
-
-
-    assertEquals(2, entriesByAuthor.get(author1));
-    assertEquals(1, entriesByAuthor.get(author2));
+    assertThrows(Exception.class, () ->
+        authorController.updateAuthorEmail(author, "email@that.exist"));
   }
 
-}
+    @Test
+    void testGetMapOfEntriesByAuthor () {
+      authorController.addAuthorToRegister("Test", "Author", "test@mail.com");
+      authorController.addAuthorToRegister("Another", "Authorer", "tester@lyse.net");
+
+      Author author1 = authorController.getAuthorByEmail("test@mail.com");
+      Author author2 = authorController.getAuthorByEmail("tester@lyse.net");
+
+      LocalDateTime date = LocalDateTime.of(2023, 1, 1, 12, 0);
+
+      diaryController.addDiaryToRegister(date, author1, "Title1", "Text1");
+      diaryController.addDiaryToRegister(date, author1, "Title2", "Text2");
+      diaryController.addDiaryToRegister(date, author2, "Title3", "Text3");
+
+      Map<Author, Integer> entriesByAuthor = authorController.getMapOfEntriesByAuthor();
+
+      assertEquals(2, entriesByAuthor.get(author1));
+      assertEquals(1, entriesByAuthor.get(author2));
+    }
+
+  }

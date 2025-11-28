@@ -54,6 +54,47 @@ public class AuthorController {
   }
 
   /**
+   * Updates the first name of an author after validating it.
+   *
+   * @param author the author to update
+   * @param newName the new first name to set
+   * @throws InvalidInputException if the new name is invalid
+   */
+  public void updateAuthorFirstName(Author author, String newName)
+      throws InvalidInputException {
+    validateAuthorName(newName);
+    author.setFirstName(newName);
+  }
+
+  /**
+   * Updates the last name of an author after validating it.
+   *
+   * @param author the author to update
+   * @param newName the new last name to set
+   * @throws InvalidInputException if the new name is invalid
+   */
+  public void updateAuthorLastName(Author author, String newName)
+      throws InvalidInputException {
+    validateAuthorName(newName);
+    author.setLastName(newName);
+  }
+
+  /**
+   * Updates the email of an author after validating it.
+   *
+   * @param author the author to update
+   * @param newEmail the new name to set
+   * @throws InvalidInputException if the new name is invalid
+   */
+  public void updateAuthorEmail(Author author, String newEmail)
+      throws InvalidInputException {
+    validateAuthorEmail(newEmail);
+    author.setFirstName(newEmail);
+  }
+
+
+
+  /**
    * Validates the author's name.
    *
    * @param newName the new name to validate

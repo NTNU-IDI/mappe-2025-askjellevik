@@ -76,9 +76,7 @@ public class EditAuthorAction implements Action {
             authorMenu.displayErrorMessage(e.getMessage());
           }
         }
-        case "back" -> {
-          choosingSubMenu = false;
-        }
+        case "back" -> choosingSubMenu = false;
         default -> authorMenu.displayErrorMessage("Could not execute that command");
       }
 

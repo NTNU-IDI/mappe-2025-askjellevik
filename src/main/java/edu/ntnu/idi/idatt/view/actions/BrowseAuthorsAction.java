@@ -66,10 +66,10 @@ public class BrowseAuthorsAction implements Action {
 
       String promptMessage = "Commands: (KEY NUMBER)";
       if (end < authors.size()) {
-        promptMessage += ", NEXT";
+        promptMessage += ", NEXTPAGE";
       }
       if (page > 0) {
-        promptMessage += ", PREV";
+        promptMessage += ", PREVPAGE";
       }
       promptMessage += ", BACK";
       String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
@@ -77,17 +77,17 @@ public class BrowseAuthorsAction implements Action {
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }
-      if ("next".equalsIgnoreCase(userInput) && end < authors.size()) {
+      if ("nextpage".equalsIgnoreCase(userInput) && end < authors.size()) {
         page += 1;
         continue;
       }
-      if ("prev".equalsIgnoreCase(userInput) && page > 0) {
+      if ("prevpage".equalsIgnoreCase(userInput) && page > 0) {
         page -= 1;
         continue;
       }
 
       try {
-        int indexOfChosenAuthor = Integer.parseInt(userInput);
+        int indexOfChosenAuthor = Integer.parseInt(userInput) -1;
 
         if (indexOfChosenAuthor < start || indexOfChosenAuthor >= end) {
           authorMenu.displayErrorMessage("The author ID was out of range");

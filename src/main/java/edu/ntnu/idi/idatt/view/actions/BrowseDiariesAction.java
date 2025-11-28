@@ -86,10 +86,10 @@ public class BrowseDiariesAction implements Action {
 
       String promptMessage = "Commands: (KEY NUMBER)";
       if (end < diaryEntries.size()) {
-        promptMessage += ", NEXT";
+        promptMessage += ", NEXTPAGE";
       }
       if ( page > 0) {
-        promptMessage += ", PREV";
+        promptMessage += ", PREVPAGE";
       }
       promptMessage += ", BACK";
       String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
@@ -98,17 +98,17 @@ public class BrowseDiariesAction implements Action {
         return;
       }
 
-      if ("next".equalsIgnoreCase(userInput) && end < diaryEntries.size()) {
+      if ("nextpage".equalsIgnoreCase(userInput) && end < diaryEntries.size()) {
         page += 1;
         continue;
       }
-      if ("prev".equalsIgnoreCase(userInput) && page > 0) {
+      if ("prevpage".equalsIgnoreCase(userInput) && page > 0) {
         page -= 1;
         continue;
       }
       try {
 
-        int indexOfChosenDiary = Integer.parseInt(userInput);
+        int indexOfChosenDiary = Integer.parseInt(userInput) - 1;
 
         if (indexOfChosenDiary < start || indexOfChosenDiary >= end) {
           diaryMenu.displayErrorMessage("The input key was out of range");

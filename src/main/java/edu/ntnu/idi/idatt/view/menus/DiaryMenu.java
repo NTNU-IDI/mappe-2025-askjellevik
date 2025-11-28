@@ -189,7 +189,7 @@ public class DiaryMenu extends BaseMenu {
       if ("1".equals(userInput)) {
         entryDate = LocalDateTime.now();
         consoleUtils.printLine(Color.GREEN);
-        consoleUtils.showMessage("Using the current date and time" + entryDate.format(formatter));
+        consoleUtils.showMessage("Using the current date and time " + entryDate.format(formatter));
         consoleUtils.showMessage("");
         return entryDate;
       } else if ("2".equalsIgnoreCase(userInput)) {

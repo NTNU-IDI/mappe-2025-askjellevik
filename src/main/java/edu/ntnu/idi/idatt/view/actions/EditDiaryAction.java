@@ -10,10 +10,13 @@ public class EditDiaryAction implements Action {
 
   private final DiaryMenu diaryMenu;
   private final DiaryEntry diaryEntry;
+  private final DiaryController diaryController;
 
-  public EditDiaryAction(DiaryMenu diaryMenu, DiaryEntry diaryEntry) {
+  public EditDiaryAction(DiaryMenu diaryMenu, DiaryEntry diaryEntry,
+      DiaryController diaryController) {
     this.diaryMenu = diaryMenu;
     this.diaryEntry = diaryEntry;
+    this.diaryController = diaryController;
   }
 
   @Override
@@ -21,6 +24,7 @@ public class EditDiaryAction implements Action {
     boolean showSubMenu = true;
 
     while (showSubMenu) {
+      diaryMenu.displaySecondaryHeader("Editing diary entry: " + diaryEntry.getEntryTitle());
       String submenuUserChoice = diaryMenu.subMenuForEditingDiaryAction();
 
       switch (submenuUserChoice) {
@@ -46,11 +50,10 @@ public class EditDiaryAction implements Action {
         return;
       }
       try {
-        DiaryEntryValidator.validateText(userInput);
+        diaryController.validateEntryText(userInput);
         validTextToAdd = userInput;
 
-        String finalDiaryText = String.join(" ", diaryEntry.getEntryText(), validTextToAdd);
-        diaryEntry.setEntryText(finalDiaryText);
+        diaryController.updateDiaryEntryTextByAdding(diaryEntry, validTextToAdd);
       } catch (InvalidInputException e) {
         diaryMenu.displayErrorMessage(e.getMessage());
       }
@@ -69,10 +72,10 @@ public class EditDiaryAction implements Action {
         return;
       }
       try {
-        DiaryEntryValidator.validateText(userInput);
+        diaryController.validateEntryText(userInput);
         validTextToSet = userInput;
 
-        diaryEntry.setEntryText(validTextToSet);
+        diaryController.updateDiaryEntryText(diaryEntry, validTextToSet);
       } catch (InvalidInputException e) {
         diaryMenu.displayErrorMessage(e.getMessage());
       }
@@ -91,10 +94,10 @@ public class EditDiaryAction implements Action {
         return;
       }
       try {
-        DiaryEntryValidator.validateText(userInput);
+        diaryController.validateEntryTitle(userInput);
         validTitleToSet = userInput;
 
-        diaryEntry.setEntryTitle(validTitleToSet);
+        diaryController.updateDiaryEntryTitle(diaryEntry, validTitleToSet);
       } catch (InvalidInputException e) {
         diaryMenu.displayErrorMessage(e.getMessage());
       }

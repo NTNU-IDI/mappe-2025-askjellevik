@@ -52,7 +52,7 @@ public class DiaryController {
    * @throws InvalidInputException  if the title or text is invalid
    */
   public void addDiaryToRegister(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
-      String entryText) throws InvalidDateException, InvalidInputException{
+      String entryText) throws InvalidDateException, InvalidInputException {
 
     validateDate(entryDate);
     validateEntryTitle(entryTitle);
@@ -190,6 +190,45 @@ public class DiaryController {
     if (!errors.isEmpty()) {
       throw new InvalidDateException(String.join(". ", errors));
     }
+  }
+
+  /**
+   * Updates the title of a diary entry after validating it.
+   *
+   * @param diaryEntry the diary entry to update
+   * @param newTitle the new title to set
+   * @throws InvalidInputException if the new title is invalid
+   */
+  public void updateDiaryEntryTitle(DiaryEntry diaryEntry, String newTitle)
+      throws InvalidInputException {
+    validateEntryTitle(newTitle);
+    diaryEntry.setEntryTitle(newTitle);
+  }
+
+  /**
+   * Updates the text of a diary entry after validating it.
+   *
+   * @param diaryEntry the diary entry to update
+   * @param newText the new text to set
+   * @throws InvalidInputException if the new text is invalid
+   */
+  public void updateDiaryEntryText(DiaryEntry diaryEntry, String newText)
+      throws InvalidInputException {
+    validateEntryText(newText);
+    diaryEntry.setEntryText(newText);
+  }
+
+  /**
+   * Updates the text of a diary entry by adding new text to the existing text.
+   *
+   * @param diaryEntry the diary entry to update
+   * @param validTextToAdd the text to add to the existing entry text
+   * @throws InvalidInputException if the text to add is invalid
+   */
+  public void updateDiaryEntryTextByAdding(DiaryEntry diaryEntry, String validTextToAdd) {
+    validateEntryText(validTextToAdd);
+    String updatedText = String.join("\n", diaryEntry.getEntryText(), validTextToAdd);
+    diaryEntry.setEntryText(updatedText);
   }
 
   /**

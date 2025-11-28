@@ -61,6 +61,7 @@ public class BaseMenu {
   /**
    * Displays a main header in cyan color to the user.
    * The header is formatted with "===" before and after the text.
+   * A few blank lines are added before the header for better readability.
    *
    * @param header the header text to display.
    */

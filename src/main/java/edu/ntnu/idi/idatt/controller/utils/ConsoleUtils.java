@@ -138,7 +138,7 @@ public class ConsoleUtils {
   }
 
   public void clearScreen() {
-    for (int i = 0; i < 25; i++) {
+    for (int i = 0; i < 3; i++) {
       System.out.println();
     }
   }

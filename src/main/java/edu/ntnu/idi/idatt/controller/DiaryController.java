@@ -8,6 +8,7 @@ import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
 import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -33,11 +34,14 @@ public class DiaryController {
 
   /**
    * Gets a list of all the registered diary entries in the register.
+   * The list is sorted by entry date in descending order.
    *
    * @return list of all registered diary entries
    */
   public List<DiaryEntry> getListOfAllRegisteredDiaryEntries() {
-    return diaryRegister.getAllDiaryEntries();
+    return diaryRegister.getAllDiaryEntries().stream()
+        .sorted(Comparator.comparing(DiaryEntry::getEntryDate).reversed())
+        .toList();
   }
 
   /**

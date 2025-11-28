@@ -195,7 +195,7 @@ public class DiaryMenu extends BaseMenu {
       } else if ("2".equalsIgnoreCase(userInput)) {
         while (true) {
           String dateString = consoleUtils.readUserInputWithPrompt(
-              "Enter the date as dd-MM-yyyy HH:mm");
+              "Cancel or Enter the date as dd-MM-yyyy HH:mm");
           if ("cancel".equalsIgnoreCase(dateString)) {
             return null;
           }

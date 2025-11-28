@@ -2,16 +2,22 @@ package edu.ntnu.idi.idatt.view.actions;
 
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
-import edu.ntnu.idi.idatt.controller.validators.DiaryEntryValidator;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 
+/**
+ * Action class for editing an existing diary entry.
+ * Allows users to modify the title and text of the diary entry.
+ */
 public class EditDiaryAction implements Action {
 
   private final DiaryMenu diaryMenu;
   private final DiaryEntry diaryEntry;
   private final DiaryController diaryController;
 
+  /**
+   * Constructs an EditDiaryAction with the injected dependencies.
+   */
   public EditDiaryAction(DiaryMenu diaryMenu, DiaryEntry diaryEntry,
       DiaryController diaryController) {
     this.diaryMenu = diaryMenu;
@@ -19,6 +25,14 @@ public class EditDiaryAction implements Action {
     this.diaryController = diaryController;
   }
 
+  /**
+   * Executes the action of editing a diary entry.
+   * Presents a submenu for editing the diary entry's title or text.
+   * Users can exit the submenu by selecting "back".
+   * Validates each input and updates the diary entry accordingly.
+   * If the validation from the controller fails, an error message is displayed
+   * and the user is prompted again.
+   */
   @Override
   public void execute() {
     boolean showSubMenu = true;
@@ -61,6 +75,15 @@ public class EditDiaryAction implements Action {
 
   }
 
+  /**
+   * Overwrites the text of a diary entry.
+   * Prompts the user for new text, validates the input, and updates the diary entry
+   * through the controller.
+   * If the user inputs "back", the operation is cancelled.
+   * If the validation fails, an error message is displayed and the user is re-prompted.
+   *
+   * @param diaryEntry the diary entry to be updated
+   */
   private void overwriteDiaryText(DiaryEntry diaryEntry) {
     diaryMenu.displayThirdHeader("Overwriting text");
 
@@ -82,6 +105,15 @@ public class EditDiaryAction implements Action {
     }
   }
 
+  /**
+   * Edits the title of a diary entry.
+   * Prompts the user for a new title, validates the input, and updates the diary entry
+   * through the controller.
+   * If the user inputs "back", the operation is cancelled.
+   * If the validation fails, an error message is displayed and the user is re-prompted.
+   *
+   * @param diaryEntry the diary entry to be updated
+   */
   private void editDiaryTitle(DiaryEntry diaryEntry) {
     diaryMenu.displayThirdHeader("Editing title");
 

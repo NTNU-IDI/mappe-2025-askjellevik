@@ -6,6 +6,10 @@ import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Action class for browsing registered diary entries.
+ * Allows users to view, edit, or delete selected diary entries.
+ */
 public class BrowseDiariesAction implements Action {
 
   private final DiaryMenu diaryMenu;
@@ -13,12 +17,28 @@ public class BrowseDiariesAction implements Action {
   private List<DiaryEntry> diaryEntries;
   private final boolean isBrowsingAllDiaries;
 
+  /**
+   * Constructs a BrowseDiariesAction with the injected dependencies.
+   * This constructor is used for browsing all diary entries in the register.
+   *
+   * @param diaryMenu the DiaryMenu for displaying diary-related UI
+   * @param diaryController the DiaryController for managing diary entries
+   */
   public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController) {
     this.diaryMenu = diaryMenu;
     this.diaryController = diaryController;
     this.isBrowsingAllDiaries = true;
   }
 
+  /**
+   * Constructs a BrowseDiariesAction with the injected dependencies and a list of diary entries.
+   * This constructor is used for browsing a specific list of diary entries, such as search results
+   * or by a specific author.
+   *
+   * @param diaryMenu the DiaryMenu for displaying diary-related menus
+   * @param diaryController the DiaryController for managing diary entries
+   * @param diaryEntries the list of diary entries to browse
+   */
   public BrowseDiariesAction(DiaryMenu diaryMenu, DiaryController diaryController,
       List<DiaryEntry> diaryEntries) {
     this.diaryMenu = diaryMenu;
@@ -27,6 +47,13 @@ public class BrowseDiariesAction implements Action {
     this.isBrowsingAllDiaries = false;
   }
 
+  /**
+   * Executes the action of browsing diary entries.
+   * When the user selects a diary entry by a user input key, they can choose to
+   * view, edit, or delete it.
+   * Diary entries are displayed with pagination.
+   * If no diary entries are registered, an error message is displayed and the action exits.
+   */
   @Override
   public void execute() {
 
@@ -121,6 +148,13 @@ public class BrowseDiariesAction implements Action {
     }
   }
 
+  /**
+   * Prompts the user to confirm deletion of a diary entry.
+   * If the user confirms, the diary entry is deleted from the register.
+   *
+   * @param diaryEntry the diary entry to be deleted
+   * @return true if the diary entry was deleted, false otherwise
+   */
   private boolean deleteDiaryEntry(DiaryEntry diaryEntry) {
     while (true) {
       String userInput = diaryMenu.deleteDiaryEntryPrompt(diaryEntry);

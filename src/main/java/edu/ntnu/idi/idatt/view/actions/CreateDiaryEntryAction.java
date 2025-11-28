@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Action class for creating a new diary entry.
+ * Prompts the user for diary entry details and validates the input.
+ */
 public class CreateDiaryEntryAction implements Action {
 
   private final DiaryMenu diaryMenu;
@@ -18,6 +22,16 @@ public class CreateDiaryEntryAction implements Action {
   private final AuthorController authorController;
   private final Author authorOfDiaryEntry;
 
+  /**
+   * Constructs a CreateDiaryEntryAction with the injected dependencies.
+   * This constructor is used when the author of the diary entry is not pre-defined,
+   * and an author needs to be selected or created during the process.
+   *
+   * @param diaryMenu the DiaryMenu for displaying diary-related UI
+   * @param diaryController the DiaryController for managing diary entries
+   * @param authorMenu the AuthorMenu for displaying author-related UI
+   * @param authorController the AuthorController for managing authors
+   */
   public CreateDiaryEntryAction(DiaryMenu diaryMenu, DiaryController diaryController,
       AuthorMenu authorMenu,
       AuthorController authorController) {
@@ -28,6 +42,16 @@ public class CreateDiaryEntryAction implements Action {
     this.authorOfDiaryEntry = null;
   }
 
+  /**
+   * Constructs a CreateDiaryEntryAction with the injected dependencies and a predefined author.
+   * This constructor is used when the author of the diary entry is already known.
+   *
+   * @param diaryMenu the DiaryMenu for displaying diary-related UI
+   * @param diaryController the DiaryController for managing diary entries
+   * @param authorMenu the AuthorMenu for displaying author-related UI
+   * @param authorController the AuthorController for managing authors
+   * @param authorOfDiaryEntry the predefined author of the diary entry
+   */
   public CreateDiaryEntryAction(DiaryMenu diaryMenu, DiaryController diaryController,
       AuthorMenu authorMenu,
       AuthorController authorController, Author authorOfDiaryEntry) {
@@ -38,6 +62,13 @@ public class CreateDiaryEntryAction implements Action {
     this.authorOfDiaryEntry = authorOfDiaryEntry;
   }
 
+  /**
+   * Executes the action of creating a new diary entry.
+   * Prompts the user for the diary entry's date, author, title, and text,
+   * validating each input instantaneous. If the user inputs "back" at any prompt, the action exits.
+   * If the validation from the controller fails, an error message is
+   * displayed and the user is re-prompted.
+   */
   @Override
   public void execute() {
 
@@ -96,6 +127,13 @@ public class CreateDiaryEntryAction implements Action {
 
   }
 
+  /**
+   * Prompts the user for diary text and validates the input.
+   * The method uses a loop to prompt until valid text is provided or the user chooses to go back.
+   * If the user inputs "back", the method returns null.
+   *
+   * @return the valid diary text, or null if the user chose to go back
+   */
   private String getValidText() {
     String validText = null;
     String userInput;
@@ -114,6 +152,13 @@ public class CreateDiaryEntryAction implements Action {
     return validText;
   }
 
+  /**
+   * Prompts the user for diary title and validates the input.
+   * The method uses a loop to prompt until a valid title is provided or the user chooses to go back.
+   * If the user inputs "back", the method returns null.
+   *
+   * @return the valid diary title, or null if the user chose to go back
+   */
   private String getValidTitle() {
     String validTitle = null;
     String userInput;
@@ -133,6 +178,13 @@ public class CreateDiaryEntryAction implements Action {
     return validTitle;
   }
 
+  /**
+   * Prompts the user for a diary entry date and validates the input.
+   * The method uses a loop to prompt until a valid date is provided or the user chooses to go back.
+   * If the user inputs "back", the method returns null.
+   *
+   * @return the valid diary entry date, or null if the user chose to go back
+   */
   private LocalDateTime getValidDate() {
     LocalDateTime userInputDate;
     LocalDateTime validDate = null;
@@ -154,6 +206,14 @@ public class CreateDiaryEntryAction implements Action {
 
   }
 
+  /**
+   * Prompts the user to browse and select a valid author from the list of registered authors.
+   * Authors are displayed with pagination. The user can navigate through pages,
+   * select an author by their key, or go back to exit the selection.
+   * If no authors are registered, an error message is displayed and the method returns null.
+   *
+   * @return the valid selected Author, or null if the user chose to go back or if no authors are registered
+   */
   private Author getValidAuthorFromBrowsing() {
 
     List<Author> authors = authorController.getListOfAuthorsInRegister();

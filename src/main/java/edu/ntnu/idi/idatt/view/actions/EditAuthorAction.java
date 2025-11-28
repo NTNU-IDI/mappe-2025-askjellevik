@@ -2,10 +2,13 @@ package edu.ntnu.idi.idatt.view.actions;
 
 import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
-import edu.ntnu.idi.idatt.controller.validators.AuthorValidator;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 
+/**
+ * Action class for editing an existing author's details.
+ * Allows users to update the author's first name, last name, and email.
+ */
 public class EditAuthorAction implements Action {
 
   private final AuthorMenu authorMenu;
@@ -13,12 +16,23 @@ public class EditAuthorAction implements Action {
   private final AuthorController authorController;
 
 
+  /**
+   * Constructs an EditAuthorAction with the injected dependencies.
+   */
   public EditAuthorAction(AuthorMenu authorMenu, Author author, AuthorController authorController) {
     this.authorMenu = authorMenu;
     this.author = author;
     this.authorController = authorController;
   }
 
+  /**
+   * Executes the action of editing an author's details.
+   * Presents a submenu for editing the author's first name, last name, or email.
+   * Validates each input and updates the author's information accordingly.
+   * Users can exit the submenu by selecting "back".
+   * If the validation from the controller fails, an error message is displayed
+   * and the user is prompted again.
+   */
   @Override
   public void execute() {
 

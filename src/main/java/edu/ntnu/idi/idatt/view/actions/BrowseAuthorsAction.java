@@ -9,6 +9,10 @@ import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Action class for browsing registered authors.
+ * Allows users to view, edit, or create diary entries for selected authors.
+ */
 public class BrowseAuthorsAction implements Action {
 
   private final AuthorMenu authorMenu;
@@ -16,6 +20,14 @@ public class BrowseAuthorsAction implements Action {
   private final DiaryController diaryController;
   private final AuthorController authorController;
 
+  /**
+   * Constructs a BrowseAuthorsAction with the injected dependencies.
+   *
+   * @param authorMenu the AuthorMenu for displaying author-related UI
+   * @param diaryMenu the DiaryMenu for displaying diary-related UI
+   * @param diaryController the DiaryController for managing diary entries
+   * @param authorController the AuthorController for managing authors
+   */
   public BrowseAuthorsAction(AuthorMenu authorMenu, DiaryMenu diaryMenu,
       DiaryController diaryController, AuthorController authorController) {
     this.authorMenu = authorMenu;
@@ -24,6 +36,13 @@ public class BrowseAuthorsAction implements Action {
     this.authorController = authorController;
   }
 
+  /**
+   * Executes the action of browsing authors.
+   * When the user selects an author, they can choose to view, edit,
+   * or create diary entries for that author.
+   * Authors are displayed with pagination.
+   * If no authors are registered, an error message is displayed and the action exits.
+   */
   @Override
   public void execute() {
     List<Author> authors = authorController.getListOfAuthorsInRegister();
@@ -49,7 +68,7 @@ public class BrowseAuthorsAction implements Action {
       if (end < authors.size()) {
         promptMessage += ", NEXT";
       }
-      if ( page > 0) {
+      if (page > 0) {
         promptMessage += ", PREV";
       }
       promptMessage += ", BACK";

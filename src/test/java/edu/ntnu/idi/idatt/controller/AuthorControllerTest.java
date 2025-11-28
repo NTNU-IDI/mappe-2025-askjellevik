@@ -2,8 +2,6 @@ package edu.ntnu.idi.idatt.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
@@ -16,15 +14,14 @@ import org.junit.jupiter.api.Test;
 
 public class AuthorControllerTest {
 
-  private AuthorRegister authorRegister;
   private AuthorController authorController;
   private DiaryController diaryController;
-  private DiaryRegister diaryRegister;
 
   @BeforeEach
   void setUp() {
-    authorRegister = new AuthorRegister();
-    diaryRegister = new DiaryRegister();
+    AuthorRegister authorRegister = new AuthorRegister();
+    DiaryRegister diaryRegister = new DiaryRegister();
+
     diaryController = new DiaryController(diaryRegister);
     authorController = new AuthorController(authorRegister, diaryController);
   }

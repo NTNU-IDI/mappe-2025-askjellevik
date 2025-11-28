@@ -42,8 +42,8 @@ public class CreateAuthorAction implements Action {
     String validFirstName = null;
 
     while (validFirstName == null) {
-      userInput = authorMenu.getUserStringWithPrompt("Enter the first name of the author");
-      if ("back".equalsIgnoreCase(userInput)) {
+      userInput = authorMenu.getUserStringWithPrompt("Cancel or Enter the first name of the author");
+      if ("cancel".equalsIgnoreCase(userInput)) {
         return;
       }
       try {
@@ -57,8 +57,8 @@ public class CreateAuthorAction implements Action {
 
     String validLastName = null;
     while (validLastName == null) {
-      userInput = authorMenu.getUserStringWithPrompt("Enter the last name of the author");
-      if ("back".equalsIgnoreCase(userInput)) {
+      userInput = authorMenu.getUserStringWithPrompt("Cancel or Enter the last name of the author");
+      if ("cancel".equalsIgnoreCase(userInput)) {
         return;
       }
       try {
@@ -73,8 +73,8 @@ public class CreateAuthorAction implements Action {
     String validEmail = null;
 
     while (validEmail == null) {
-      userInput = authorMenu.getUserStringWithPrompt("Enter the email of the author");
-      if ("back".equalsIgnoreCase(userInput)) {
+      userInput = authorMenu.getUserStringWithPrompt("Cancel or Enter the email of the author");
+      if ("cancel".equalsIgnoreCase(userInput)) {
         return;
       }
       try {

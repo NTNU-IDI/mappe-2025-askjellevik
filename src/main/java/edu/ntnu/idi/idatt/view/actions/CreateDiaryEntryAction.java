@@ -16,7 +16,7 @@ public class CreateDiaryEntryAction implements Action {
   private final DiaryController diaryController;
   private final AuthorMenu authorMenu;
   private final AuthorController authorController;
-  private Author authorOfDiaryEntry;
+  private final Author authorOfDiaryEntry;
 
   public CreateDiaryEntryAction(DiaryMenu diaryMenu, DiaryController diaryController,
       AuthorMenu authorMenu,
@@ -146,7 +146,7 @@ public class CreateDiaryEntryAction implements Action {
         diaryController.validateDate(userInputDate);
         validDate = userInputDate;
       } catch (InvalidInputException e) {
-        authorMenu.displayErrorMessage(e.getMessage());
+        diaryMenu.displayErrorMessage(e.getMessage());
       }
     }
     return validDate;

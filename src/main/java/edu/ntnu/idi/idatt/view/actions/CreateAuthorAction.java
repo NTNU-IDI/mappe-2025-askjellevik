@@ -3,7 +3,7 @@ package edu.ntnu.idi.idatt.view.actions;
 import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
-import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExsistsException;
+import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExistsException;
 import edu.ntnu.idi.idatt.view.menus.AuthorMenu;
 
 
@@ -88,7 +88,7 @@ public class CreateAuthorAction implements Action {
     try {
       this.createdAuthor = authorController.addAuthorToRegister(validFirstName, validLastName,
           validEmail);
-    } catch (AuthorAlreadyExsistsException e) {
+    } catch (AuthorAlreadyExistsException e) {
       authorMenu.displayErrorMessage(e.getMessage());
     }
 

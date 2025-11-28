@@ -73,11 +73,11 @@ public class DiaryController {
   /**
    * Deletes a diary entry from the register.
    *
-   * @param diaryEntry the diary entry to delete
+   * @param diaryEntryId the diary entry to delete
    * @throws DiaryEntryNotFound if the diary entry is null
    */
-  public void deleteDiaryEntryInRegister(DiaryEntry diaryEntry) {
-    diaryRegister.deleteDiaryEntry(diaryEntry.getEntryID());
+  public void deleteDiaryEntryInRegister(UUID diaryEntryId) {
+    diaryRegister.deleteDiaryEntry(diaryEntryId);
   }
 
   /**

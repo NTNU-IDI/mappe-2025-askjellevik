@@ -61,9 +61,7 @@ public class DiaryEntryValidatorTest {
 
   @Test
   void testValidateEmptyDate() {
-    LocalDateTime emptyDate = null;
-
-    List<String> errors = DiaryEntryValidator.validateDate(emptyDate);
+    List<String> errors = DiaryEntryValidator.validateDate(null);
 
     assertEquals(1, errors.size());
     assertEquals("The date can not be null", errors.get(0));

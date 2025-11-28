@@ -103,7 +103,7 @@ public class AuthorController {
   public void updateAuthorEmail(Author author, String newEmail)
       throws InvalidInputException {
     validateAuthorEmail(newEmail);
-    author.setFirstName(newEmail);
+    author.setEmail(newEmail);
   }
 
 

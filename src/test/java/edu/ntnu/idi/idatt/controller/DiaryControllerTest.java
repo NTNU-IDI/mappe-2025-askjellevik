@@ -354,10 +354,9 @@ public class DiaryControllerTest {
 
   @Test
   void testValidateDateThrowsException() {
-    LocalDateTime invalidDate = null;
 
     assertThrows(InvalidDateException.class, () ->
-        diaryController.validateDate(invalidDate)
+        diaryController.validateDate(null)
     );
   }
 

@@ -37,7 +37,7 @@ public class DiaryMenu extends BaseMenu {
       consoleUtils.showMessage("Option 1: Search for diary entry by word");
       consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
       consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
-      consoleUtils.showMessage("Option Back: Exit diary entry lookup");
+      consoleUtils.showMessage("Option Back: Go back");
 
       String userInput = consoleUtils.readUserInput();
 
@@ -54,7 +54,7 @@ public class DiaryMenu extends BaseMenu {
   /**
    * Prompts the user to enter a search date in the format dd-MM-yyyy.
    * The input is validated and parsed to a LocalDateTime object.
-   * If the user enters "back", the method returns null.
+   * If the user enters "cancel", the method returns null.
    *
    *
    *
@@ -66,7 +66,7 @@ public class DiaryMenu extends BaseMenu {
     while (true) {
       String userInput = consoleUtils.readUserInputWithPrompt("Enter the search date: dd-MM-yyyy");
 
-      if ("back".equalsIgnoreCase(userInput)) {
+      if ("cancel".equalsIgnoreCase(userInput)) {
         return null;
       }
 
@@ -124,20 +124,23 @@ public class DiaryMenu extends BaseMenu {
    * @return the user input as a String.
    */
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
-    String[] messages = {"You have chosen the diary: \n",
+    consoleUtils.showMessage("");
+    displaySecondaryHeader("You hae chosen the diary entry:");
+    String[] messages = {
         diaryEntry.getEntryTitle(), " written by ",
         diaryEntry.getEntryAuthor().getName(), " registered ",
         consoleUtils.formatDateToView(diaryEntry.getEntryDate())};
-    Color[] colors = {Color.WHITE, Color.CYAN, Color.WHITE, Color.CYAN, Color.WHITE,
-        Color.CYAN};
+    Color[] colors = {Color.YELLOW, Color.WHITE, Color.YELLOW, Color.WHITE,
+        Color.YELLOW};
 
     tryShowMessageWithMultipleColors(messages, colors);
+    consoleUtils.showMessage("");
 
     while (true) {
       consoleUtils.showMessage("Option 1: Read this diary entry");
       consoleUtils.showMessage("Option 2: Edit this diary entry");
       consoleUtils.showMessage("Option 3: Delete this diary entry");
-      consoleUtils.showMessage("Option Back: Return to main menu");
+      consoleUtils.showMessage("Option Back: Back to browsing");
 
       String userInput = consoleUtils.readUserInput();
 
@@ -164,7 +167,7 @@ public class DiaryMenu extends BaseMenu {
     displaySecondaryHeader("Date selection");
     consoleUtils.showMessage("Option 1: Automatically choose the current time");
     consoleUtils.showMessage("Option 2: Enter date manually");
-    consoleUtils.showMessage("Back: Go back");
+    consoleUtils.showMessage("Cancel: Cancel diary entry creation");
 
     String userInput;
 
@@ -173,7 +176,7 @@ public class DiaryMenu extends BaseMenu {
 
     while (true) {
       userInput = consoleUtils.readUserInputWithPrompt("Enter your choice");
-      if ("back".equalsIgnoreCase(userInput)) {
+      if ("cancel".equalsIgnoreCase(userInput)) {
         return null;
       }
 
@@ -187,8 +190,8 @@ public class DiaryMenu extends BaseMenu {
       else if ("2".equalsIgnoreCase(userInput)) {
         while (true) {
           String dateString = consoleUtils.readUserInputWithPrompt(
-              "Enter the date as dd-MM-yyyy HH:mm;");
-          if ("back".equalsIgnoreCase(dateString)) {
+              "Enter the date as dd-MM-yyyy HH:mm");
+          if ("cancel".equalsIgnoreCase(dateString)) {
             return null;
           }
           try {
@@ -236,6 +239,7 @@ public class DiaryMenu extends BaseMenu {
    * @return the user's response as a String.
    */
   public String deleteDiaryEntryPrompt(DiaryEntry diaryEntry) {
+    consoleUtils.showMessage("");
     consoleUtils.showColoredMessage("? DELETE DIARY ENTRY ?", Color.RED);
     consoleUtils.showMessage("Are you sure you want to delete this diary from the register?");
     String[] messages = {

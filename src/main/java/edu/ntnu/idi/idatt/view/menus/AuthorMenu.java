@@ -68,6 +68,7 @@ public class AuthorMenu extends BaseMenu {
   public String subMenuForEditingAuthorAction(Author author) {
     while (true) {
       consoleUtils.showColoredMessage("=== Author editing ===", Color.WHITE);
+      consoleUtils.showColoredMessage(author.getName(), Color.CYAN);
       consoleUtils.showMessage("Option 1: Edit the authors first name");
       consoleUtils.showMessage("Option 2: Edit the authors last name");
       consoleUtils.showMessage("Option 3: Edit the authors email");
@@ -122,11 +123,11 @@ public class AuthorMenu extends BaseMenu {
       displaySecondaryHeader("Author selection");
       consoleUtils.showMessage("Option 1: Register a new author");
       consoleUtils.showMessage("Option 2: Choose an existing author");
-      consoleUtils.showMessage("Option Back: Exit");
+      consoleUtils.showMessage("Option cancel: Cancel author selection");
 
       String userInput = consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "back".equals(
+      if ("1".equals(userInput) || "2".equals(userInput) || "cancel".equals(
           userInput)) {
         return userInput;
       }

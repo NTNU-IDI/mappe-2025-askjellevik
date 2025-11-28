@@ -96,7 +96,7 @@ public class CreateDiaryEntryAction implements Action {
             validAuthor = getValidAuthorFromBrowsing();
             choosingSubMenu = false;
           }
-          case "back" -> choosingSubMenu = false;
+          case "cancel" -> choosingSubMenu = false;
           default -> diaryMenu.displayErrorMessage("Could not execute that command");
         }
       }

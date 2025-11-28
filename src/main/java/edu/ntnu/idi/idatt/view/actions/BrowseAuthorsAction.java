@@ -45,14 +45,14 @@ public class BrowseAuthorsAction implements Action {
       authorMenu.displayAuthorsForSelection(authors, start, end, page + 1,
           mapOfEntriesByAuthor);
 
-      String promptMessage = "Options: (KEY)";
+      String promptMessage = "Commands: (KEY NUMBER)";
       if (end < authors.size()) {
         promptMessage += ", NEXT";
       }
       if ( page > 0) {
         promptMessage += ", PREV";
       }
-      promptMessage += " |  BACK";
+      promptMessage += ", BACK";
       String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
 
       if ("back".equalsIgnoreCase(userInput)) {
@@ -90,7 +90,7 @@ public class BrowseAuthorsAction implements Action {
               action.execute();
             }
             case "2" -> {
-              Action action = new EditAuthorAction(authorMenu, chosenAuthor);
+              Action action = new EditAuthorAction(authorMenu, chosenAuthor, authorController);
               action.execute();
             }
             case "3" -> {

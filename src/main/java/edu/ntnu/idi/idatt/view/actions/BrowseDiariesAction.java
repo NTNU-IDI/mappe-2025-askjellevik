@@ -57,14 +57,14 @@ public class BrowseDiariesAction implements Action {
 
       diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page+1);
 
-      String promptMessage = "Options: (KEY)";
+      String promptMessage = "Commands: (KEY NUMBER)";
       if (end < diaryEntries.size()) {
         promptMessage += ", NEXT";
       }
       if ( page > 0) {
         promptMessage += ", PREV";
       }
-      promptMessage += " |  BACK";
+      promptMessage += ", BACK";
       String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
 
       if ("back".equalsIgnoreCase(userInput)) {

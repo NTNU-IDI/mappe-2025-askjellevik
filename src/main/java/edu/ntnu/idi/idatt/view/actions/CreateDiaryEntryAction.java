@@ -175,14 +175,14 @@ public class CreateDiaryEntryAction implements Action {
 
       authorMenu.displayAuthorsForSelection(authors, start, end, page+1, mapOfEntriesByAuthor);
 
-      String promptMessage = "Options: (KEY)";
+      String promptMessage = "Commands: (KEY NUMBER)";
       if (end < authors.size()) {
         promptMessage += ", NEXT";
       }
       if ( page > 0) {
         promptMessage += ", PREV";
       }
-      promptMessage += " |  BACK";
+      promptMessage += ", BACK";
       String userInput = diaryMenu.getUserStringWithPrompt(promptMessage);
 
       if ("back".equalsIgnoreCase(userInput)) {

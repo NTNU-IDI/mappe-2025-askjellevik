@@ -44,6 +44,8 @@ public class DiaryMenu extends BaseMenu {
       if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
           userInput)) {
         return userInput;
+      } else {
+        displayErrorMessage("That was not a valid option");
       }
 
     }
@@ -60,11 +62,11 @@ public class DiaryMenu extends BaseMenu {
    *
    * @return the parsed LocalDateTime object or null if the user chooses to go back.
    */
-  public LocalDateTime getSearchDate() {
+  public LocalDateTime getSearchDate(String prompt) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     while (true) {
-      String userInput = consoleUtils.readUserInputWithPrompt("Enter the search date: dd-MM-yyyy");
+      String userInput = consoleUtils.readUserInputWithPrompt(prompt);
 
       if ("cancel".equalsIgnoreCase(userInput)) {
         return null;
@@ -72,7 +74,7 @@ public class DiaryMenu extends BaseMenu {
 
       try {
         LocalDate entryDate = LocalDate.parse(userInput, formatter);
-        return entryDate.atStartOfDay();
+        return entryDate.atTime(23, 59, 59);
 
       } catch (DateTimeParseException e) {
         consoleUtils.showColoredMessage("Invalid date format (dd-MM-yyyy)", Color.RED);
@@ -110,7 +112,7 @@ public class DiaryMenu extends BaseMenu {
 
     String leftAlignFormat = "| %-1d | %-30s | %-10s |%n";
     for (int i = start; i < end; i++) {
-      System.out.format(leftAlignFormat, i, diaryEntries.get(i).getEntryTitle(),
+      System.out.format(leftAlignFormat, i+1, diaryEntries.get(i).getEntryTitle(),
           diaryEntries.get(i).getEntryAuthor().getLastName());
     }
     System.out.format("+---+---------------------------------------------+%n");
@@ -147,6 +149,8 @@ public class DiaryMenu extends BaseMenu {
       if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
           userInput)) {
         return userInput;
+      } else {
+        displayErrorMessage("That was not a valid option");
       }
 
 

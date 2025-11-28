@@ -106,7 +106,7 @@ public class AuthorMenu extends BaseMenu {
 
     String leftAlignFormat = "| %-1d | %-20s | %-4d| %n";
     for (int i = start; i < end; i++) {
-      System.out.format(leftAlignFormat, i, authors.get(i).getName(),
+      System.out.format(leftAlignFormat, i+1, authors.get(i).getName(),
           authorIntegerMap.get(authors.get(i)));
     }
     System.out.format("+---+---------------------------+%n");
@@ -131,6 +131,8 @@ public class AuthorMenu extends BaseMenu {
           userInput)) {
         return userInput;
       }
+
+
 
     }
   }

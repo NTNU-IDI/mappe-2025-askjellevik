@@ -63,6 +63,7 @@ public class UserInterface {
     AuthorMenu authorMenu = new AuthorMenu(consoleUtils);
     DiaryMenu diaryMenu = new DiaryMenu(consoleUtils);
 
+    consoleUtils.clearScreen();
     boolean validInput = false;
     while (!validInput) {
       String loadData = consoleUtils.readUserInputWithPrompt("\nLoad test data now? (y/n)");

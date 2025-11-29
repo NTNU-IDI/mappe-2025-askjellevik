@@ -61,6 +61,7 @@ public class BrowseAuthorsAction implements Action {
 
       Map<Author, Integer> mapOfEntriesByAuthor = authorController.getMapOfEntriesByAuthor();
 
+      authorMenu.displayMainHeader("Registered authors");
       authorMenu.displayAuthorsForSelection(authors, start, end, page + 1,
           mapOfEntriesByAuthor);
 
@@ -98,7 +99,6 @@ public class BrowseAuthorsAction implements Action {
 
         boolean choosingSubMenu = true;
         while (choosingSubMenu) {
-          authorMenu.displayMainHeader("Registered authors");
           String subMenuUserChoice = authorMenu.subMenuForAuthorManagementAction(chosenAuthor,
               diaryController.getAmountOfEntriesBySpecificAuthor(chosenAuthor));
 

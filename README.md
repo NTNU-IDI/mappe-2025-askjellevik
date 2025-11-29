@@ -29,6 +29,7 @@ mvn exec:java
 ## How to run the tests
 
 [//]: # (TODO: Describe how to run the tests here.)
+mvn test
 
 ## References
 

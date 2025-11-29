@@ -47,7 +47,7 @@ public class BrowseAuthorsAction implements Action {
   public void execute() {
     List<Author> authors = authorController.getListOfAuthorsInRegister();
     if (authors.isEmpty()) {
-      diaryMenu.displayErrorMessage("No authors registered yet");
+      authorMenu.displayErrorMessage("No authors registered yet");
       return;
     }
 
@@ -118,7 +118,7 @@ public class BrowseAuthorsAction implements Action {
               action.execute();
             }
             case "back" -> choosingSubMenu = false;
-            default -> diaryMenu.displayErrorMessage("Could not execute that command");
+            default -> authorMenu.displayErrorMessage("Could not execute that command");
           }
         }
 

@@ -47,6 +47,15 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.4</version>
         </plugin>
+        <!-- https://www.mojohaus.org/exec-maven-plugin/usage.html -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.6.2</version>
+          <configuration>
+            <mainClass>edu.ntnu.idi.idatt.Main</mainClass>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>

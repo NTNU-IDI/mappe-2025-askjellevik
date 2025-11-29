@@ -25,7 +25,7 @@ STUDENT ID = "142168"
 
 [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
 What is the input and output of the program? What is the expected behaviour of the program?)
-mvn exec:java '-Dexec.mainClass=edu.ntnu.idi.idatt.Main'
+mvn exec:java
 ## How to run the tests
 
 [//]: # (TODO: Describe how to run the tests here.)

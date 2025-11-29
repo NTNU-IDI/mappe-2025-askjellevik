@@ -16,20 +16,54 @@ STUDENT ID = "142168"
 ## Project structure
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
-
+├───src
+│   ├───main
+│   │   └───java
+│   │       └───edu
+│   │           └───ntnu
+│   │               └───idi
+│   │                   └───idatt
+│   │                       ├───controller
+│   │                       │   ├───exceptions
+│   │                       │   ├───utils
+│   │                       │   └───validators
+│   │                       ├───model
+│   │                       │   │
+│   │                       │   └───exceptions
+│   │                       ├───view
+│   │                       │   ├───actions
+│   │                       │   └───menus
+│   │                       └Main.java
+│   └───test                
+│       └───java
+│           └───edu
+│               └───ntnu
+│                   └───idi
+│                       └───idatt
+│                           ├───controller
+│                           │   └───validators
+│                           └───model
 ## Link to repository
 
 [//]: # (TODO: Include a link to your GitHub repository here.)
+https://github.com/NTNU-IDI/mappe-2025-askjellevik
 
 ## How to run the project
 
 [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
 What is the input and output of the program? What is the expected behaviour of the program?)
-mvn exec:java
+The project is set up with an execution plugin that is set to run the Main.java file (main class for starting the application).
+To start the project this way, simply enter the following command in the terminal
+`mvn exec:java`
+
+However, it is recommended to build clean classes before you run the application. Combine this with the executing command
+`mvn clean compile exec:java`
+
 ## How to run the tests
 
 [//]: # (TODO: Describe how to run the tests here.)
-mvn test
+You can run the tests by running the following command in the terminal
+`mvn test`
 
 ## References
 

@@ -40,7 +40,7 @@ public class EditAuthorAction implements Action {
     boolean choosingSubMenu = true;
 
     while (choosingSubMenu) {
-
+      authorMenu.displaySecondaryHeader("Editing author");
       String subMenuUserChoice = authorMenu.subMenuForEditingAuthorAction(author);
 
       switch (subMenuUserChoice) {

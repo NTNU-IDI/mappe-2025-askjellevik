@@ -59,7 +59,7 @@ public class EditDiaryAction implements Action {
     String validTextToAdd = null;
 
     while (validTextToAdd == null) {
-      String userInput = diaryMenu.getUserStringWithPrompt("Enter the text to add: ");
+      String userInput = diaryMenu.getUserStringWithPrompt("Enter the text to add");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }
@@ -90,7 +90,7 @@ public class EditDiaryAction implements Action {
     String validTextToSet = null;
 
     while (validTextToSet == null) {
-      String userInput = diaryMenu.getUserStringWithPrompt("Enter new diary text:");
+      String userInput = diaryMenu.getUserStringWithPrompt("Enter new diary text");
       if ("back".equalsIgnoreCase(userInput)) {
         return;
       }

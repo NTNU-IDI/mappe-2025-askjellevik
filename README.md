@@ -16,6 +16,7 @@ STUDENT ID = "142168"
 ## Project structure
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
+```
 ├───src
 │   ├───main
 │   │   └───java
@@ -43,6 +44,7 @@ STUDENT ID = "142168"
 │                           ├───controller
 │                           │   └───validators
 │                           └───model
+```
 ## Link to repository
 
 [//]: # (TODO: Include a link to your GitHub repository here.)

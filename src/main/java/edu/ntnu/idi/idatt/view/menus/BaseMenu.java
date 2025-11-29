@@ -77,6 +77,7 @@ public class BaseMenu {
    * @param header the header text to display.
    */
   public void displaySecondaryHeader(String header) {
+    consoleUtils.clearScreen();
     consoleUtils.showColoredMessage("--- " + header + " ---", Color.CYAN);
   }
 
@@ -87,6 +88,7 @@ public class BaseMenu {
    * @param header the header text to display.
    */
   public void displayThirdHeader(String header) {
+    consoleUtils.clearScreen();
     consoleUtils.showColoredMessage("### " + header + " ###", Color.MAGENTA);
   }
 

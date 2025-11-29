@@ -33,23 +33,14 @@ public class DiaryMenu extends BaseMenu {
    */
   public String subMenuForFindingDiaryAction() {
 
-    while (true) {
       consoleUtils.showMessage("Option 1: Search for diary entry by word");
       consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
       consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
       consoleUtils.showMessage("Option 4: Search for diary entry by author email");
       consoleUtils.showMessage("Option Back: Go back");
 
-      String userInput = consoleUtils.readUserInput();
+      return consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput)
-          || "4".equals(userInput) || "back".equals(userInput)) {
-        return userInput;
-      } else {
-        displayErrorMessage("That was not a valid option");
-      }
-
-    }
 
 
   }
@@ -128,7 +119,7 @@ public class DiaryMenu extends BaseMenu {
    */
   public String subMenuForDiaryManagementAction(DiaryEntry diaryEntry) {
     consoleUtils.showMessage("");
-    displaySecondaryHeader("You hae chosen the diary entry:");
+    displaySecondaryHeader("You have chosen the diary entry:");
     String[] messages = {
         diaryEntry.getEntryTitle(), "\nWritten by ",
         diaryEntry.getEntryAuthor().getName(), " registered ",
@@ -139,23 +130,13 @@ public class DiaryMenu extends BaseMenu {
     tryShowMessageWithMultipleColors(messages, colors);
     consoleUtils.showMessage("");
 
-    while (true) {
       consoleUtils.showMessage("Option 1: Read this diary entry");
       consoleUtils.showMessage("Option 2: Edit this diary entry");
       consoleUtils.showMessage("Option 3: Delete this diary entry");
       consoleUtils.showMessage("Option Back: Back to browsing");
 
-      String userInput = consoleUtils.readUserInput();
+      return consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
-          userInput)) {
-        return userInput;
-      } else {
-        displayErrorMessage("That was not a valid option");
-      }
-
-
-    }
 
 
   }
@@ -225,6 +206,7 @@ public class DiaryMenu extends BaseMenu {
    * @param diaryEntry the diary entry to read.
    */
   public void readDiaryEntry(DiaryEntry diaryEntry) {
+    consoleUtils.clearScreen();
     consoleUtils.showColoredMessage("===== Reading diary entry =====", Color.MAGENTA);
     consoleUtils.showMessage(diaryEntry.getEntryTitle());
     consoleUtils.printLine(Color.GREEN);
@@ -265,20 +247,14 @@ public class DiaryMenu extends BaseMenu {
    * @return the user input as a String.
    */
   public String subMenuForEditingDiaryAction() {
-    while (true) {
       consoleUtils.showMessage("Option 1: Edit the diary entry title");
       consoleUtils.showMessage("Option 2: Overwrite the diary entry text");
       consoleUtils.showMessage("Option 3: Add text to the existing diary entry text");
       consoleUtils.showMessage("Option Back: Exit diary entry editing");
 
-      String userInput = consoleUtils.readUserInput();
+      return consoleUtils.readUserInput();
 
-      if ("1".equals(userInput) || "2".equals(userInput) || "3".equals(userInput) || "back".equals(
-          userInput)) {
-        return userInput;
-      }
 
-    }
   }
 
 

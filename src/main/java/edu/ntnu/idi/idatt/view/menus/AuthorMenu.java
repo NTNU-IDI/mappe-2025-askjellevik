@@ -84,9 +84,6 @@ public class AuthorMenu extends BaseMenu {
      */
     public void displayAuthorsForSelection(List<Author> authors, int start, int end, int page,
                                            Map<Author, Integer> authorIntegerMap) {
-        consoleUtils.showColoredMessage("=== Registered Authors ===", Color.WHITE);
-
-
         System.out.format("+---+---------Page " + page + "---------------+%n");
         System.out.format("|KEY| Name                 |Diaries|%n");
         System.out.format("+---+------------------------------+%n");

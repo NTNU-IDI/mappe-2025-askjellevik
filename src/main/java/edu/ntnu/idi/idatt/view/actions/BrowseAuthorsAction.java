@@ -98,6 +98,7 @@ public class BrowseAuthorsAction implements Action {
 
         boolean choosingSubMenu = true;
         while (choosingSubMenu) {
+          authorMenu.displayMainHeader("Registered authors");
           String subMenuUserChoice = authorMenu.subMenuForAuthorManagementAction(chosenAuthor,
               diaryController.getAmountOfEntriesBySpecificAuthor(chosenAuthor));
 

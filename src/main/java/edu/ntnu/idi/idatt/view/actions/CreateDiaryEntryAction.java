@@ -235,6 +235,7 @@ public class CreateDiaryEntryAction implements Action {
       Map<Author, Integer> mapOfEntriesByAuthor= authorController.getMapOfEntriesByAuthor();
 
 
+      authorMenu.displaySecondaryHeader("Choose an author");
       authorMenu.displayAuthorsForSelection(authors, start, end, page+1, mapOfEntriesByAuthor);
 
       String promptMessage = "Commands: (KEY NUMBER)";

@@ -29,7 +29,7 @@ public class AuthorMenu extends BaseMenu {
      * Displays the submenu for author management actions and returns the user's choice.
      * Options include browsing diary entries, editing the author, creating a diary entry, or returning.
      *
-     * @param author          the author being managed
+     * @param author the author being managed
      * @param amountOfEntries the number of diary entries registered to the author
      * @return the user input as a String.
      */

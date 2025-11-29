@@ -145,10 +145,10 @@ public class DiaryMenu extends BaseMenu {
    * Prompts the user to choose a date for a new diary entry.
    * The user can either use the current date which will return LocalDateTime.now(),
    * or enter a date manually in the format dd-MM-yyyy HH:mm.
-   * If the user enters "back", the method returns null.
+   * If the user enters "cancel", the method returns null.
    *
    * @return the chosen LocalDateTime for the new diary entry
-   * or null if the user chooses to go back.
+   * or null if the user chooses to cancel.
    */
   public LocalDateTime getDateOfNewDiaryEntry() {
     displaySecondaryHeader("Date selection");

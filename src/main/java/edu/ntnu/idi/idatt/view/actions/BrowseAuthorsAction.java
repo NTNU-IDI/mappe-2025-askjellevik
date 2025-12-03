@@ -88,7 +88,7 @@ public class BrowseAuthorsAction implements Action {
       }
 
       try {
-        int indexOfChosenAuthor = Integer.parseInt(userInput) -1;
+        int indexOfChosenAuthor = Integer.parseInt(userInput) - 1;
 
         if (indexOfChosenAuthor < start || indexOfChosenAuthor >= end) {
           authorMenu.displayErrorMessage("The author ID was out of range");

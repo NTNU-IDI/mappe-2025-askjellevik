@@ -155,7 +155,8 @@ public class CreateDiaryEntryAction implements Action {
 
   /**
    * Prompts the user for diary title and validates the input.
-   * The method uses a loop to prompt until a valid title is provided or the user chooses to go back.
+   * The method uses a loop to prompt until a valid title is
+   * provided or the user chooses to go back.
    * If the user inputs "back", the method returns null.
    *
    * @return the valid diary title, or null if the user chose to go back
@@ -213,7 +214,8 @@ public class CreateDiaryEntryAction implements Action {
    * select an author by their key, or go back to exit the selection.
    * If no authors are registered, an error message is displayed and the method returns null.
    *
-   * @return the valid selected Author, or null if the user chose to go back or if no authors are registered
+   * @return the valid selected Author,
+   *     or null if the user chose to go back or if no authors are registered
    */
   private Author getValidAuthorFromBrowsing() {
 
@@ -232,17 +234,17 @@ public class CreateDiaryEntryAction implements Action {
       int start = page * pageSize;
       int end = Math.min(authors.size(), start + pageSize);
 
-      Map<Author, Integer> mapOfEntriesByAuthor= authorController.getMapOfEntriesByAuthor();
+      Map<Author, Integer> mapOfEntriesByAuthor = authorController.getMapOfEntriesByAuthor();
 
 
       authorMenu.displaySecondaryHeader("Choose an author");
-      authorMenu.displayAuthorsForSelection(authors, start, end, page+1, mapOfEntriesByAuthor);
+      authorMenu.displayAuthorsForSelection(authors, start, end, page + 1, mapOfEntriesByAuthor);
 
       String promptMessage = "Commands: (KEY NUMBER)";
       if (end < authors.size()) {
         promptMessage += ", NEXTPAGE";
       }
-      if ( page > 0) {
+      if (page > 0) {
         promptMessage += ", PREVPAGE";
       }
       promptMessage += ", BACK";
@@ -261,7 +263,7 @@ public class CreateDiaryEntryAction implements Action {
       }
 
       try {
-        int indexOfChosenAuthor = Integer.parseInt(userInput) -1;
+        int indexOfChosenAuthor = Integer.parseInt(userInput) - 1;
 
         if (indexOfChosenAuthor < start || indexOfChosenAuthor >= end) {
           authorMenu.displayErrorMessage("The author ID was out of range");

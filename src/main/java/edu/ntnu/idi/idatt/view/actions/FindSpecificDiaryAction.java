@@ -31,7 +31,8 @@ public class FindSpecificDiaryAction implements Action {
 
   /**
    * Executes the action of finding specific diary entries.
-   * Presents a submenu for searching diary entries by keyword, specific date, or within a date range.
+   * Presents a submenu for searching diary entries by keyword,
+   * specific date, or within a date range.
    * Users can exit the submenu by selecting "back".
    * Displays the search results and allows further actions on the found diary entries.
    */
@@ -83,13 +84,15 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryWithinTwoDates() {
     diaryMenu.displaySecondaryHeader("Searching within two dates");
 
-    LocalDateTime startSearchDate = diaryMenu.getSearchDate("Cancel or Enter the start date: dd-MM-yyyy");
+    LocalDateTime startSearchDate = diaryMenu.getSearchDate(
+            "Cancel or Enter the start date: dd-MM-yyyy");
 
     if (startSearchDate == null) {
       return;
     }
 
-    LocalDateTime endSearchDate = diaryMenu.getSearchDate("Cancel or Enter the end date: dd-MM-yyyy");
+    LocalDateTime endSearchDate = diaryMenu.getSearchDate(
+            "Cancel or Enter the end date: dd-MM-yyyy");
 
     if (endSearchDate == null) {
       return;
@@ -110,7 +113,8 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryWithSpecificDate() {
     diaryMenu.displaySecondaryHeader("Searching by date");
 
-    LocalDateTime searchDate = diaryMenu.getSearchDate("Cancel or Enter the search date: dd-MM-yyyy");
+    LocalDateTime searchDate = diaryMenu.getSearchDate(
+            "Cancel or Enter the search date: dd-MM-yyyy");
 
     List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesByDate(searchDate);
 

@@ -127,7 +127,7 @@ public class FindSpecificDiaryAction implements Action {
   private void searchForDiaryEntryByWord() {
     diaryMenu.displaySecondaryHeader("Searching by word");
 
-    String searchWord = diaryMenu.searchForDiaryEntryByWordPrompt();
+    String searchWord = diaryMenu.getUserStringWithPrompt("Enter the search word");
 
     List<DiaryEntry> diaries = diaryController.getListOfDiaryEntriesWithSpecificWord(searchWord);
 

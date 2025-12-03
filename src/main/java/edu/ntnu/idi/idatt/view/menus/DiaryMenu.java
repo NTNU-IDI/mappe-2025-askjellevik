@@ -77,16 +77,6 @@ public class DiaryMenu extends BaseMenu {
   }
 
   /**
-   * Prompts the user to enter a search word for finding diary entries and returns it.
-   *
-   * @return the search word entered by the user as a String.
-   */
-  public String searchForDiaryEntryByWordPrompt() {
-    return consoleUtils.readUserInputWithPrompt("Enter the search word");
-
-  }
-
-  /**
    * Displays a paginated list of diary entries for user selection.
    * Each entry is shown with its key and title.
    * The user can navigate through pages or select a diary entry by its key.
@@ -98,16 +88,16 @@ public class DiaryMenu extends BaseMenu {
    */
   public void displayEntriesForSelection(List<DiaryEntry> diaryEntries, int start, int end,
       int page) {
-    System.out.format("+---+----------------Page " + page + "-----------------------+%n");
-    System.out.format("|KEY| Title                          | Author     |%n");
-    System.out.format("+---+---------------------------------------------+%n");
+    System.out.format("+----+----------------Page " + page + "-----------------------+%n");
+    System.out.format("|KEY | Title                          | Author     |%n");
+    System.out.format("+----+---------------------------------------------+%n");
 
-    String leftAlignFormat = "| %-1d | %-30s | %-10s |%n";
+    String leftAlignFormat = "| %-2d | %-30s | %-10s |%n";
     for (int i = start; i < end; i++) {
       System.out.format(leftAlignFormat, i + 1, diaryEntries.get(i).getEntryTitle(),
           diaryEntries.get(i).getEntryAuthor().getLastName());
     }
-    System.out.format("+---+---------------------------------------------+%n");
+    System.out.format("+----+---------------------------------------------+%n");
   }
 
   /**

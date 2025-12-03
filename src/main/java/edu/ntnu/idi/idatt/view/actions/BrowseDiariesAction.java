@@ -83,13 +83,13 @@ public class BrowseDiariesAction implements Action {
 
 
 
-      diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page+1);
+      diaryMenu.displayEntriesForSelection(diaryEntries, start, end, page + 1);
 
       String promptMessage = "Commands: (KEY NUMBER)";
       if (end < diaryEntries.size()) {
         promptMessage += ", NEXTPAGE";
       }
-      if ( page > 0) {
+      if (page > 0) {
         promptMessage += ", PREVPAGE";
       }
       promptMessage += ", BACK";

@@ -42,7 +42,8 @@ public class CreateAuthorAction implements Action {
     String validFirstName = null;
 
     while (validFirstName == null) {
-      userInput = authorMenu.getUserStringWithPrompt("Cancel or Enter the first name of the author");
+      userInput = authorMenu.getUserStringWithPrompt(
+              "Cancel or Enter the first name of the author");
       if ("cancel".equalsIgnoreCase(userInput)) {
         return;
       }

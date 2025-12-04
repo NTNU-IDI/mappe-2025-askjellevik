@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.view.actions;
 
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.model.DiaryEntry;
+import edu.ntnu.idi.idatt.model.exceptions.DiaryEntryNotFound;
 import edu.ntnu.idi.idatt.view.menus.DiaryMenu;
 import java.util.ArrayList;
 import java.util.List;
@@ -169,7 +170,7 @@ public class BrowseDiariesAction implements Action {
           diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryID());
           diaryMenu.displaySuccessMessage("Diary entry deleted");
           return true;
-        } catch (Exception e) {
+        } catch (DiaryEntryNotFound e) {
           diaryMenu.displayErrorMessage("Could not delete the diary entry");
           return false;
         }

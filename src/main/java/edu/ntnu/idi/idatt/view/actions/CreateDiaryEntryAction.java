@@ -121,7 +121,7 @@ public class CreateDiaryEntryAction implements Action {
 
     try {
       diaryController.addDiaryToRegister(validDate, validAuthor, validTitle, validText);
-    } catch (Exception e) {
+    } catch (InvalidInputException | InvalidDateException e) {
       authorMenu.displayErrorMessage("Unexpected error: " + e.getMessage());
     }
 

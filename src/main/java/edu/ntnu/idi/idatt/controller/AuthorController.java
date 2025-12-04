@@ -55,11 +55,8 @@ public class AuthorController {
     validateAuthorName(lastName);
     validateAuthorEmail(email);
 
-    try {
-      getAuthorByEmail(email);
+    if (authorRegister.checkIfAuthorExists(email)) {
       throw new AuthorAlreadyExistsException("An author with that email already exists.");
-    } catch (AuthorNotFoundException e) {
-      // If AuthorNotFoundException is thrown, it means the author does not exist.
     }
 
     Author authorToAdd = new Author(firstName, lastName, email);

@@ -1,7 +1,9 @@
 package edu.ntnu.idi.idatt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,6 +47,41 @@ public class AuthorRegisterTest {
 
   }
 
+  @Test
+  void testGetAuthorByEmail() {
+    Author author = new Author("Test", "Author", "test@mail.com");
 
+    authorRegister.addAuthor(author);
+    Author retrievedAuthor = authorRegister.getAuthorByEmail("test@mail.com");
 
+    assertSame(author, retrievedAuthor);
+
+  }
+
+  @Test
+  void testGetAuthorByEmailNotFound() {
+    Author retrievedAuthor = authorRegister.getAuthorByEmail("not.found@mail.com");
+
+    assertNull(retrievedAuthor);
+
+  }
+
+  @Test
+  void testCheckIfAuthorExists() {
+    Author author = new Author("Test", "Author", "test@author.com");
+
+    authorRegister.addAuthor(author);
+    boolean exists = authorRegister.checkIfAuthorExists("test@author.com");
+
+    assertTrue(exists);
+
+  }
+
+  @Test
+  void testCheckIfAuthorExistsNotFound() {
+    boolean exists = authorRegister.checkIfAuthorExists("not.found@mail.com");
+
+    assertFalse(exists);
+
+  }
 }

@@ -52,4 +52,14 @@ public class AuthorRegister {
 
 
   }
+
+  /**
+   * Checks if an author exists in the register by their email.
+   *
+   * @param email the email of the author
+   * @return true if the author exists, false if it does not
+   */
+  public boolean checkIfAuthorExists(String email) {
+    return authorRegister.containsKey(email);
+  }
 }

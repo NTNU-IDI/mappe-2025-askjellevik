@@ -63,17 +63,18 @@ public class AuthorValidator {
     }
 
     /* Chat-GPT prompt:
-    *
-    *   Make a regex pattern to check that it's a valid name, not enforcing capitalization or formatting.
-    *   also allowing for names with hyphens, apostrophes and spaces.
-    * */
+     *
+     *   Make a regex pattern to check that it's a valid name,
+     *   not enforcing capitalization or formatting.
+     *   also allowing for names with hyphens, apostrophes and spaces.
+     * */
 
     String regexPattern = "^[a-zA-ZÀ-ÿ'’-]+(?:[ -][a-zA-ZÀ-ÿ'’-]+)*$";
 
-    if(!Pattern.compile(regexPattern)
+    if (!Pattern.compile(regexPattern)
         .matcher(name)
         .matches()) {
-          errors.add("The name does not fit the name format");
+      errors.add("The name does not fit the name format");
     }
     if (name.length() < 2) {
       errors.add("The name can not be less than 2 characters");

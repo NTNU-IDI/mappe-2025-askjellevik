@@ -23,7 +23,7 @@ public class AuthorController {
   /**
    * Constructs a DiaryController with the injected DiaryRegister.
    *
-   * @param authorRegister the AuthorController to be managed by this controller
+   * @param authorRegister the authorRegister to be managed by this controller
    * @param diaryController the DiaryController to get diary entries from;
    */
   public AuthorController(AuthorRegister authorRegister, DiaryController diaryController) {

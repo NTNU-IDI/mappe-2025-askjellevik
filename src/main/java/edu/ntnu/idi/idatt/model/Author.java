@@ -14,17 +14,18 @@ public class Author {
 
 
   /**
-   * Constructs an Author with the specified id, name, and email.
+   * Constructs an Author with the specified names and email.
    *
    * @param firstName the first name of the author
    * @param lastName the last name of the author
    * @param email the email of the author
+   * @throws IllegalArgumentException if any of the parameters are null or empty
    */
-  public Author(String firstName, String lastName, String email) {
+  public Author(String firstName, String lastName, String email) throws IllegalArgumentException {
     this.id = UUID.randomUUID();
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
+    setFirstName(firstName);
+    setLastName(lastName);
+    setEmail(email);
   }
 
   /**   Gets the name of the author.
@@ -70,16 +71,25 @@ public class Author {
   /**   Sets the email of the author.
    *
    * @param email the new email of the author
+   * @throws IllegalArgumentException if the email is null or empty
+   *
    */
   public void setEmail(String email) {
+    if (email == null || email.isBlank()) {
+      throw new IllegalArgumentException("Email cannot be null or empty.");
+    }
     this.email = email;
   }
 
   /**   Sets the first name of the author.
    *
    * @param firstName the new name of the author
+   * @throws IllegalArgumentException if the first name is null or empty
    */
   public void setFirstName(String firstName) {
+    if (firstName == null || firstName.isBlank()) {
+      throw new IllegalArgumentException("First name cannot be null or empty.");
+    }
     this.firstName = firstName;
   }
 
@@ -88,6 +98,9 @@ public class Author {
    * @param lastName the new name of the author
    */
   public void setLastName(String lastName) {
+    if (lastName == null || lastName.isBlank()) {
+      throw new IllegalArgumentException("Last name cannot be null or empty.");
+    }
     this.lastName = lastName;
   }
 

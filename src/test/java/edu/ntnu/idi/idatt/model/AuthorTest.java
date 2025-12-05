@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,6 +54,43 @@ public class AuthorTest {
     Author anotherAuthor = new Author("Name", "Nameson", "nameson@mail.com");
 
     assertNotEquals(author.getId(), anotherAuthor.getId());
+  }
+
+  @Test
+  void testConstructorWithInvalidEmailThrowsException() {
+
+    assertThrows(IllegalArgumentException.class, () -> new Author("Navn", "Navnesen", null));
+    assertThrows(IllegalArgumentException.class, () -> new Author("Navn", "Navnesen", ""));
+    assertThrows(IllegalArgumentException.class, () -> new Author("Navn", "Navnesen", " "));
+
+    assertThrows(IllegalArgumentException.class, () -> author.setEmail(null));
+    assertThrows(IllegalArgumentException.class, () -> author.setEmail(""));
+    assertThrows(IllegalArgumentException.class, () -> author.setEmail(" "));
+  }
+
+  @Test
+  void testInvalidFirstNameThrowsException() {
+    assertThrows(IllegalArgumentException.class, () -> new Author(null, "Navnesen", "email@mail.com"));
+    assertThrows(IllegalArgumentException.class, () -> new Author("", "Navnesen", "email@mail.com"));
+    assertThrows(IllegalArgumentException.class, () -> new Author(" ", "Navnesen", "email@mail.com"));
+
+    assertThrows(IllegalArgumentException.class, () -> author.setFirstName(null));
+    assertThrows(IllegalArgumentException.class, () -> author.setFirstName(""));
+    assertThrows(IllegalArgumentException.class, () -> author.setFirstName(" "));
+
+  }
+
+  @Test
+  void testInvalidLastNameThrowsException() {
+    assertThrows(IllegalArgumentException.class, () -> new Author("Navn", null, "email@mail.com"));
+    assertThrows(IllegalArgumentException.class, () -> new Author("Navn", "", "email@mail.com"));
+    assertThrows(IllegalArgumentException.class, () -> new Author("Navn", " ", "email@mail.com"));
+
+
+    assertThrows(IllegalArgumentException.class, () -> author.setLastName(null));
+    assertThrows(IllegalArgumentException.class, () -> author.setLastName(""));
+    assertThrows(IllegalArgumentException.class, () -> author.setLastName(" "));
+
   }
 
 }

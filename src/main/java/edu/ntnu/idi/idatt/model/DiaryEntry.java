@@ -25,11 +25,17 @@ public class DiaryEntry {
    */
   public DiaryEntry(LocalDateTime entryDate, Author entryAuthor, String entryTitle,
       String entryText) {
+    if (entryDate == null) {
+      throw new IllegalArgumentException("Entry date cannot be null.");
+    }
+    if (entryAuthor == null) {
+      throw new IllegalArgumentException("Entry author cannot be null.");
+    }
     this.entryID = UUID.randomUUID();
     this.entryDate = entryDate;
     this.entryAuthor = entryAuthor;
-    this.entryTitle = entryTitle;
-    this.entryText = entryText;
+    setEntryTitle(entryTitle);
+    setEntryText(entryText);
   }
 
   /**   * Gets the unique identifier of the diary entry.
@@ -76,6 +82,9 @@ public class DiaryEntry {
    * @param entryTitle the new entry title
    */
   public void setEntryTitle(String entryTitle) {
+    if (entryTitle == null || entryTitle.isBlank()) {
+      throw new IllegalArgumentException("Entry title cannot be null or empty.");
+    }
     this.entryTitle = entryTitle;
   }
 
@@ -84,6 +93,9 @@ public class DiaryEntry {
    * @param entryText the new entry text
    */
   public void setEntryText(String entryText) {
+    if (entryText == null || entryText.isBlank()) {
+      throw new IllegalArgumentException("Entry text cannot be null or empty.");
+    }
     this.entryText = entryText;
   }
 

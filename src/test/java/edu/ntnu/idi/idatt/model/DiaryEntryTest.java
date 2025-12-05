@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,4 +48,26 @@ public class DiaryEntryTest {
     assertEquals(expected, diaryEntry.toString());
   }
 
+  @Test
+  void testConstructorWithInvalidArguments() {
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(null, author, "Title", "Text"));
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(entryDate, null, "Title", "Text"));
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(entryDate, author, null, "Text"));
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(entryDate, author, "", "Text"));
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(entryDate, author, " ", "Text"));
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(entryDate, author, "Title", null));
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(entryDate, author, "Title", ""));
+    assertThrows(IllegalArgumentException.class, () -> new DiaryEntry(entryDate, author, "Title", " "));
+  }
+
+  @Test
+  void testSettersWithInvalidArguments() {
+    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setEntryTitle(null));
+    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setEntryTitle(""));
+    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setEntryTitle(" "));
+
+    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setEntryText(null));
+    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setEntryText(""));
+    assertThrows(IllegalArgumentException.class, () -> diaryEntry.setEntryText(" "));
+  }
 }

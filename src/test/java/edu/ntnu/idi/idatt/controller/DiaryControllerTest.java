@@ -25,7 +25,7 @@ public class DiaryControllerTest {
   void setUp() {
     diaryRegister = new DiaryRegister();
     diaryController = new DiaryController(diaryRegister);
-    author = new Author("Test",  "Author", "test.author@mail.com");
+    author = new Author("Test", "Author", "test.author@mail.com");
   }
 
   @Test
@@ -196,7 +196,7 @@ public class DiaryControllerTest {
         "Test title 1",
         "Test text 1."
     );
-    Author author2 = new Author("Another" ,"Author", "another@mail.com");
+    Author author2 = new Author("Another", "Author", "another@mail.com");
     DiaryEntry diaryEntry2 = new DiaryEntry(
         java.time.LocalDateTime.of(2024, 6, 16, 10, 30),
         author2,
@@ -249,7 +249,6 @@ public class DiaryControllerTest {
 
     diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryID());
 
-
     assertEquals(0, diaryController.getListOfAllRegisteredDiaryEntries().size());
   }
 
@@ -270,10 +269,10 @@ public class DiaryControllerTest {
     );
     diaryRegister.addDiaryEntry(diaryEntry);
 
-
     diaryController.updateDiaryEntryTitle(diaryEntry, "New Title");
 
-    assertEquals("New Title", diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryTitle());
+    assertEquals("New Title",
+        diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryTitle());
   }
 
   @Test
@@ -301,10 +300,10 @@ public class DiaryControllerTest {
     );
     diaryRegister.addDiaryEntry(diaryEntry);
 
-
     diaryController.updateDiaryEntryText(diaryEntry, "New test text.");
 
-    assertEquals("New test text.", diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryText());
+    assertEquals("New test text.",
+        diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryText());
   }
 
   @Test
@@ -331,10 +330,10 @@ public class DiaryControllerTest {
     );
     diaryRegister.addDiaryEntry(diaryEntry);
 
-
     diaryController.updateDiaryEntryTextByAdding(diaryEntry, "This text is added.");
 
-    assertEquals("Old test text.\nThis text is added.", diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryText());
+    assertEquals("Old test text.\nThis text is added.",
+        diaryController.getListOfAllRegisteredDiaryEntries().get(0).getEntryText());
   }
 
   @Test
@@ -360,7 +359,29 @@ public class DiaryControllerTest {
     );
   }
 
+  @Test
+  void testAddDiaryEntryToRegisterWithInvalidInputThrowsException() {
+    LocalDateTime validDate = java.time.LocalDateTime.of(2024, 6, 15, 10, 30);
 
+    assertThrows(InvalidInputException.class, () ->
+        diaryController.addDiaryToRegister(null, author, "Title", "Text")
+    );
+
+    assertThrows(InvalidInputException.class, () ->
+        diaryController.addDiaryToRegister(validDate, null, "Title", "Text")
+    );
+
+    assertThrows(InvalidInputException.class, () ->
+        diaryController.addDiaryToRegister(validDate, author, null, "Text")
+    );
+
+    assertThrows(InvalidInputException.class, () ->
+        diaryController.addDiaryToRegister(validDate, author, "Title", null)
+    );
+
+
+
+  }
 
 
 }

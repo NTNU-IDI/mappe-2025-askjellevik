@@ -2,11 +2,13 @@ package edu.ntnu.idi.idatt.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.AuthorRegister;
 import edu.ntnu.idi.idatt.model.DiaryRegister;
+import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExistsException;
 import edu.ntnu.idi.idatt.model.exceptions.AuthorNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -60,7 +62,7 @@ public class AuthorControllerTest {
     Author addedAuthor = authorController.addAuthorToRegister("Test", "Author", "test@mail.com");
     Author authorByEmail = authorController.getAuthorByEmail("test@mail.com");
 
-    assert (addedAuthor.equals(authorByEmail));
+    assertEquals(addedAuthor, authorByEmail);
   }
 
   @Test
@@ -70,10 +72,10 @@ public class AuthorControllerTest {
   }
 
   @Test
-  void testAddAuthorToRegisterThrowsException() {
+  void testAddExistingAuthorToRegisterThrowsException() {
     authorController.addAuthorToRegister("Test", "Author", "test@mail.com");
 
-    assertThrows(Exception.class, () ->
+    assertThrows(AuthorAlreadyExistsException.class, () ->
         authorController.addAuthorToRegister("Another", "Authorer", "test@mail.com"));
 
   }
@@ -126,6 +128,19 @@ public class AuthorControllerTest {
 
       assertEquals(2, entriesByAuthor.get(author1));
       assertEquals(1, entriesByAuthor.get(author2));
+    }
+
+    @Test
+    void testAddAuthorToRegisterWithInvalidInputThrowsException() {
+      assertThrows(InvalidInputException.class, () ->
+          authorController.addAuthorToRegister(" ", "Author", "author@mail.com"));
+
+      assertThrows(InvalidInputException.class, () ->
+          authorController.addAuthorToRegister("Test", " ", "author@mail.com"));
+
+      assertThrows(InvalidInputException.class, () ->
+          authorController.addAuthorToRegister("Test", "Author", " "));
+
     }
 
   }

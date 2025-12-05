@@ -5,12 +5,16 @@ import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
+import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExistsException;
 import java.time.LocalDateTime;
 
 public class TestDataLoader {
 
   /**
    * Constructs a TestDataLoader.
+   *
+   * <p>This class is only used for generating
+   * mock data to test the program with
    *
    * @author andskj
    * @since v0.3.1
@@ -20,6 +24,9 @@ public class TestDataLoader {
 
   /**
    * Loads hard-coded test data into the provided DiaryController and AuthorController.
+   *
+   * <p>This method creates several authors where each author
+   * has multiple diary entries
    *
    * @param diaryController  the DiaryController to load data into
    * @param authorController the AuthorController to load data into
@@ -86,7 +93,7 @@ public class TestDataLoader {
           "I found a dollar on the ground today. So I am twice as rich as I was yesterday.");
 
     }
-    catch (InvalidInputException | InvalidDateException e) {
+    catch (InvalidInputException | InvalidDateException | AuthorAlreadyExistsException e) {
       System.err.println(e.getMessage());
     }
   }

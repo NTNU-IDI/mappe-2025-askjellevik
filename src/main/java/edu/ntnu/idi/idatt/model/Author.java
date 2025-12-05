@@ -30,9 +30,9 @@ public class Author {
   }
 
   /**
-   * Gets the name of the author.
+   * Gets the ID of the author.
    *
-   * @return the author's name
+   * @return the author's ID
    */
   public UUID getId() {
     return id;

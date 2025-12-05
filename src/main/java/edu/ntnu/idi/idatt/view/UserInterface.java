@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.view;
 
-
 import edu.ntnu.idi.idatt.controller.AuthorController;
 import edu.ntnu.idi.idatt.controller.DiaryController;
 import edu.ntnu.idi.idatt.controller.utils.ConsoleUtils;
@@ -31,26 +30,34 @@ import org.fusesource.jansi.Ansi.Color;
 public class UserInterface {
 
   private final ConsoleUtils consoleUtils;
+  private final DiaryMenu diaryMenu;
+  private final AuthorMenu authorMenu;
   private boolean running;
   private Map<String, Action> mainMenuMap;
   private String errorMessage;
 
 
   /**
-   * Constructs the UserInterface and initializes the console utilities and setting running to true.
+   * Constructs the UserInterface.
+   *
+   * <p>Initializes the console utilities, diary menu, and author menu.
+   * Sets the running flag to true and error message to null.</p>
    *
    */
   public UserInterface() {
-    consoleUtils = new ConsoleUtils();
-    running = true;
-    errorMessage = null;
+    this.consoleUtils = new ConsoleUtils();
+    this.diaryMenu = new DiaryMenu(consoleUtils);
+    this.authorMenu = new AuthorMenu(consoleUtils);
+    this.running = true;
+    this.errorMessage = null;
   }
 
 
   /**
-   * Initializes the user interface by creating the registers, controllers, and menus.
-   * The user is also given a choice to load test data into the application.
-   * Main menu user input options are mapped to their corresponding actions.
+   * Initializes the user interface by creating the registers and controllers.
+   *
+   * <p>The user is also given a choice to load test data into the application.
+   * Main menu user input options are mapped to their corresponding actions.</p>
    * */
   public void init() {
 
@@ -60,8 +67,6 @@ public class UserInterface {
     DiaryController diaryController = new DiaryController(diaryRegister);
     AuthorController authorController = new AuthorController(authorRegister, diaryController);
 
-    AuthorMenu authorMenu = new AuthorMenu(consoleUtils);
-    DiaryMenu diaryMenu = new DiaryMenu(consoleUtils);
 
     consoleUtils.clearScreen();
     boolean validInput = false;
@@ -106,7 +111,9 @@ public class UserInterface {
 
   /**
    * Displays the main menu and collect user input to execute the corresponding menu action.
-   * */
+   *
+   * <p>If the user input is invalid, an error message is shown on the next menu display.</p>
+   */
   public void showMainMenu() {
     consoleUtils.clearScreen();
     consoleUtils.showColoredMessage("======= Main Menu =======", Color.GREEN);

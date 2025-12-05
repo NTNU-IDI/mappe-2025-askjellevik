@@ -28,7 +28,7 @@ public class DiaryRegister {
    * @param diaryEntry the diary entry to add
    */
   public void addDiaryEntry(DiaryEntry diaryEntry) {
-    diaryRegister.put(diaryEntry.getEntryID(), diaryEntry);
+    diaryRegister.put(diaryEntry.getEntryId(), diaryEntry);
   }
 
   /**

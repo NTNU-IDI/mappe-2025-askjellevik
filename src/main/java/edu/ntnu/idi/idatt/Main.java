@@ -5,8 +5,9 @@ import edu.ntnu.idi.idatt.view.UserInterface;
 
 /**
  * Main class for starting the application.
- * This class contains the main method which initializes and
- * starts the user interface, starting the main loop.
+ *
+ * <p>This class contains the main method which initializes and
+ * starts the user interface, starting the main loop.</p>
  */
 public class Main {
 

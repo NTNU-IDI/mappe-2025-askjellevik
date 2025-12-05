@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidDateException;
 import edu.ntnu.idi.idatt.controller.exceptions.InvalidInputException;
 import edu.ntnu.idi.idatt.model.Author;
@@ -363,7 +362,7 @@ public class DiaryControllerTest {
   void testAddDiaryEntryToRegisterWithInvalidInputThrowsException() {
     LocalDateTime validDate = java.time.LocalDateTime.of(2024, 6, 15, 10, 30);
 
-    assertThrows(InvalidInputException.class, () ->
+    assertThrows(InvalidDateException .class, () ->
         diaryController.addDiaryToRegister(null, author, "Title", "Text")
     );
 

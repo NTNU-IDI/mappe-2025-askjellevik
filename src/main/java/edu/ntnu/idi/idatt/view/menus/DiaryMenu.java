@@ -33,14 +33,13 @@ public class DiaryMenu extends BaseMenu {
    */
   public String subMenuForFindingDiaryAction() {
 
-      consoleUtils.showMessage("Option 1: Search for diary entry by word");
-      consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
-      consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
-      consoleUtils.showMessage("Option 4: Search for diary entry by author email");
-      consoleUtils.showMessage("Option Back: Go back");
+    consoleUtils.showMessage("Option 1: Search for diary entry by word");
+    consoleUtils.showMessage("Option 2: Search for diary entry by specific date");
+    consoleUtils.showMessage("Option 3: Search for diary entry within two dates");
+    consoleUtils.showMessage("Option 4: Search for diary entry by author email");
+    consoleUtils.showMessage("Option Back: Go back");
 
-      return consoleUtils.readUserInput();
-
+    return consoleUtils.readUserInput();
 
 
   }
@@ -120,13 +119,12 @@ public class DiaryMenu extends BaseMenu {
     tryShowMessageWithMultipleColors(messages, colors);
     consoleUtils.showMessage("");
 
-      consoleUtils.showMessage("Option 1: Read this diary entry");
-      consoleUtils.showMessage("Option 2: Edit this diary entry");
-      consoleUtils.showMessage("Option 3: Delete this diary entry");
-      consoleUtils.showMessage("Option Back: Back to browsing");
+    consoleUtils.showMessage("Option 1: Read this diary entry");
+    consoleUtils.showMessage("Option 2: Edit this diary entry");
+    consoleUtils.showMessage("Option 3: Delete this diary entry");
+    consoleUtils.showMessage("Option Back: Back to browsing");
 
-      return consoleUtils.readUserInput();
-
+    return consoleUtils.readUserInput();
 
 
   }
@@ -138,7 +136,7 @@ public class DiaryMenu extends BaseMenu {
    * If the user enters "cancel", the method returns null.
    *
    * @return the chosen LocalDateTime for the new diary entry
-   * or null if the user chooses to cancel.
+   *     or null if the user chooses to cancel.
    */
   public LocalDateTime getDateOfNewDiaryEntry() {
     displaySecondaryHeader("Date selection");
@@ -237,12 +235,12 @@ public class DiaryMenu extends BaseMenu {
    * @return the user input as a String.
    */
   public String subMenuForEditingDiaryAction() {
-      consoleUtils.showMessage("Option 1: Edit the diary entry title");
-      consoleUtils.showMessage("Option 2: Overwrite the diary entry text");
-      consoleUtils.showMessage("Option 3: Add text to the existing diary entry text");
-      consoleUtils.showMessage("Option Back: Exit diary entry editing");
+    consoleUtils.showMessage("Option 1: Edit the diary entry title");
+    consoleUtils.showMessage("Option 2: Overwrite the diary entry text");
+    consoleUtils.showMessage("Option 3: Add text to the existing diary entry text");
+    consoleUtils.showMessage("Option Back: Exit diary entry editing");
 
-      return consoleUtils.readUserInput();
+    return consoleUtils.readUserInput();
 
 
   }

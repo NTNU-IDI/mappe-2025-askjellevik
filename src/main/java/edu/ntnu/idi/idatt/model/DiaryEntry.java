@@ -16,7 +16,7 @@ public class DiaryEntry {
 
   /**
    * Constructs a DiaryEntry with the specified date, author, title, and text.
-   * UUID is generated automatically.
+   * The entry ID is generated automatically as a UUID.
    *
    * @param entryDate   the date of the diary entry
    * @param entryAuthor the author of the diary entry
@@ -38,7 +38,8 @@ public class DiaryEntry {
     setEntryText(entryText);
   }
 
-  /**   * Gets the unique identifier of the diary entry.
+  /**
+   * Gets the unique identifier of the diary entry.
    *
    * @return the entry ID
    */
@@ -46,7 +47,8 @@ public class DiaryEntry {
     return entryID;
   }
 
-  /**   * Gets the date of the diary entry.
+  /**
+   * Gets the date of the diary entry.
    *
    * @return the entry date
    */
@@ -54,7 +56,8 @@ public class DiaryEntry {
     return entryDate;
   }
 
-  /**   * Gets the author of the diary entry.
+  /**
+   * Gets the author of the diary entry.
    *
    * @return the entry author
    */
@@ -62,14 +65,17 @@ public class DiaryEntry {
     return entryAuthor;
   }
 
-  /**   * Gets the title of the diary entry.
+  /**
+   * Gets the title of the diary entry.
    *
    * @return the entry title
    */
   public String getEntryTitle() {
     return entryTitle;
   }
-/**   * Gets the text content of the diary entry.
+
+  /**
+   * Gets the text content of the diary entry.
    *
    * @return the entry text
    */
@@ -77,7 +83,8 @@ public class DiaryEntry {
     return entryText;
   }
 
-  /**   * Sets the title of the diary entry.
+  /**
+   * Sets the title of the diary entry.
    *
    * @param entryTitle the new entry title
    */
@@ -88,7 +95,8 @@ public class DiaryEntry {
     this.entryTitle = entryTitle;
   }
 
-  /**   * Sets the text content of the diary entry.
+  /**
+   * Sets the text content of the diary entry.
    *
    * @param entryText the new entry text
    */
@@ -99,7 +107,8 @@ public class DiaryEntry {
     this.entryText = entryText;
   }
 
-  /**   * Returns a string representation of the diary entry.
+  /**
+   * Returns a string representation of the diary entry.
    *
    * @return a string containing the date, author, title, and text of the entry
    */

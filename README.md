@@ -18,7 +18,7 @@ The application is a console based diary with CRUD and searching functionalities
 
 ## Project structure
 
-Sources and tests follow a standard Maven layout. Key packages and responsibilities:
+Sources and tests follow a standard Maven layout.
 
 Entire project structure:
 
@@ -61,17 +61,26 @@ https://github.com/NTNU-IDI/mappe-2025-askjellevik
 The project is set up with an execution plugin that is set to run the Main.java file.
 To start the project this way, simply enter the following command in the terminal
 
+- run: `mvn exec:java`
+
+However, it is necessary to have compiled the correct classes before running.
+The recommended command to ensure a clean run:
+
 - Build and run: `mvn clean compile exec:java`
-- Or run directly: `mvn exec:java`
 
-However, it is recommended to build clean classes before you run the application. Combine this with the executing
-command
-`mvn clean compile exec:java`
-
-When running the main file the application will start the containing main method itself.
-The program lives in the console and expects user input directly in the controller.
+When running the main file the application will start the main method itself.
+The program lives in the console and expects user input directly in the console.
 
 ## How to run the tests
 
 You can run the tests by running the following command in the terminal
 `mvn test`
+
+## References
+
+* [Maven](https://maven.apache.org/guides/index.html)
+* [Exec plugin](https://www.mojohaus.org/exec-maven-plugin/usage.html)
+* [JUnit 5](https://junit.org/junit5/docs/current/user-guide/)
+* [Jansi](https://fusesource.github.io/jansi/)
+* Horstmann, C. S. (2020). Core Java, volume I: Fundamentals. Pearson.
+

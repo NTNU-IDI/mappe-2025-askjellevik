@@ -55,7 +55,7 @@ public class DiaryRegisterTest {
     );
 
     diaryRegister.addDiaryEntry(diaryEntry);
-    diaryRegister.deleteDiaryEntry(diaryEntry.getEntryID());
+    diaryRegister.deleteDiaryEntry(diaryEntry.getEntryId());
 
     assertTrue(diaryRegister.getAllDiaryEntries().isEmpty());
   }

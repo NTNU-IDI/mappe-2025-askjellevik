@@ -246,7 +246,7 @@ public class DiaryControllerTest {
     diaryRegister.addDiaryEntry(diaryEntry);
     assertEquals(1, diaryController.getListOfAllRegisteredDiaryEntries().size());
 
-    diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryID());
+    diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryId());
 
     assertEquals(0, diaryController.getListOfAllRegisteredDiaryEntries().size());
   }

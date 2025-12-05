@@ -8,7 +8,7 @@ import java.util.UUID;
  */
 public class DiaryEntry {
 
-  private final UUID entryID;
+  private final UUID entryId;
   private final LocalDateTime entryDate;
   private final Author entryAuthor;
   private String entryTitle;
@@ -31,7 +31,7 @@ public class DiaryEntry {
     if (entryAuthor == null) {
       throw new IllegalArgumentException("Entry author cannot be null.");
     }
-    this.entryID = UUID.randomUUID();
+    this.entryId = UUID.randomUUID();
     this.entryDate = entryDate;
     this.entryAuthor = entryAuthor;
     setEntryTitle(entryTitle);
@@ -43,8 +43,8 @@ public class DiaryEntry {
    *
    * @return the entry ID
    */
-  public UUID getEntryID() {
-    return entryID;
+  public UUID getEntryId() {
+    return entryId;
   }
 
   /**
@@ -114,10 +114,10 @@ public class DiaryEntry {
    */
   @Override
   public String toString() {
-    return "Date: " + entryDate + "\n" +
-        "Author: " + entryAuthor.getName() + "\n" +
-        "Title " + entryTitle + "\n" +
-        "Entry: " + entryText;
+    return "Date: " + entryDate + "\n"
+        + "Author: " + entryAuthor.getName() + "\n"
+        + "Title " + entryTitle + "\n"
+        + "Entry: " + entryText;
   }
 
 }

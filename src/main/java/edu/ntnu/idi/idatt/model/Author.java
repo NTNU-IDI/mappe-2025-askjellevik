@@ -15,6 +15,7 @@ public class Author {
 
   /**
    * Constructs an Author with the specified names and email.
+   * The id is generated automatically as a UUID.
    *
    * @param firstName the first name of the author
    * @param lastName the last name of the author
@@ -28,7 +29,8 @@ public class Author {
     setEmail(email);
   }
 
-  /**   Gets the name of the author.
+  /**
+   * Gets the name of the author.
    *
    * @return the author's name
    */
@@ -36,7 +38,8 @@ public class Author {
     return id;
   }
 
-  /**   Gets the name of the author.
+  /**
+   * Gets the name of the author.
    *
    * @return the author's name
    */
@@ -44,7 +47,8 @@ public class Author {
     return firstName + " " + lastName;
   }
 
-  /**   Gets the first name of the author.
+  /**
+   * Gets the first name of the author.
    *
    * @return the author's first name
    */
@@ -52,7 +56,8 @@ public class Author {
     return firstName;
   }
 
-  /**   Gets the last name of the author.
+  /**
+   * Gets the last name of the author.
    *
    * @return the author's last name
    */
@@ -60,7 +65,8 @@ public class Author {
     return lastName;
   }
 
-  /**   Gets the email of the author.
+  /**
+   * Gets the email of the author.
    *
    * @return the author's email
    */
@@ -68,11 +74,11 @@ public class Author {
     return email;
   }
 
-  /**   Sets the email of the author.
+  /**
+   * Sets the email of the author.
    *
    * @param email the new email of the author
    * @throws IllegalArgumentException if the email is null or empty
-   *
    */
   public void setEmail(String email) {
     if (email == null || email.isBlank()) {
@@ -81,7 +87,8 @@ public class Author {
     this.email = email;
   }
 
-  /**   Sets the first name of the author.
+  /**
+   * Sets the first name of the author.
    *
    * @param firstName the new name of the author
    * @throws IllegalArgumentException if the first name is null or empty
@@ -93,7 +100,8 @@ public class Author {
     this.firstName = firstName;
   }
 
-  /**   Sets the last name of the author.
+  /**
+   * Sets the last name of the author.
    *
    * @param lastName the new name of the author
    */

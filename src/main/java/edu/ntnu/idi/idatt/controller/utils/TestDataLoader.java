@@ -8,6 +8,9 @@ import edu.ntnu.idi.idatt.model.Author;
 import edu.ntnu.idi.idatt.model.exceptions.AuthorAlreadyExistsException;
 import java.time.LocalDateTime;
 
+/**
+ * Utility class for loading test data into the application.
+ */
 public class TestDataLoader {
 
   /**
@@ -35,18 +38,18 @@ public class TestDataLoader {
 
     try {
       // Crating dateTime objects for diary entries
-      LocalDateTime dateTime1 = LocalDateTime.of(2025, 4, 9, 17, 0);
-      LocalDateTime dateTime2 = LocalDateTime.of(2025, 4, 10, 18, 16);
-      LocalDateTime dateTime3 = LocalDateTime.of(2025, 4, 6, 18, 0);
-      LocalDateTime dateTime4 = LocalDateTime.of(2025, 1, 13, 18, 20);
-      LocalDateTime dateTime5 = LocalDateTime.of(2025, 3, 25, 18, 0);
-      LocalDateTime dateTime6 = LocalDateTime.of(2025, 6, 13, 18, 33);
-      LocalDateTime dateTime7 = LocalDateTime.of(2024, 12, 1, 12, 0);
-      LocalDateTime dateTime8 = LocalDateTime.of(2024, 11, 5, 14, 30);
-      LocalDateTime dateTime9 = LocalDateTime.of(2024, 10, 20, 16, 45);
-      LocalDateTime dateTime10 = LocalDateTime.of(2025, 2, 14, 10, 0);
-      LocalDateTime dateTime11 = LocalDateTime.of(2025, 5, 30, 9, 15);
-      LocalDateTime dateTime12 = LocalDateTime.of(2025, 7, 4, 11, 45);
+      final LocalDateTime dateTime1 = LocalDateTime.of(2025, 4, 9, 17, 0);
+      final LocalDateTime dateTime2 = LocalDateTime.of(2025, 4, 10, 18, 16);
+      final LocalDateTime dateTime3 = LocalDateTime.of(2025, 4, 6, 18, 0);
+      final LocalDateTime dateTime4 = LocalDateTime.of(2025, 1, 13, 18, 20);
+      final LocalDateTime dateTime5 = LocalDateTime.of(2025, 3, 25, 18, 0);
+      final LocalDateTime dateTime6 = LocalDateTime.of(2025, 6, 13, 18, 33);
+      final LocalDateTime dateTime7 = LocalDateTime.of(2024, 12, 1, 12, 0);
+      final LocalDateTime dateTime8 = LocalDateTime.of(2024, 11, 5, 14, 30);
+      final LocalDateTime dateTime9 = LocalDateTime.of(2024, 10, 20, 16, 45);
+      final LocalDateTime dateTime10 = LocalDateTime.of(2025, 2, 14, 10, 0);
+      final LocalDateTime dateTime11 = LocalDateTime.of(2025, 5, 30, 9, 15);
+      final LocalDateTime dateTime12 = LocalDateTime.of(2025, 7, 4, 11, 45);
 
       // Adding authors to the register
       authorController.addAuthorToRegister("André", "Navnesen", "andre@email.no");
@@ -55,10 +58,10 @@ public class TestDataLoader {
       authorController.addAuthorToRegister("Gunnar", "Sønsteby", "nr24@secret.eu");
 
       // Retrieving authors by email
-      Author author1 = authorController.getAuthorByEmail("andre@email.no");
-      Author author2 = authorController.getAuthorByEmail("hansen@mail.com");
-      Author author3 = authorController.getAuthorByEmail("gyda.johnsen@mail.net");
-      Author author4 = authorController.getAuthorByEmail("nr24@secret.eu");
+      final Author author1 = authorController.getAuthorByEmail("andre@email.no");
+      final Author author2 = authorController.getAuthorByEmail("hansen@mail.com");
+      final Author author3 = authorController.getAuthorByEmail("gyda.johnsen@mail.net");
+      final Author author4 = authorController.getAuthorByEmail("nr24@secret.eu");
 
       // Adding diary entries for author1
       diaryController.addDiaryToRegister(dateTime1, author1, "My first every diary entry!",
@@ -80,9 +83,11 @@ public class TestDataLoader {
       diaryController.addDiaryToRegister(dateTime7, author3, "Me and my existential crisis",
           "What even is the meaning of life?");
       diaryController.addDiaryToRegister(dateTime8, author3, "I found a new meaning of life",
-          "After I pondered for a while, I realized that life is about enjoying the little things.");
+          "After I pondered for a while, "
+              + "I realized that life is about enjoying the little things.");
       diaryController.addDiaryToRegister(dateTime9, author3, "I watched Interstellar..",
-          "Today I watched Interstellar, so now I am even more confused about the meaning of life.");
+          "Today I watched Interstellar, "
+              + "so now I am even more confused about the meaning of life.");
 
       // Adding diary entries for author4
       diaryController.addDiaryToRegister(dateTime10, author4, "Day one of being broke",
@@ -92,8 +97,7 @@ public class TestDataLoader {
       diaryController.addDiaryToRegister(dateTime12, author4, "Day three of being broke",
           "I found a dollar on the ground today. So I am twice as rich as I was yesterday.");
 
-    }
-    catch (InvalidInputException | InvalidDateException | AuthorAlreadyExistsException e) {
+    } catch (InvalidInputException | InvalidDateException | AuthorAlreadyExistsException e) {
       System.err.println(e.getMessage());
     }
   }

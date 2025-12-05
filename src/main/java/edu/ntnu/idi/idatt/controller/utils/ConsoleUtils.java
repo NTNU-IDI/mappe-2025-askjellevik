@@ -19,9 +19,9 @@ public class ConsoleUtils {
   private static final DateTimeFormatter DEFAULT_FORMATTER =
       DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-/**
- * Initiate the ConsoleUtils with Ansi for colored console output.
- */
+  /**
+   * Initiate the ConsoleUtils with Ansi for colored console output.
+   */
   public ConsoleUtils() {
     System.setProperty("jansi.passthrough", "true");
     AnsiConsole.systemInstall();
@@ -47,8 +47,11 @@ public class ConsoleUtils {
 
   /**
    * Method to show a message with multiple colors in the console.
-   * The strings and colors are provided as arrays, where each string corresponds to a color at the same index.
-   * Therefore, the lengths of both arrays must match. If not, an IllegalArgumentException is thrown.
+   *
+   * <p>The strings and colors are provided as arrays,
+   * where each string corresponds to a color at the same index.
+   * Therefore, the lengths of both arrays must match.
+   * If not, an IllegalArgumentException is thrown.
    *
    * @param strings The array of strings to be displayed.
    * @param colors  The array of colors corresponding to each string.
@@ -114,12 +117,13 @@ public class ConsoleUtils {
     scanner.close();
   }
 
-/**
- * Method to format a LocalDateTime object to a string for prettier display.
- *
- * @param date The LocalDateTime object to be formatted.
- * @return The formatted date string in the pattern "dd/MM/yyyy HH:mm". If the date is null, returns an empty string.
- */
+  /**
+   * Method to format a LocalDateTime object to a string for prettier display.
+   *
+   * @param date The LocalDateTime object to be formatted.
+   * @return The formatted date string in the pattern "dd/MM/yyyy HH:mm".
+   *     If the date is null, returns an empty string.
+   */
   public String formatDateToView(LocalDateTime date) {
     if (date == null) {
       return "";
@@ -137,6 +141,10 @@ public class ConsoleUtils {
 
   }
 
+  /**
+   * Method to clear the console screen by printing multiple new lines.
+   * This creates the effect of clearing the screen in the console.
+   */
   public void clearScreen() {
     for (int i = 0; i < 3; i++) {
       System.out.println();

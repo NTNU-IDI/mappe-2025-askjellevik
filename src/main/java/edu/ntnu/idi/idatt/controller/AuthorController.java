@@ -59,9 +59,16 @@ public class AuthorController {
       throw new AuthorAlreadyExistsException("An author with that email already exists.");
     }
 
-    Author authorToAdd = new Author(firstName, lastName, email);
-    authorRegister.addAuthor(authorToAdd);
-    return authorToAdd;
+    try {
+      Author authorToAdd = new Author(firstName, lastName, email);
+      authorRegister.addAuthor(authorToAdd);
+      return authorToAdd;
+    } catch (IllegalArgumentException e) {
+      throw new InvalidInputException(e.getMessage());
+    }
+
+
+
   }
 
   /**
@@ -102,11 +109,8 @@ public class AuthorController {
       throws InvalidInputException, AuthorAlreadyExistsException {
     validateAuthorEmail(newEmail);
 
-    try {
-      getAuthorByEmail(newEmail);
+    if (authorRegister.checkIfAuthorExists(newEmail)) {
       throw new AuthorAlreadyExistsException("An author with that email already exists.");
-    } catch (AuthorNotFoundException e) {
-      // If AuthorNotFoundException is thrown, it means the author does not exist.
     }
 
     author.setEmail(newEmail);

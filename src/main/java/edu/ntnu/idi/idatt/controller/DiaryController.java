@@ -65,8 +65,13 @@ public class DiaryController {
       throw new InvalidInputException("Author cannot be null");
     }
 
-    DiaryEntry diaryEntryToAdd = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
-    diaryRegister.addDiaryEntry(diaryEntryToAdd);
+   try {
+     DiaryEntry diaryEntryToAdd = new DiaryEntry(entryDate, entryAuthor, entryTitle, entryText);
+     diaryRegister.addDiaryEntry(diaryEntryToAdd);
+   } catch (IllegalArgumentException e) {
+     throw new InvalidInputException(e.getMessage());
+   }
+
   }
 
   /**

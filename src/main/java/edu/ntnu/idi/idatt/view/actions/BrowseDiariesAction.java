@@ -167,7 +167,7 @@ public class BrowseDiariesAction implements Action {
       if ("yes".equalsIgnoreCase(userInput)) {
 
         try {
-          diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryID());
+          diaryController.deleteDiaryEntryInRegister(diaryEntry.getEntryId());
           diaryMenu.displaySuccessMessage("Diary entry deleted");
           return true;
         } catch (DiaryEntryNotFound e) {

@@ -43,7 +43,7 @@ public class EditAuthorAction implements Action {
       authorMenu.displaySecondaryHeader("Editing author");
       String subMenuUserChoice = authorMenu.subMenuForEditingAuthorAction(author);
 
-      switch (subMenuUserChoice) {
+      switch (subMenuUserChoice.toLowerCase()) {
         case "1" -> {
           authorMenu.displaySimpleMessage("Original first name: " + author.getFirstName());
           String newName = authorMenu.getUserStringWithPrompt("Enter the new first name");

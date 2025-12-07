@@ -41,7 +41,7 @@ public class EditDiaryAction implements Action {
       diaryMenu.displaySecondaryHeader("Editing diary entry: " + diaryEntry.getEntryTitle());
       String submenuUserChoice = diaryMenu.subMenuForEditingDiaryAction();
 
-      switch (submenuUserChoice) {
+      switch (submenuUserChoice.toLowerCase()) {
         case "1" -> editDiaryTitle(diaryEntry);
         case "2" -> overwriteDiaryText(diaryEntry);
         case "3" -> addDiaryText(diaryEntry);

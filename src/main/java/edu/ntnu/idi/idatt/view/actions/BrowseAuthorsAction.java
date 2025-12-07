@@ -102,7 +102,7 @@ public class BrowseAuthorsAction implements Action {
           String subMenuUserChoice = authorMenu.subMenuForAuthorManagementAction(chosenAuthor,
               diaryController.getAmountOfEntriesBySpecificAuthor(chosenAuthor));
 
-          switch (subMenuUserChoice) {
+          switch (subMenuUserChoice.toLowerCase()) {
             case "1" -> {
               List<DiaryEntry> diaries = diaryController.getListOfAllEntriesBySpecificAuthor(
                   chosenAuthor);

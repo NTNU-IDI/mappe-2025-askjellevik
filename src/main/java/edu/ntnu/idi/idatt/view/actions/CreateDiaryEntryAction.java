@@ -86,7 +86,8 @@ public class CreateDiaryEntryAction implements Action {
       boolean choosingSubMenu = true;
       while (choosingSubMenu) {
         String subMenuUserChoice = authorMenu.subMenuForChoosingAuthor();
-        switch (subMenuUserChoice) {
+
+        switch (subMenuUserChoice.toLowerCase()) {
           case "1" -> {
             CreateAuthorAction action  = new CreateAuthorAction(authorMenu, authorController);
             action.execute();

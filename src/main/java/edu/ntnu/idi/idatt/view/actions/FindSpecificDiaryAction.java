@@ -44,7 +44,7 @@ public class FindSpecificDiaryAction implements Action {
       diaryMenu.displayMainHeader("Diary entry lookup ");
       String submenuUserChoice = diaryMenu.subMenuForFindingDiaryAction();
 
-      switch (submenuUserChoice) {
+      switch (submenuUserChoice.toLowerCase()) {
         case "1" -> searchForDiaryEntryByWord();
         case "2" -> searchForDiaryEntryWithSpecificDate();
         case "3" -> searchForDiaryEntryWithinTwoDates();

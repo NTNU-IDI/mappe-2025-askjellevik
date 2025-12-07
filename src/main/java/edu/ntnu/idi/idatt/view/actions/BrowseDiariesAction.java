@@ -123,7 +123,7 @@ public class BrowseDiariesAction implements Action {
         while (choosingSubMenu) {
           String submenuUserChoice = diaryMenu.subMenuForDiaryManagementAction(diaryEntry);
 
-          switch (submenuUserChoice) {
+          switch (submenuUserChoice.toLowerCase()) {
             case "1" -> diaryMenu.readDiaryEntry(diaryEntry);
             case "2" -> {
               Action editDiaryAction = new EditDiaryAction(diaryMenu, diaryEntry, diaryController);
